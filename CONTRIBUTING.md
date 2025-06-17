@@ -1,4 +1,4 @@
-## Contributing
-When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.
+## 기여하기
+이 리포지토리에 기여할 때 변경하기 전에 먼저 문제, 이메일 또는 기타 방법을 통해 이 리포지토리의 소유자와 변경하고자 하는 내용을 논의하십시오.
 
-Please note we have a code of conduct, please follow it in all your interactions with the project.
+우리는 행동 강령을 가지고 있으며 프로젝트와의 모든 상호 작용에서 이를 따라야 합니다.

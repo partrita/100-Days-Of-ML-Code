@@ -1,1 +1,1 @@
-Each Day Infograph
+각 날짜 인포그래픽

@@ -276,3 +276,141 @@ JK VanderPlas의 새 책 "Python Data Science HandBook"을 받았습니다. [여
 <p align="center">
   <img src="https://github.com/Avik-Jain/100-Days-Of-ML-Code/blob/master/Info-graphs/Day%2054.jpg">
 </p>
+
+## 강화 학습 소개 | 55일차
+강화 학습(RL)의 기본 개념과 용어(에이전트, 환경, 보상, 정책, 가치 함수)를 학습했습니다. [자세히 보기](Code/Day_55_Reinforcement_Learning_Intro.md)
+
+## 마르코프 결정 과정 | 56일차
+강화 학습의 핵심 프레임워크인 마르코프 결정 과정(MDP)에 대해 학습했습니다. [자세히 보기](Code/Day_56_Markov_Decision_Processes.md)
+
+## Q-러닝 - 이론 및 알고리즘 | 57일차
+모델 프리 강화 학습 알고리즘인 Q-러닝의 이론적 배경과 작동 방식에 대해 학습했습니다. [자세히 보기](Code/Day_57_Q_Learning_Theory_Algorithm.md)
+
+## Q-러닝 - 간단한 구현 | 58일차
+간단한 예제(예: 그리드 월드)를 통해 Q-러닝을 구현하는 방법을 학습했습니다. [코드](Code/Day_58_Q_Learning_Simple_Implementation.md)
+
+## 심층 Q-네트워크 (DQN) | 59일차
+Q-러닝과 심층 신경망을 결합한 심층 Q-네트워크(DQN)의 개념과 장점에 대해 학습했습니다. [자세히 보기](Code/Day_59_Deep_Q_Networks_DQN.md)
+
+## 자연어 처리 소개 | 60일차
+자연어 처리(NLP)의 기본 개념과 용어(코퍼스, 토큰, 임베딩)를 학습했습니다. [자세히 보기](Code/Day_60_Natural_Language_Processing_Intro.md)
+
+## 텍스트 전처리 | 61일차
+NLP의 중요한 단계인 텍스트 전처리 기법(토큰화, 어간 추출, 표제어 추출)에 대해 학습했습니다. [자세히 보기](Code/Day_61_Text_Preprocessing.md)
+
+## Bag-of-Words 및 TF-IDF | 62일차
+텍스트 데이터를 수치 벡터로 변환하는 대표적인 방법인 Bag-of-Words와 TF-IDF에 대해 학습하고 구현했습니다. [코드](Code/Day_62_Bag_of_Words_TF-IDF.md)
+
+## 단어 임베딩 - Word2Vec, GloVe (개념) | 63일차
+단어의 의미를 밀집 벡터로 표현하는 단어 임베딩 기법인 Word2Vec과 GloVe의 개념에 대해 학습했습니다. [자세히 보기](Code/Day_63_Word_Embeddings_Word2Vec_GloVe_Conceptual.md)
+
+## Word2Vec 구현 | 64일차
+Gensim 라이브러리를 사용하여 Word2Vec을 구현하는 방법을 학습했습니다. [코드](Code/Day_64_Implementing_Word2Vec_Gensim.md)
+
+## 감성 분석 - 기본 기법 | 65일차
+텍스트에 나타난 감성을 분석하는 기본 기법들에 대해 학습했습니다. [자세히 보기](Code/Day_65_Sentiment_Analysis_Basic_Techniques.md)
+
+## 간단한 감성 분석기 구축 | 66일차
+학습한 내용을 바탕으로 간단한 감성 분석기를 구축했습니다. [코드](Code/Day_66_Building_Simple_Sentiment_Analyzer.md)
+
+## 순환 신경망 (RNN) 소개 | 67일차
+순서가 있는 데이터를 처리하는 데 효과적인 순환 신경망(RNN)의 기본 구조와 원리에 대해 학습했습니다. [자세히 보기](Code/Day_67_Introduction_to_Recurrent_Neural_Networks_RNNs.md)
+
+## LSTM (Long Short-Term Memory) 네트워크 | 68일차
+RNN의 장기 의존성 문제를 해결하기 위해 제안된 LSTM 네트워크에 대해 학습했습니다. [자세히 보기](Code/Day_68_Long_Short_Term_Memory_LSTM_Networks.md)
+
+## RNN/LSTM을 이용한 텍스트 분류기 구축 | 69일차
+RNN 또는 LSTM을 사용하여 텍스트 분류기를 구축하는 방법을 학습했습니다. [코드](Code/Day_69_Building_Text_Classifier_RNN_LSTM.md)
+
+## 강화 학습 및 NLP 개념 복습 | 70일차
+지난 15일간 학습한 강화 학습 및 자연어 처리 관련 주요 개념들을 복습했습니다. [자세히 보기](Code/Day_70_Review_RL_NLP_Concepts.md)
+
+## 주성분 분석 (PCA) - 이론 및 구현 | 71일차
+차원 축소 기법 중 하나인 주성분 분석(PCA)의 이론을 학습하고 구현했습니다. [코드](Code/Day_71_PCA_Theory_Implementation.md)
+
+## 선형 판별 분석 (LDA) | 72일차
+또 다른 차원 축소 및 분류 기법인 선형 판별 분석(LDA)에 대해 학습했습니다. [코드](Code/Day_72_Linear_Discriminant_Analysis_LDA.md)
+
+## 모델 평가 지표 | 73일차
+머신러닝 모델의 성능을 평가하기 위한 다양한 지표(정밀도, 재현율, F1 점수, ROC AUC)에 대해 학습했습니다. [자세히 보기](Code/Day_73_Model_Evaluation_Metrics.md)
+
+## 교차 검증 기법 | 74일차
+모델의 일반화 성능을 평가하기 위한 교차 검증 기법(K-폴드 교차 검증 등)에 대해 학습했습니다. [자세히 보기](Code/Day_74_Cross_Validation_Techniques.md)
+
+## 하이퍼파라미터 튜닝 | 75일차
+모델 성능을 최적화하기 위한 하이퍼파라미터 튜닝 방법(그리드 서치, 랜덤 서치)에 대해 학습했습니다. [자세히 보기](Code/Day_75_Hyperparameter_Tuning_Grid_Random_Search.md)
+
+## 앙상블 방법 - 배깅, 부스팅 | 76일차
+여러 모델을 결합하여 성능을 향상시키는 앙상블 기법 중 배깅(랜덤 포레스트 복습)과 부스팅(AdaBoost, Gradient Boosting)에 대해 학습했습니다. [코드](Code/Day_76_Ensemble_Methods_Bagging_Boosting.md)
+
+## XGBoost - 소개 및 구현 | 77일차
+강력한 부스팅 알고리즘인 XGBoost의 개념을 학습하고 구현했습니다. [코드](Code/Day_77_XGBoost_Introduction_Implementation.md)
+
+## LightGBM - 소개 및 구현 | 78일차
+XGBoost와 유사하지만 더 빠르고 효율적인 LightGBM에 대해 학습하고 구현했습니다. [코드](Code/Day_78_LightGBM_Introduction_Implementation.md)
+
+## 시계열 분석 소개 | 79일차
+시간 순서대로 기록된 데이터인 시계열 데이터 분석의 기초 개념을 학습했습니다. [자세히 보기](Code/Day_79_Introduction_to_Time_Series_Analysis.md)
+
+## 시계열을 위한 ARIMA 모델 | 80일차
+대표적인 시계열 예측 모델인 ARIMA 모델에 대해 학습하고 간단한 예제에 적용해 보았습니다. [코드](Code/Day_80_ARIMA_Models_for_Time_Series.md)
+
+## 모델 배포 소개 | 81일차
+개발한 머신러닝 모델을 실제 환경에서 사용할 수 있도록 배포하는 과정의 중요성과 기본 개념을 학습했습니다. [자세히 보기](Code/Day_81_Introduction_to_Model_Deployment.md)
+
+## ML 모델 배포를 위한 Flask/Django - 기초 | 82일차
+웹 프레임워크인 Flask 또는 Django를 사용하여 머신러닝 모델을 배포하는 기초적인 방법을 학습했습니다. [자세히 보기](Code/Day_82_Flask_Django_for_ML_Deployment_Basics.md)
+
+## ML 모델을 위한 간단한 API 만들기 | 83일차
+Flask/Django를 사용하여 학습된 머신러닝 모델을 위한 간단한 API를 만드는 실습을 진행했습니다. [코드](Code/Day_83_Creating_Simple_API_for_ML_Model.md)
+
+## ML을 위한 Docker - 기초 | 84일차
+컨테이너화 기술인 Docker를 머신러닝 모델 배포에 활용하는 기초적인 방법을 학습했습니다. [자세히 보기](Code/Day_84_Docker_for_ML_Basics.md)
+
+## Docker를 사용한 간단한 ML 모델 배포 | 85일차
+Docker를 사용하여 간단한 머신러닝 모델을 배포하는 실습을 진행했습니다. [코드](Code/Day_85_Deploying_Simple_ML_Model_Docker.md)
+
+## 캡스톤 프로젝트 아이디어 브레인스토밍 | 86일차
+100일 챌린지를 마무리할 캡스톤 프로젝트에 대한 아이디어를 구상했습니다. [자세히 보기](Code/Day_86_Brainstorming_Capstone_Project_Ideas.md)
+
+## 캡스톤 프로젝트 선정 및 범위 정의 | 87일차
+여러 아이디어 중 하나를 캡스톤 프로젝트로 선정하고, 프로젝트의 목표와 범위를 명확히 정의했습니다. [자세히 보기](Code/Day_87_Selecting_Capstone_Project_Scope_Definition.md)
+
+## 프로젝트를 위한 데이터 수집 및 전처리 | 88일차
+캡스톤 프로젝트에 필요한 데이터를 수집하고, 모델 학습에 적합하도록 전처리하는 작업을 수행했습니다. [자세히 보기](Code/Day_88_Data_Collection_Preprocessing_Capstone.md)
+
+## 프로젝트를 위한 탐색적 데이터 분석 (EDA) | 89일차
+수집된 데이터를 다양한 각도에서 분석하고 시각화하여 데이터의 특징과 패턴을 파악하는 EDA를 수행했습니다. [자세히 보기](Code/Day_89_EDA_Feature_Engineering_Capstone.md)
+
+## 프로젝트를 위한 모델 선정 및 초기 학습 | 90일차
+프로젝트 목표에 맞는 머신러닝 모델을 선정하고, 전처리된 데이터를 사용하여 초기 모델 학습을 진행했습니다. [자세히 보기](Code/Day_90_Model_Selection_Initial_Training_Capstone.md)
+
+## 프로젝트를 위한 모델 평가 및 반복 | 91일차
+학습된 모델의 성능을 평가하고, 문제점을 분석하여 모델을 개선하는 반복 작업을 수행했습니다. [자세히 보기](Code/Day_91_Model_Evaluation_Iteration_Capstone.md)
+
+## 프로젝트를 위한 미세 조정 및 최적화 | 92일차
+선정된 모델의 하이퍼파라미터를 조정하고 다양한 최적화 기법을 적용하여 모델 성능을 극대화했습니다. [자세히 보기](Code/Day_92_Fine_tuning_Optimization_Capstone.md)
+
+## 프로젝트를 위한 간단한 UI 또는 프레젠테이션 구축 | 93일차
+캡스톤 프로젝트의 결과를 효과적으로 보여줄 수 있는 간단한 사용자 인터페이스(UI) 또는 프레젠테이션 자료를 제작했습니다. [자세히 보기](Code/Day_93_Building_UI_Presentation_Capstone.md)
+
+## 캡스톤 프로젝트 문서화 | 94일차
+프로젝트의 전 과정(데이터 수집, 전처리, 모델링, 평가, 결과)을 상세히 기록하여 문서화했습니다. [자세히 보기](Code/Day_94_Documenting_Capstone_Project.md)
+
+## 생성적 적대 신경망 (GAN) 소개 | 95일차
+새로운 데이터를 생성하는 모델인 생성적 적대 신경망(GAN)의 기본 개념과 작동 원리에 대해 학습했습니다. [자세히 보기](Code/Day_95_Introduction_to_GANs.md)
+
+## 오토인코더 | 96일차
+데이터의 특징을 효율적으로 학습하여 차원 축소나 이상치 탐지 등에 활용되는 오토인코더에 대해 학습했습니다. [자세히 보기](Code/Day_96_Autoencoders.md)
+
+## 설명 가능한 AI (XAI) - LIME, SHAP | 97일차
+머신러닝 모델의 예측 결과를 사람이 이해할 수 있도록 설명하는 XAI 기법(LIME, SHAP 등)에 대해 학습했습니다. [자세히 보기](Code/Day_97_Explainable_AI_XAI_LIME_SHAP.md)
+
+## AI 및 머신러닝 윤리 | 98일차
+인공지능 기술 발전과 함께 중요성이 커지고 있는 AI 및 머신러닝 윤리 문제에 대해 고찰했습니다. [자세히 보기](Code/Day_98_Ethics_in_AI_ML.md)
+
+## ML 및 AI의 미래 동향 | 99일차
+머신러닝과 인공지능 분야의 최신 연구 동향과 미래 발전 가능성에 대해 학습하고 토론했습니다. [자세히 보기](Code/Day_99_Future_Trends_in_ML_AI.md)
+
+## 100일 여정 복습 및 다음 단계 | 100일차
+지난 100일간의 머신러닝 학습 여정을 되돌아보고, 앞으로의 학습 계획 및 목표를 설정했습니다. [자세히 보기](Code/Day_100_Review_100_Days_Next_Steps.md)

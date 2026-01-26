@@ -132,7 +132,7 @@ if 'text' in df.columns:
           `df['column'].fillna(df['column'].mean(), inplace=True)`
         - **범주형 데이터**: 최빈값으로 대치. 또는 "Unknown"과 같은 새로운 카테고리 생성.
           `df['column'].fillna(df['column'].mode()[0], inplace=True)`
-        - **텍스트 데이터**: 빈 문자열("") 또는 특정 토큰("<unk>")으로 대치.
+        - **텍스트 데이터**: 빈 문자열("") 또는 특정 토큰("`<unk>`")으로 대치.
           `df['text_column'].fillna("", inplace=True)`
         - `scikit-learn`의 `SimpleImputer` 사용 가능.
 

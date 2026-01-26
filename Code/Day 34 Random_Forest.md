@@ -1,6 +1,6 @@
 # 랜덤 포레스트
 <p align="center">
-  <img src="https://github.com/Avik-Jain/100-Days-Of-ML-Code/blob/master/Info-graphs/Day%2033.jpg">
+  <img src="../Info-graphs/Day%2033.jpg">
 </p>
 
 

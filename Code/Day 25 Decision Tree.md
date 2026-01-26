@@ -1,6 +1,6 @@
 # 결정 트리 분류
 <p align="center">
-  <img src="https://github.com/Avik-Jain/100-Days-Of-ML-Code/blob/master/Info-graphs/Day%2023.jpg">
+  <img src="../Info-graphs/Day%2023.jpg">
 </p>
 
 ### 라이브러리 가져오기

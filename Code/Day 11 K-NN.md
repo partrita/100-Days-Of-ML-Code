@@ -1,13 +1,13 @@
 # K-최근접 이웃 (K-NN)
 
 <p align="center">
-  <img src="https://github.com/Avik-Jain/100-Days-Of-ML-Code/blob/master/Info-graphs/Day%207.jpg">
+  <img src="../Info-graphs/Day%207.jpg">
 </p>
 
 ## 데이터셋 | 소셜 네트워크
 
 <p align="center">
-  <img src="https://github.com/Avik-Jain/100-Days-Of-ML-Code/blob/master/Other%20Docs/data.PNG">
+  <img src="../Other%20Docs/data.PNG">
 </p> 
 
 

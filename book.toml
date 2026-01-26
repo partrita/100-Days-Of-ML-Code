@@ -1,0 +1,5 @@
+[book]
+authors = ["Avik-Jain", "Contributors"]
+language = "ko"
+src = "."
+title = "100 Days of ML Code"

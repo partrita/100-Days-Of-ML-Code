@@ -1,0 +1,389 @@
+<!DOCTYPE HTML>
+<html lang="ko" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>생성적 적대 신경망 (GAN) 소개 | 95일차 - 100 Days of ML Code</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-b65ed104.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-68538d78.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">100 Days of ML Code</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="day-95-생성적-적대-신경망-gan-소개-introduction-to-generative-adversarial-networks-gans"><a class="header" href="#day-95-생성적-적대-신경망-gan-소개-introduction-to-generative-adversarial-networks-gans">Day 95: 생성적 적대 신경망 (GAN) 소개 (Introduction to Generative Adversarial Networks (GANs))</a></h1>
+<h2 id="학습-목표"><a class="header" href="#학습-목표">학습 목표</a></h2>
+<ul>
+<li>생성 모델(Generative Model)의 개념과 종류 이해.</li>
+<li>GAN (Generative Adversarial Network, 생성적 적대 신경망)의 기본 아이디어와 작동 원리 학습.
+<ul>
+<li>생성자 (Generator)와 판별자 (Discriminator)의 역할.</li>
+<li>두 네트워크 간의 적대적(Adversarial) 학습 과정.</li>
+</ul>
+</li>
+<li>GAN의 학습 과정과 손실 함수(Loss Function)의 개념 이해.</li>
+<li>GAN의 주요 응용 분야 및 한계점 인식.</li>
+</ul>
+<h2 id="1-생성-모델-generative-model이란"><a class="header" href="#1-생성-모델-generative-model이란">1. 생성 모델 (Generative Model)이란?</a></h2>
+<ul>
+<li><strong>정의</strong>: 학습 데이터의 분포를 학습하여, 기존 데이터와 유사하지만 <strong>새로운 데이터를 생성</strong>할 수 있는 모델.</li>
+<li><strong>목표</strong>: 데이터가 어떻게 생성되었는지 그 근본적인 확률 분포 p(x)를 모델링하는 것.</li>
+<li><strong>판별 모델 (Discriminative Model)과의 비교</strong>:
+<ul>
+<li><strong>판별 모델</strong>: 데이터 x가 주어졌을 때 레이블 y를 예측하는 조건부 확률 p(y|x)를 학습. (예: 이미지 분류기 - 이 이미지가 고양이인지 개인지 판별)</li>
+<li><strong>생성 모델</strong>: 데이터 x 자체의 분포 p(x)를 학습하거나, 특정 레이블 y가 주어졌을 때 데이터 x를 생성하는 p(x|y)를 학습. (예: 고양이 이미지를 새로 생성)</li>
+</ul>
+</li>
+</ul>
+<h3 id="주요-생성-모델-종류"><a class="header" href="#주요-생성-모델-종류">주요 생성 모델 종류</a></h3>
+<ul>
+<li><strong>명시적 밀도 추정 (Explicit Density Estimation)</strong>: 데이터의 확률 밀도 함수 p(x)를 명시적으로 정의하고 학습.
+<ul>
+<li>예: PixelRNN, PixelCNN, Variational Autoencoder (VAE) - 일부</li>
+</ul>
+</li>
+<li><strong>암시적 밀도 추정 (Implicit Density Estimation)</strong>: 데이터의 확률 밀도 함수를 직접 정의하지 않고, 샘플링 과정을 통해 새로운 데이터를 생성.
+<ul>
+<li>예: <strong>Generative Adversarial Network (GAN)</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="2-gan-generative-adversarial-network-기본-아이디어"><a class="header" href="#2-gan-generative-adversarial-network-기본-아이디어">2. GAN (Generative Adversarial Network) 기본 아이디어</a></h2>
+<ul>
+<li>2014년 Ian Goodfellow 등에 의해 제안된 생성 모델의 한 종류로, 두 개의 신경망이 서로 경쟁하며 학습하는 독특한 구조를 가집니다.</li>
+<li><strong>핵심 아이디어</strong>: “경찰과 위조지폐범“의 비유
+<ul>
+<li><strong>위조지폐범 (생성자, Generator)</strong>: 진짜와 최대한 유사한 위조지폐를 만들려고 노력.</li>
+<li><strong>경찰 (판별자, Discriminator)</strong>: 위조지폐와 진짜 지폐를 최대한 잘 구별하려고 노력.</li>
+</ul>
+</li>
+<li>이 두 네트워크는 서로 적대적인(Adversarial) 관계에서 경쟁적으로 학습하며, 이 과정에서 생성자는 점점 더 진짜 같은 데이터를 만들게 되고, 판별자는 점점 더 정교하게 진짜와 가짜를 구별하게 됩니다.</li>
+</ul>
+<h2 id="3-gan의-구성-요소-및-작동-원리"><a class="header" href="#3-gan의-구성-요소-및-작동-원리">3. GAN의 구성 요소 및 작동 원리</a></h2>
+<h3 id="가-생성자-generator-g"><a class="header" href="#가-생성자-generator-g">가. 생성자 (Generator, G)</a></h3>
+<ul>
+<li><strong>역할</strong>: 실제 데이터와 유사한 가짜(Fake) 데이터를 생성.</li>
+<li><strong>입력</strong>: 무작위 노이즈 벡터 (Random Noise Vector, z). (보통 정규분포나 균등분포에서 샘플링)</li>
+<li><strong>출력</strong>: 생성된 가짜 데이터 (예: 이미지, 텍스트).</li>
+<li><strong>목표</strong>: 판별자가 생성된 데이터를 진짜 데이터로 착각하도록 만드는 것. (즉, 판별자를 속이는 것)</li>
+<li><strong>구조</strong>: 일반적으로 역컨볼루션(Deconvolution) 또는 업샘플링(Upsampling) 레이어를 포함하는 심층 신경망 (예: DCGAN의 경우).</li>
+</ul>
+<h3 id="나-판별자-discriminator-d"><a class="header" href="#나-판별자-discriminator-d">나. 판별자 (Discriminator, D)</a></h3>
+<ul>
+<li><strong>역할</strong>: 입력된 데이터가 진짜(Real) 데이터인지 아니면 생성자(G)가 만든 가짜(Fake) 데이터인지 판별.</li>
+<li><strong>입력</strong>: 진짜 데이터 또는 생성자가 만든 가짜 데이터.</li>
+<li><strong>출력</strong>: 입력된 데이터가 진짜일 확률 (0과 1 사이의 스칼라 값). (1에 가까우면 진짜, 0에 가까우면 가짜로 판별)</li>
+<li><strong>목표</strong>: 진짜 데이터와 가짜 데이터를 최대한 정확하게 구별하는 것.</li>
+<li><strong>구조</strong>: 일반적으로 컨볼루션(Convolution) 레이어를 포함하는 심층 신경망 (이미지 분류기와 유사).</li>
+</ul>
+<h3 id="다-적대적-학습-과정-adversarial-training-process"><a class="header" href="#다-적대적-학습-과정-adversarial-training-process">다. 적대적 학습 과정 (Adversarial Training Process)</a></h3>
+<ol>
+<li>
+<p><strong>판별자(D) 학습 단계</strong>:</p>
+<ul>
+<li>생성자(G)는 고정된 상태로 둡니다.</li>
+<li>실제 데이터셋에서 샘플(x<sub>real</sub>)을 가져오고, 생성자(G)를 통해 가짜 데이터(x<sub>fake</sub> = G(z))를 생성합니다.</li>
+<li>판별자(D)는 x<sub>real</sub>에 대해서는 높은 확률(1에 가깝게)을 출력하고, x<sub>fake</sub>에 대해서는 낮은 확률(0에 가깝게)을 출력하도록 학습합니다.</li>
+<li>즉, 판별자는 진짜와 가짜를 잘 구별하도록 손실 함수를 최소화하는 방향으로 업데이트됩니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>생성자(G) 학습 단계</strong>:</p>
+<ul>
+<li>판별자(D)는 고정된 상태로 둡니다.</li>
+<li>생성자(G)는 무작위 노이즈(z)로부터 가짜 데이터(x<sub>fake</sub> = G(z))를 생성합니다.</li>
+<li>생성된 x<sub>fake</sub>를 판별자(D)에 입력하여, 판별자가 이를 진짜 데이터로 착각하도록(즉, D(G(z))가 1에 가까워지도록) 학습합니다.</li>
+<li>즉, 생성자는 판별자를 속이도록 손실 함수를 최소화(또는 특정 형태의 손실 함수를 최대화)하는 방향으로 업데이트됩니다.</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>위 두 단계를 번갈아 반복하면서 학습을 진행합니다.</li>
+<li>이상적으로는 학습이 진행됨에 따라 생성자는 점점 더 실제 데이터와 구분하기 어려운 데이터를 생성하게 되고, 판별자는 진짜와 가짜를 구별하는 능력이 향상되다가, 결국 생성된 데이터가 실제 데이터와 매우 유사해져 판별자가 더 이상 구별하기 어려운 상태(내쉬 균형, Nash Equilibrium)에 도달하는 것을 목표로 합니다. (실제로는 이 균형에 도달하기 어려울 수 있음)</li>
+</ul>
+<p><img src="https://developers.google.com/machine-learning/gan/images/gan_diagram.svg" alt="GAN Training Process">
+<em>(이미지 출처: Google Developers - GANs Overview)</em></p>
+<h2 id="4-gan의-손실-함수-loss-function---minimax-game"><a class="header" href="#4-gan의-손실-함수-loss-function---minimax-game">4. GAN의 손실 함수 (Loss Function) - Minimax Game</a></h2>
+<ul>
+<li>
+<p>GAN의 학습은 생성자(G)와 판별자(D) 간의 **최소최대 게임(Minimax Game)**으로 볼 수 있습니다.</p>
+</li>
+<li>
+<p><strong>판별자(D)의 손실 함수 (L<sub>D</sub>)</strong>: 실제 데이터에 대해서는 log(D(x))를 최대화하고, 가짜 데이터에 대해서는 log(1 - D(G(z)))를 최대화합니다. (즉, D(x)는 1로, D(G(z))는 0으로 만들려고 함)</p>
+<ul>
+<li>L<sub>D</sub> = -E<sub>x~p<sub>data</sub>(x)</sub>[log D(x)] - E<sub>z~p<sub>z</sub>(z)</sub>[log(1 - D(G(z)))]</li>
+<li>(D는 이 손실을 최소화하려고 함)</li>
+</ul>
+</li>
+<li>
+<p><strong>생성자(G)의 손실 함수 (L<sub>G</sub>)</strong>: 판별자가 가짜 데이터를 진짜로 착각하도록, 즉 D(G(z))를 최대화(또는 log(1 - D(G(z)))를 최소화)하려고 합니다.</p>
+<ul>
+<li>초기 논문에서는 L<sub>G</sub> = E<sub>z~p<sub>z</sub>(z)</sub>[log(1 - D(G(z)))] (최소화)</li>
+<li>실제 구현에서는 학습 초기 그래디언트 소실 문제를 피하기 위해 L<sub>G</sub> = -E<sub>z~p<sub>z</sub>(z)</sub>[log D(G(z))] (최소화, 즉 D(G(z))를 최대화)를 더 많이 사용합니다. (Non-saturating game)</li>
+</ul>
+</li>
+<li>
+<p><strong>전체 목적 함수 (Value Function, V(D,G))</strong>:
+V(D,G) = E<sub>x~p<sub>data</sub>(x)</sub>[log D(x)] + E<sub>z~p<sub>z</sub>(z)</sub>[log(1 - D(G(z)))]</p>
+<ul>
+<li>생성자 G는 이 V(D,G)를 최소화(min<sub>G</sub>)하려고 하고, 판별자 D는 이 V(D,G)를 최대화(max<sub>D</sub>)하려고 합니다.</li>
+<li>min<sub>G</sub> max<sub>D</sub> V(D,G)</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-gan의-주요-응용-분야"><a class="header" href="#5-gan의-주요-응용-분야">5. GAN의 주요 응용 분야</a></h2>
+<ul>
+<li><strong>이미지 생성</strong>: 고품질의 새로운 이미지 생성 (예: 유명인 얼굴, 동물, 풍경 등).</li>
+<li><strong>이미지 변환 (Image-to-Image Translation)</strong>: 한 스타일의 이미지를 다른 스타일로 변환 (예: 스케치를 그림으로, 낮 사진을 밤 사진으로 - Pix2Pix, CycleGAN).</li>
+<li><strong>초해상화 (Super-Resolution)</strong>: 저해상도 이미지를 고해상도 이미지로 변환.</li>
+<li><strong>텍스트-이미지 변환 (Text-to-Image Synthesis)</strong>: 텍스트 설명을 바탕으로 이미지 생성.</li>
+<li><strong>데이터 증강 (Data Augmentation)</strong>: 부족한 학습 데이터를 보충하기 위해 새로운 데이터 생성.</li>
+<li><strong>스타일 전이 (Style Transfer)</strong>: 특정 스타일(예: 특정 화가의 화풍)을 다른 이미지에 적용.</li>
+<li><strong>비디오 생성 및 편집</strong>.</li>
+<li><strong>신약 개발, 분자 구조 생성 등 과학 분야 응용</strong>.</li>
+</ul>
+<h2 id="6-gan의-한계점-및-과제"><a class="header" href="#6-gan의-한계점-및-과제">6. GAN의 한계점 및 과제</a></h2>
+<ul>
+<li><strong>학습 불안정성 (Training Instability)</strong>:
+<ul>
+<li>생성자와 판별자 간의 균형을 맞추기 어려워 학습이 불안정하거나 수렴하지 않을 수 있습니다.</li>
+<li><strong>모드 붕괴 (Mode Collapse)</strong>: 생성자가 다양한 종류의 데이터를 생성하지 못하고, 판별자를 속이기 쉬운 소수의 특정 데이터(모드)만 반복적으로 생성하는 현상.</li>
+<li><strong>기울기 소실 (Vanishing Gradients)</strong>: 판별자가 너무 뛰어나면 생성자가 학습할 유용한 그래디언트를 받지 못할 수 있습니다.</li>
+</ul>
+</li>
+<li><strong>평가의 어려움</strong>: 생성된 결과물의 품질을 정량적으로 평가하기 위한 명확한 지표가 부족합니다. (주관적인 시각적 평가에 의존하는 경우 많음. IS, FID 등 지표 사용)</li>
+<li><strong>하이퍼파라미터 튜닝의 어려움</strong>: 적절한 하이퍼파라미터 조합을 찾는 것이 까다로울 수 있습니다.</li>
+<li><strong>다양한 변형 모델</strong>: 위 한계점들을 극복하기 위해 DCGAN, WGAN, LSGAN, StyleGAN, BigGAN 등 수많은 변형 GAN 모델들이 제안되었습니다.</li>
+</ul>
+<h2 id="추가-학습-자료"><a class="header" href="#추가-학습-자료">추가 학습 자료</a></h2>
+<ul>
+<li><a href="https://arxiv.org/abs/1701.00160">NIPS 2016 Tutorial: Generative Adversarial Networks (Ian Goodfellow)</a> - (GAN 창시자의 튜토리얼 논문)</li>
+<li><a href="https://www.youtube.com/watch?v=H9cHvV5nK4M">GANs from Scratch 1: A deep introduction. (YouTube - deeplizard)</a></li>
+<li><a href="https://www.coursera.org/specializations/generative-adversarial-networks-gans">Generative Adversarial Networks (GANs) Specialization on Coursera (DeepLearning.AI)</a></li>
+<li><a href="https://poloclub.github.io/ganlab/">GAN Lab (Google AI Experiments) - GAN 학습 과정 시각화 도구</a></li>
+</ul>
+<h2 id="다음-학습-내용"><a class="header" href="#다음-학습-내용">다음 학습 내용</a></h2>
+<ul>
+<li>Day 96: 오토인코더 (Autoencoders) - 데이터 압축 및 특징 추출에 사용되는 또 다른 중요한 비지도 학습 신경망. GAN과 비교되는 경우도 있음.</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../Code/Day_94_Documenting_Capstone_Project.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../Code/Day_96_Autoencoders.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../Code/Day_94_Documenting_Capstone_Project.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../Code/Day_96_Autoencoders.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

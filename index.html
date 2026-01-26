@@ -1,0 +1,535 @@
+<!DOCTYPE HTML>
+<html lang="ko" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Introduction - 100 Days of ML Code</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="favicon-8114d1fc.png">
+        <link rel="stylesheet" href="css/variables-8adf115d.css">
+        <link rel="stylesheet" href="css/general-2459343d.css">
+        <link rel="stylesheet" href="css/chrome-ae938929.css">
+        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex-b65ed104.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc-68538d78.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">100 Days of ML Code</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="100일간의-머신러닝-코드"><a class="header" href="#100일간의-머신러닝-코드">100일간의 머신러닝 코드</a></h1>
+<p><a href="https://github.com/llSourcell">Siraj Raval</a>이 제안한 100일간의 머신러닝 코딩</p>
+<p><a href="datasets">여기</a>에서 데이터셋을 받으세요.</p>
+<h2 id="데이터-전처리--1일차"><a class="header" href="#데이터-전처리--1일차">데이터 전처리 | 1일차</a></h2>
+<p><a href="Code/Day%201_Data%20PreProcessing.html">여기</a>에서 코드를 확인하세요.</p>
+<p align="center">
+  <img src="Info-graphs/Day%201.jpg">
+</p>
+
+<h2 id="단순-선형-회귀--2일차"><a class="header" href="#단순-선형-회귀--2일차">단순 선형 회귀 | 2일차</a></h2>
+<p><a href="Code/Day2_Simple_Linear_Regression.html">여기</a>에서 코드를 확인하세요.</p>
+<p align="center">
+  <img src="Info-graphs/Day%202.jpg">
+</p>
+
+<h2 id="다중-선형-회귀--3일차"><a class="header" href="#다중-선형-회귀--3일차">다중 선형 회귀 | 3일차</a></h2>
+<p><a href="Code/Day3_Multiple_Linear_Regression.html">여기</a>에서 코드를 확인하세요.</p>
+<p align="center">
+  <img src="Info-graphs/Day%203.jpg">
+</p>
+
+<h2 id="로지스틱-회귀--4일차"><a class="header" href="#로지스틱-회귀--4일차">로지스틱 회귀 | 4일차</a></h2>
+<p align="center">
+  <img src="Info-graphs/Day%204.jpg">
+</p>
+
+<h2 id="로지스틱-회귀--5일차"><a class="header" href="#로지스틱-회귀--5일차">로지스틱 회귀 | 5일차</a></h2>
+<p>#100DaysOfMLCode를 진행하면서 오늘 로지스틱 회귀가 실제로 무엇이며 그 뒤에 숨겨진 수학은 무엇인지 더 깊이 파고들었습니다. 비용 함수가 어떻게 계산되는지, 그리고 예측 오류를 최소화하기 위해 비용 함수에 경사 하강 알고리즘을 적용하는 방법을 배웠습니다.
+시간이 부족하여 이제 격일로 인포그래픽을 게시할 예정입니다.
+또한 코드 문서화에 도움을 주실 분이 있고 이미 해당 분야에 경험이 있으며 github용 Markdown을 알고 계신다면 LinkedIn으로 저에게 연락해 주세요 :).</p>
+<h2 id="로지스틱-회귀-구현--6일차"><a class="header" href="#로지스틱-회귀-구현--6일차">로지스틱 회귀 구현 | 6일차</a></h2>
+<p><a href="Code/Day%206%20Logistic%20Regression.html">여기</a>에서 코드를 확인하세요.</p>
+<h2 id="k-최근접-이웃--7일차"><a class="header" href="#k-최근접-이웃--7일차">K 최근접 이웃 | 7일차</a></h2>
+<p align="center">
+  <img src="Info-graphs/Day%207.jpg">
+</p>
+
+<h2 id="로지스틱-회귀의-수학적-원리--8일차"><a class="header" href="#로지스틱-회귀의-수학적-원리--8일차">로지스틱 회귀의 수학적 원리 | 8일차</a></h2>
+<p>#100DaysOfMLCode 로지스틱 회귀에 대한 이해를 명확히 하기 위해 인터넷에서 자료나 기사를 검색하다가 Saishruthi Swaminathan의 이 기사(https://towardsdatascience.com/logistic-regression-detailed-overview-46c4da4303bc)를 발견했습니다.</p>
+<p>로지스틱 회귀에 대한 자세한 설명을 제공합니다. 확인해 보세요.</p>
+<h2 id="서포트-벡터-머신--9일차"><a class="header" href="#서포트-벡터-머신--9일차">서포트 벡터 머신 | 9일차</a></h2>
+<p>SVM이 무엇이며 분류 문제를 해결하는 데 어떻게 사용되는지에 대한 직관을 얻었습니다.</p>
+<h2 id="svm-및-knn--10일차"><a class="header" href="#svm-및-knn--10일차">SVM 및 KNN | 10일차</a></h2>
+<p>SVM 작동 방식에 대해 더 자세히 배우고 K-NN 알고리즘을 구현했습니다.</p>
+<h2 id="k-nn-구현--11일차"><a class="header" href="#k-nn-구현--11일차">K-NN 구현 | 11일차</a></h2>
+<p>분류를 위한 K-NN 알고리즘을 구현했습니다. #100DaysOfMLCode
+서포트 벡터 머신 인포그래픽이 절반 정도 완료되었습니다. 내일 업데이트하겠습니다.</p>
+<h2 id="서포트-벡터-머신--12일차"><a class="header" href="#서포트-벡터-머신--12일차">서포트 벡터 머신 | 12일차</a></h2>
+<p align="center">
+  <img src="Info-graphs/Day%2012.jpg">
+</p>
+
+<h2 id="나이브-베이즈-분류기--13일차"><a class="header" href="#나이브-베이즈-분류기--13일차">나이브 베이즈 분류기 | 13일차</a></h2>
+<p>#100DaysOfMLCode를 계속 진행하면서 오늘 나이브 베이즈 분류기를 살펴보았습니다.
+또한 scikit-learn을 사용하여 파이썬으로 SVM을 구현하고 있습니다. 코드는 곧 업데이트하겠습니다.</p>
+<h2 id="svm-구현--14일차"><a class="header" href="#svm-구현--14일차">SVM 구현 | 14일차</a></h2>
+<p>오늘 선형적으로 관련된 데이터에 SVM을 구현했습니다. Scikit-Learn 라이브러리를 사용했습니다. Scikit-Learn에는 이 작업을 수행하는 데 사용하는 SVC 분류기가 있습니다. 다음 구현에서는 커널 트릭을 사용할 예정입니다.
+<a href="Code/Day%2013%20SVM.html">여기</a>에서 코드를 확인하세요.</p>
+<h2 id="나이브-베이즈-분류기-및-블랙박스-머신러닝--15일차"><a class="header" href="#나이브-베이즈-분류기-및-블랙박스-머신러닝--15일차">나이브 베이즈 분류기 및 블랙박스 머신러닝 | 15일차</a></h2>
+<p>다양한 유형의 나이브 베이즈 분류기에 대해 배웠습니다. 또한 <a href="https://bloomberg.github.io/foml/#home">Bloomberg</a>의 강의를 듣기 시작했습니다. 재생 목록의 첫 번째 강의는 블랙박스 머신러닝이었습니다. 예측 함수, 특징 추출, 학습 알고리즘, 성능 평가, 교차 검증, 샘플 편향, 비정상성, 과적합 및 하이퍼파라미터 튜닝에 대한 전체 개요를 제공합니다.</p>
+<h2 id="커널-트릭을-사용한-svm-구현--16일차"><a class="header" href="#커널-트릭을-사용한-svm-구현--16일차">커널 트릭을 사용한 SVM 구현 | 16일차</a></h2>
+<p>Scikit-Learn 라이브러리를 사용하여 데이터 포인트를 더 높은 차원으로 매핑하여 최적의 초평면을 찾는 커널 함수와 함께 SVM 알고리즘을 구현했습니다.</p>
+<h2 id="coursera에서-딥러닝-전문-과정-시작--17일차"><a class="header" href="#coursera에서-딥러닝-전문-과정-시작--17일차">Coursera에서 딥러닝 전문 과정 시작 | 17일차</a></h2>
+<p>하루 만에 1주차와 2주차 전체를 완료했습니다. 신경망으로서의 로지스틱 회귀를 배웠습니다.</p>
+<h2 id="coursera에서-딥러닝-전문-과정--18일차"><a class="header" href="#coursera에서-딥러닝-전문-과정--18일차">Coursera에서 딥러닝 전문 과정 | 18일차</a></h2>
+<p>딥러닝 전문 과정의 첫 번째 과정을 완료했습니다. 파이썬으로 신경망을 구현했습니다.</p>
+<h2 id="학습-문제-yaser-abu-mostafa-교수--19일차"><a class="header" href="#학습-문제-yaser-abu-mostafa-교수--19일차">학습 문제, Yaser Abu-Mostafa 교수 | 19일차</a></h2>
+<p>Yaser Abu-Mostafa 교수의 Caltech 머신러닝 과정(CS 156) 18개 강의 중 첫 번째 강의를 시작했습니다. 기본적으로 다음 강의에 대한 소개였습니다. 또한 퍼셉트론 알고리즘에 대해서도 설명했습니다.</p>
+<h2 id="딥러닝-전문-과정-2-시작--20일차"><a class="header" href="#딥러닝-전문-과정-2-시작--20일차">딥러닝 전문 과정 2 시작 | 20일차</a></h2>
+<p>심층 신경망 개선: 하이퍼파라미터 튜닝, 정규화 및 최적화 1주차를 완료했습니다.</p>
+<h2 id="웹-스크래핑--21일차"><a class="header" href="#웹-스크래핑--21일차">웹 스크래핑 | 21일차</a></h2>
+<p>모델 구축을 위한 데이터 수집을 위해 Beautiful Soup을 사용하여 웹 스크래핑을 수행하는 방법에 대한 몇 가지 튜토리얼을 시청했습니다.</p>
+<h2 id="학습은-가능한가--22일차"><a class="header" href="#학습은-가능한가--22일차">학습은 가능한가? | 22일차</a></h2>
+<p>Yaser Abu-Mostafa 교수의 Caltech 머신러닝 과정(CS 156) 18개 강의 중 두 번째 강의. 호프딩 부등식에 대해 배웠습니다.</p>
+<h2 id="결정-트리--23일차"><a class="header" href="#결정-트리--23일차">결정 트리 | 23일차</a></h2>
+<p align="center">
+  <img src="Info-graphs/Day%2023.jpg">
+</p>
+
+<h2 id="통계-학습-이론-소개--24일차"><a class="header" href="#통계-학습-이론-소개--24일차">통계 학습 이론 소개 | 24일차</a></h2>
+<p>Bloomberg ML 과정의 세 번째 강의에서는 입력 공간, 행동 공간, 결과 공간, 예측 함수, 손실 함수 및 가설 공간과 같은 핵심 개념 중 일부를 소개했습니다.</p>
+<h2 id="결정-트리-구현--25일차"><a class="header" href="#결정-트리-구현--25일차">결정 트리 구현 | 25일차</a></h2>
+<p><a href="Code/Day%2025%20Decision%20Tree.html">여기</a>에서 코드를 확인하세요.</p>
+<h2 id="선형-대수-복습으로-이동--26일차"><a class="header" href="#선형-대수-복습으로-이동--26일차">선형 대수 복습으로 이동 | 26일차</a></h2>
+<p>유튜브에서 3Blue1Brown이라는 놀라운 <a href="https://www.youtube.com/channel/UCYO_jab_esuFRV4b17AJtAw">채널</a>을 발견했습니다. 선형 대수의 본질이라는 재생 목록이 있습니다. 벡터, 선형 조합, 스팬, 기저 벡터, 선형 변환 및 행렬 곱셈에 대한 전체 개요를 제공하는 4개의 비디오를 완료하며 시작했습니다.</p>
+<p>재생 목록 링크는 <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab">여기</a>입니다.</p>
+<h2 id="선형-대수-복습으로-이동--27일차"><a class="header" href="#선형-대수-복습으로-이동--27일차">선형 대수 복습으로 이동 | 27일차</a></h2>
+<p>재생 목록을 계속 진행하면서 3D 변환, 행렬식, 역행렬, 열 공간, 영 공간 및 비정방 행렬 주제를 다루는 다음 4개의 비디오를 완료했습니다.</p>
+<p>재생 목록 링크는 <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab">여기</a>입니다.</p>
+<h2 id="선형-대수-복습으로-이동--28일차"><a class="header" href="#선형-대수-복습으로-이동--28일차">선형 대수 복습으로 이동 | 28일차</a></h2>
+<p>3Blue1Brown의 재생 목록에서 선형 대수의 본질에서 3개의 비디오를 추가로 완료했습니다.
+다룬 주제는 내적과 외적이었습니다.</p>
+<p>재생 목록 링크는 <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab">여기</a>입니다.</p>
+<h2 id="선형-대수-복습으로-이동--29일차"><a class="header" href="#선형-대수-복습으로-이동--29일차">선형 대수 복습으로 이동 | 29일차</a></h2>
+<p>오늘 12-14번 비디오를 통해 전체 재생 목록을 완료했습니다. 선형 대수 개념을 복습하기에 정말 놀라운 재생 목록입니다.
+다룬 주제는 기저 변경, 고유 벡터 및 고유값, 추상 벡터 공간이었습니다.</p>
+<p>재생 목록 링크는 <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab">여기</a>입니다.</p>
+<h2 id="미적분학의-본질--30일차"><a class="header" href="#미적분학의-본질--30일차">미적분학의 본질 | 30일차</a></h2>
+<p>3blue1brown의 선형 대수의 본질 재생 목록을 완료하자 유튜브에서 같은 채널 3Blue1Brown의 비디오 시리즈에 대한 제안이 나타났습니다. 이미 이전 선형 대수 시리즈에 깊은 인상을 받았기 때문에 바로 뛰어들었습니다.
+도함수, 연쇄 법칙, 곱셈 법칙 및 지수 함수의 도함수와 같은 주제에 대한 약 5개의 비디오를 완료했습니다.</p>
+<p>재생 목록 링크는 <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr">여기</a>입니다.</p>
+<h2 id="미적분학의-본질--31일차"><a class="header" href="#미적분학의-본질--31일차">미적분학의 본질 | 31일차</a></h2>
+<p>미적분학의 본질 재생 목록에서 음함수 미분 및 극한 주제에 대한 2개의 비디오를 시청했습니다.</p>
+<p>재생 목록 링크는 <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr">여기</a>입니다.</p>
+<h2 id="미적분학의-본질--32일차"><a class="header" href="#미적분학의-본질--32일차">미적분학의 본질 | 32일차</a></h2>
+<p>적분 및 고계 도함수와 같은 주제를 다루는 나머지 4개의 비디오를 시청했습니다.</p>
+<p>재생 목록 링크는 <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr">여기</a>입니다.</p>
+<h2 id="랜덤-포레스트--33일차"><a class="header" href="#랜덤-포레스트--33일차">랜덤 포레스트 | 33일차</a></h2>
+<p align="center">
+  <img src="Info-graphs/Day%2033.jpg">
+</p>
+
+<h2 id="랜덤-포레스트-구현--34일차"><a class="header" href="#랜덤-포레스트-구현--34일차">랜덤 포레스트 구현 | 34일차</a></h2>
+<p><a href="Code/Day%2034%20Random_Forest.html">여기</a>에서 코드를 확인하세요.</p>
+<h2 id="하지만-신경망이란-무엇일까요--딥러닝-1장--35일차"><a class="header" href="#하지만-신경망이란-무엇일까요--딥러닝-1장--35일차">하지만 신경망이란 <em>무엇</em>일까요? | 딥러닝, 1장 | 35일차</a></h2>
+<p>3Blue1Brown 유튜브 채널의 신경망에 대한 놀라운 비디오. 이 비디오는 신경망에 대한 이해를 돕고 손으로 쓴 숫자 데이터셋을 사용하여 개념을 설명합니다.
+<a href="https://www.youtube.com/watch?v=aircAruvnKk&amp;t=7s">비디오</a> 링크입니다.</p>
+<h2 id="경사-하강-신경망이-학습하는-방법--딥러닝-2장--36일차"><a class="header" href="#경사-하강-신경망이-학습하는-방법--딥러닝-2장--36일차">경사 하강, 신경망이 학습하는 방법 | 딥러닝, 2장 | 36일차</a></h2>
+<p>3Blue1Brown 유튜브 채널의 신경망 2부. 이 비디오는 흥미로운 방식으로 경사 하강 개념을 설명합니다. 169 꼭 봐야 할 강력 추천 비디오입니다.
+<a href="https://www.youtube.com/watch?v=IHZwWFHWa-w">비디오</a> 링크입니다.</p>
+<h2 id="역전파는-실제로-무엇을-하고-있을까요--딥러닝-3장--37일차"><a class="header" href="#역전파는-실제로-무엇을-하고-있을까요--딥러닝-3장--37일차">역전파는 실제로 무엇을 하고 있을까요? | 딥러닝, 3장 | 37일차</a></h2>
+<p>3Blue1Brown 유튜브 채널의 신경망 3부. 이 비디오는 주로 편도함수와 역전파에 대해 설명합니다.
+<a href="https://www.youtube.com/watch?v=Ilg3gGewQ5U">비디오</a> 링크입니다.</p>
+<h2 id="역전파-미적분학--딥러닝-4장--38일차"><a class="header" href="#역전파-미적분학--딥러닝-4장--38일차">역전파 미적분학 | 딥러닝, 4장 | 38일차</a></h2>
+<p>3Blue1Brown 유튜브 채널의 신경망 4부. 여기서 목표는 역전파가 작동하는 방식에 대한 직관을 다소 공식적인 용어로 표현하는 것이며 비디오는 주로 편도함수와 역전파에 대해 설명합니다.
+<a href="https://www.youtube.com/watch?v=tIeHLnjs5U8">비디오</a> 링크입니다.</p>
+<h2 id="파이썬-텐서플로우-케라스를-사용한-딥러닝-튜토리얼--39일차"><a class="header" href="#파이썬-텐서플로우-케라스를-사용한-딥러닝-튜토리얼--39일차">파이썬, 텐서플로우, 케라스를 사용한 딥러닝 튜토리얼 | 39일차</a></h2>
+<p><a href="https://www.youtube.com/watch?v=wQ8BIBpya2k&amp;t=19s&amp;index=2&amp;list=PLQVvvaa0QuDfhTox0AjmQ6tvTgMBZBEXN">비디오</a> 링크입니다.</p>
+<h2 id="자체-데이터-로드---파이썬-텐서플로우-케라스를-사용한-딥러닝-기초-2부--40일차"><a class="header" href="#자체-데이터-로드---파이썬-텐서플로우-케라스를-사용한-딥러닝-기초-2부--40일차">자체 데이터 로드 - 파이썬, 텐서플로우, 케라스를 사용한 딥러닝 기초 2부 | 40일차</a></h2>
+<p><a href="https://www.youtube.com/watch?v=j-3vuBynnOE&amp;list=PLQVvvaa0QuDfhTox0AjmQ6tvTgMBZBEXN&amp;index=2">비디오</a> 링크입니다.</p>
+<h2 id="컨볼루션-신경망---파이썬-텐서플로우-케라스를-사용한-딥러닝-기초-3부--41일차"><a class="header" href="#컨볼루션-신경망---파이썬-텐서플로우-케라스를-사용한-딥러닝-기초-3부--41일차">컨볼루션 신경망 - 파이썬, 텐서플로우, 케라스를 사용한 딥러닝 기초 3부 | 41일차</a></h2>
+<p><a href="https://www.youtube.com/watch?v=WvoLTXIjBYU&amp;list=PLQVvvaa0QuDfhTox0AjmQ6tvTgMBZBEXN&amp;index=3">비디오</a> 링크입니다.</p>
+<h2 id="텐서보드를-사용한-모델-분석---파이썬-텐서플로우-케라스를-사용한-딥러닝-4부--42일차"><a class="header" href="#텐서보드를-사용한-모델-분석---파이썬-텐서플로우-케라스를-사용한-딥러닝-4부--42일차">텐서보드를 사용한 모델 분석 - 파이썬, 텐서플로우, 케라스를 사용한 딥러닝 4부 | 42일차</a></h2>
+<p><a href="https://www.youtube.com/watch?v=BqgTU7_cBnk&amp;list=PLQVvvaa0QuDfhTox0AjmQ6tvTgMBZBEXN&amp;index=4">비디오</a> 링크입니다.</p>
+<h2 id="k-평균-군집화--43일차"><a class="header" href="#k-평균-군집화--43일차">K 평균 군집화 | 43일차</a></h2>
+<p>비지도 학습으로 넘어가 군집화에 대해 공부했습니다.
+제 웹사이트 <a href="http://www.avikjain.me/">avikjain.me</a>를 확인해 보세요.
+또한 K 평균 군집화를 쉽게 이해하는 데 도움이 되는 멋진 애니메이션을 찾았습니다. <a href="http://shabal.in/visuals/kmeans/6.html">링크</a></p>
+<p align="center">
+  <img src="Info-graphs/Day%2043.jpg">
+</p>
+
+<h2 id="k-평균-군집화-구현--44일차"><a class="header" href="#k-평균-군집화-구현--44일차">K 평균 군집화 구현 | 44일차</a></h2>
+<p>K 평균 군집화를 구현했습니다. <a href="">여기</a>에서 코드를 확인하세요.</p>
+<h2 id="더-깊이-파고들기--numpy--45일차"><a class="header" href="#더-깊이-파고들기--numpy--45일차">더 깊이 파고들기 | NUMPY | 45일차</a></h2>
+<p>JK VanderPlas의 새 책 “Python Data Science HandBook“을 받았습니다. <a href="https://github.com/jakevdp/PythonDataScienceHandbook">여기</a>에서 Jupyter 노트북을 확인하세요.
+<br>2장 Numpy 소개부터 시작했습니다. 데이터 유형, Numpy 배열 및 Numpy 배열 연산과 같은 주제를 다루었습니다.
+<br>코드를 확인하세요 -
+<br><a href="https://github.com/jakevdp/PythonDataScienceHandbook/blob/master/notebooks/02.00-Introduction-to-NumPy.ipynb">NumPy 소개</a>
+<br><a href="https://github.com/jakevdp/PythonDataScienceHandbook/blob/master/notebooks/02.01-Understanding-Data-Types.ipynb">파이썬의 데이터 유형 이해</a>
+<br><a href="https://github.com/jakevdp/PythonDataScienceHandbook/blob/master/notebooks/02.02-The-Basics-Of-NumPy-Arrays.ipynb">NumPy 배열의 기초</a>
+<br><a href="https://github.com/jakevdp/PythonDataScienceHandbook/blob/master/notebooks/02.03-Computation-on-arrays-ufuncs.ipynb">NumPy 배열 연산: 유니버설 함수</a></p>
+<h2 id="더-깊이-파고들기--numpy--46일차"><a class="header" href="#더-깊이-파고들기--numpy--46일차">더 깊이 파고들기 | NUMPY | 46일차</a></h2>
+<p>2장: 집계, 비교 및 브로드캐스팅
+<br>노트북 링크:
+<br><a href="https://github.com/jakevdp/PythonDataScienceHandbook/blob/master/notebooks/02.04-Computation-on-arrays-aggregates.ipynb">집계: 최소, 최대 및 그 사이의 모든 것</a>
+<br><a href="https://github.com/jakevdp/PythonDataScienceHandbook/blob/master/notebooks/02.05-Computation-on-arrays-broadcasting.ipynb">배열 연산: 브로드캐스팅</a>
+<br><a href="https://github.com/jakevdp/PythonDataScienceHandbook/blob/master/notebooks/02.06-Boolean-Arrays-and-Masks.ipynb">비교, 마스크 및 부울 논리</a></p>
+<h2 id="더-깊이-파고들기--numpy--47일차"><a class="header" href="#더-깊이-파고들기--numpy--47일차">더 깊이 파고들기 | NUMPY | 47일차</a></h2>
+<p>2장: 팬시 인덱싱, 배열 정렬, 구조화된 데이터
+<br>노트북 링크:
+<br><a href="https://github.com/jakevdp/PythonDataScienceHandbook/blob/master/notebooks/02.07-Fancy-Indexing.ipynb">팬시 인덱싱</a>
+<br><a href="https://github.com/jakevdp/PythonDataScienceHandbook/blob/master/notebooks/02.08-Sorting.ipynb">배열 정렬</a>
+<br><a href="https://github.com/jakevdp/PythonDataScienceHandbook/blob/master/notebooks/02.09-&lt;br&gt;Structured-Data-NumPy.ipynb">구조화된 데이터: NumPy의 구조화된 배열</a></p>
+<h2 id="더-깊이-파고들기--pandas--48일차"><a class="header" href="#더-깊이-파고들기--pandas--48일차">더 깊이 파고들기 | PANDAS | 48일차</a></h2>
+<p>3장: Pandas를 사용한 데이터 조작
+<br> Pandas 객체, 데이터 인덱싱 및 선택, 데이터 연산, 누락된 데이터 처리, 계층적 인덱싱, ConCat 및 Append와 같은 다양한 주제를 다루었습니다.
+<br>노트북 링크:
+<br><a href="https://github.com/jakevdp/PythonDataScienceHandbook/blob/master/notebooks/03.00-Introduction-to-Pandas.ipynb">Pandas를 사용한 데이터 조작</a>
+<br><a href="https://github.com/jakevdp/PythonDataScienceHandbook/blob/master/notebooks/03.01-Introducing-Pandas-Objects.ipynb">Pandas 객체 소개</a>
+<br><a href="https://github.com/jakevdp/PythonDataScienceHandbook/blob/master/notebooks/03.02-Data-Indexing-and-Selection.ipynb">데이터 인덱싱 및 선택</a>
+<br><a href="https://github.com/jakevdp/PythonDataScienceHandbook/blob/master/notebooks/03.03-Operations-in-Pandas.ipynb">Pandas의 데이터 연산</a>
+<br><a href="https://github.com/jakevdp/PythonDataScienceHandbook/blob/master/notebooks/03.04-Missing-Values.ipynb">누락된 데이터 처리</a>
+<br><a href="https://github.com/jakevdp/PythonDataScienceHandbook/blob/master/notebooks/03.05-Hierarchical-Indexing.ipynb">계층적 인덱싱</a>
+<br><a href="https://github.com/jakevdp/PythonDataScienceHandbook/blob/master/notebooks/03.06-Concat-And-Append.ipynb">데이터셋 결합: Concat 및 Append</a></p>
+<h2 id="더-깊이-파고들기--pandas--49일차"><a class="header" href="#더-깊이-파고들기--pandas--49일차">더 깊이 파고들기 | PANDAS | 49일차</a></h2>
+<p>3장: 다음 주제 완료 - 병합 및 조인, 집계 및 그룹화, 피벗 테이블.
+<br><a href="https://github.com/jakevdp/PythonDataScienceHandbook/blob/master/notebooks/03.07-Merge-and-Join.ipynb">데이터셋 결합: 병합 및 조인</a>
+<br><a href="https://github.com/jakevdp/PythonDataScienceHandbook/blob/master/notebooks/03.08-Aggregation-and-Grouping.ipynb">집계 및 그룹화</a>
+<br><a href="https://github.com/jakevdp/PythonDataScienceHandbook/blob/master/notebooks/03.09-Pivot-Tables.ipynb">피벗 테이블</a></p>
+<h2 id="더-깊이-파고들기--pandas--50일차"><a class="header" href="#더-깊이-파고들기--pandas--50일차">더 깊이 파고들기 | PANDAS | 50일차</a></h2>
+<p>3장: 벡터화된 문자열 연산, 시계열 작업
+<br>노트북 링크:
+<br><a href="https://github.com/jakevdp/PythonDataScienceHandbook/blob/master/notebooks/03.10-Working-With-Strings.ipynb">벡터화된 문자열 연산</a>
+<br><a href="https://github.com/jakevdp/PythonDataScienceHandbook/blob/master/notebooks/03.11-Working-with-Time-Series.ipynb">시계열 작업</a>
+<br><a href="https://github.com/jakevdp/PythonDataScienceHandbook/blob/master/notebooks/03.12-Performance-Eval-and-Query.ipynb">고성능 Pandas: eval() 및 query()</a></p>
+<h2 id="더-깊이-파고들기--matplotlib--51일차"><a class="header" href="#더-깊이-파고들기--matplotlib--51일차">더 깊이 파고들기 | MATPLOTLIB | 51일차</a></h2>
+<p>4장: Matplotlib을 사용한 시각화
+단순 선 플롯, 단순 산점도, 밀도 및 등고선 플롯에 대해 배웠습니다.
+<br>노트북 링크:
+<br><a href="https://github.com/jakevdp/PythonDataScienceHandbook/blob/master/notebooks/04.00-Introduction-To-Matplotlib.ipynb">Matplotlib을 사용한 시각화</a>
+<br><a href="https://github.com/jakevdp/PythonDataScienceHandbook/blob/master/notebooks/04.01-Simple-Line-Plots.ipynb">단순 선 플롯</a>
+<br><a href="https://github.com/jakevdp/PythonDataScienceHandbook/blob/master/notebooks/04.02-Simple-Scatter-Plots.ipynb">단순 산점도</a>
+<br><a href="https://github.com/jakevdp/PythonDataScienceHandbook/blob/master/notebooks/04.03-Errorbars.ipynb">오류 시각화</a>
+<br><a href="https://github.com/jakevdp/PythonDataScienceHandbook/blob/master/notebooks/04.04-Density-and-Contour-Plots.ipynb">밀도 및 등고선 플롯</a></p>
+<h2 id="더-깊이-파고들기--matplotlib--52일차"><a class="header" href="#더-깊이-파고들기--matplotlib--52일차">더 깊이 파고들기 | MATPLOTLIB | 52일차</a></h2>
+<p>4장: Matplotlib을 사용한 시각화
+히스토그램, 플롯 범례 사용자 지정 방법, 색상 막대 및 다중 서브플롯 만들기에 대해 배웠습니다.
+<br>노트북 링크:
+<br><a href="https://github.com/jakevdp/PythonDataScienceHandbook/blob/master/notebooks/04.05-Histograms-and-Binnings.ipynb">히스토그램, 구간화 및 밀도</a>
+<br><a href="https://github.com/jakevdp/PythonDataScienceHandbook/blob/master/notebooks/04.06-Customizing-Legends.ipynb">플롯 범례 사용자 지정</a>
+<br><a href="https://github.com/jakevdp/PythonDataScienceHandbook/blob/master/notebooks/04.07-Customizing-Colorbars.ipynb">색상 막대 사용자 지정</a>
+<br><a href="https://github.com/jakevdp/PythonDataScienceHandbook/blob/master/notebooks/04.08-Multiple-Subplots.ipynb">다중 서브플롯</a>
+<br><a href="https://github.com/jakevdp/PythonDataScienceHandbook/blob/master/notebooks/04.09-Text-and-Annotation.ipynb">텍스트 및 주석</a></p>
+<h2 id="더-깊이-파고들기--matplotlib--53일차"><a class="header" href="#더-깊이-파고들기--matplotlib--53일차">더 깊이 파고들기 | MATPLOTLIB | 53일차</a></h2>
+<p>4장: Mathplotlib의 3차원 플로팅을 다루었습니다.
+<br>노트북 링크:
+<br><a href="https://github.com/jakevdp/PythonDataScienceHandbook/blob/master/notebooks/04.12-Three-Dimensional-Plotting.ipynb">Matplotlib의 3차원 플로팅</a></p>
+<h2 id="계층적-군집화--54일차"><a class="header" href="#계층적-군집화--54일차">계층적 군집화 | 54일차</a></h2>
+<p>계층적 군집화에 대해 공부했습니다.
+이 놀라운 <a href="https://cdn-images-1.medium.com/max/800/1*ET8kCcPpr893vNZFs8j4xg.gif">시각화</a>를 확인해 보세요.</p>
+<p align="center">
+  <img src="Info-graphs/Day%2054.jpg">
+</p>
+
+<h2 id="강화-학습-소개--55일차"><a class="header" href="#강화-학습-소개--55일차">강화 학습 소개 | 55일차</a></h2>
+<p>강화 학습(RL)의 기본 개념과 용어(에이전트, 환경, 보상, 정책, 가치 함수)를 학습했습니다. <a href="Code/Day_55_Reinforcement_Learning_Intro.html">자세히 보기</a></p>
+<h2 id="마르코프-결정-과정--56일차"><a class="header" href="#마르코프-결정-과정--56일차">마르코프 결정 과정 | 56일차</a></h2>
+<p>강화 학습의 핵심 프레임워크인 마르코프 결정 과정(MDP)에 대해 학습했습니다. <a href="Code/Day_56_Markov_Decision_Processes.html">자세히 보기</a></p>
+<h2 id="q-러닝---이론-및-알고리즘--57일차"><a class="header" href="#q-러닝---이론-및-알고리즘--57일차">Q-러닝 - 이론 및 알고리즘 | 57일차</a></h2>
+<p>모델 프리 강화 학습 알고리즘인 Q-러닝의 이론적 배경과 작동 방식에 대해 학습했습니다. <a href="Code/Day_57_Q_Learning_Theory_Algorithm.html">자세히 보기</a></p>
+<h2 id="q-러닝---간단한-구현--58일차"><a class="header" href="#q-러닝---간단한-구현--58일차">Q-러닝 - 간단한 구현 | 58일차</a></h2>
+<p>간단한 예제(예: 그리드 월드)를 통해 Q-러닝을 구현하는 방법을 학습했습니다. <a href="Code/Day_58_Q_Learning_Simple_Implementation.html">코드</a></p>
+<h2 id="심층-q-네트워크-dqn--59일차"><a class="header" href="#심층-q-네트워크-dqn--59일차">심층 Q-네트워크 (DQN) | 59일차</a></h2>
+<p>Q-러닝과 심층 신경망을 결합한 심층 Q-네트워크(DQN)의 개념과 장점에 대해 학습했습니다. <a href="Code/Day_59_Deep_Q_Networks_DQN.html">자세히 보기</a></p>
+<h2 id="자연어-처리-소개--60일차"><a class="header" href="#자연어-처리-소개--60일차">자연어 처리 소개 | 60일차</a></h2>
+<p>자연어 처리(NLP)의 기본 개념과 용어(코퍼스, 토큰, 임베딩)를 학습했습니다. <a href="Code/Day_60_Natural_Language_Processing_Intro.html">자세히 보기</a></p>
+<h2 id="텍스트-전처리--61일차"><a class="header" href="#텍스트-전처리--61일차">텍스트 전처리 | 61일차</a></h2>
+<p>NLP의 중요한 단계인 텍스트 전처리 기법(토큰화, 어간 추출, 표제어 추출)에 대해 학습했습니다. <a href="Code/Day_61_Text_Preprocessing.html">자세히 보기</a></p>
+<h2 id="bag-of-words-및-tf-idf--62일차"><a class="header" href="#bag-of-words-및-tf-idf--62일차">Bag-of-Words 및 TF-IDF | 62일차</a></h2>
+<p>텍스트 데이터를 수치 벡터로 변환하는 대표적인 방법인 Bag-of-Words와 TF-IDF에 대해 학습하고 구현했습니다. <a href="Code/Day_62_Bag_of_Words_TF-IDF.html">코드</a></p>
+<h2 id="단어-임베딩---word2vec-glove-개념--63일차"><a class="header" href="#단어-임베딩---word2vec-glove-개념--63일차">단어 임베딩 - Word2Vec, GloVe (개념) | 63일차</a></h2>
+<p>단어의 의미를 밀집 벡터로 표현하는 단어 임베딩 기법인 Word2Vec과 GloVe의 개념에 대해 학습했습니다. <a href="Code/Day_63_Word_Embeddings_Word2Vec_GloVe_Conceptual.html">자세히 보기</a></p>
+<h2 id="word2vec-구현--64일차"><a class="header" href="#word2vec-구현--64일차">Word2Vec 구현 | 64일차</a></h2>
+<p>Gensim 라이브러리를 사용하여 Word2Vec을 구현하는 방법을 학습했습니다. <a href="Code/Day_64_Implementing_Word2Vec_Gensim.html">코드</a></p>
+<h2 id="감성-분석---기본-기법--65일차"><a class="header" href="#감성-분석---기본-기법--65일차">감성 분석 - 기본 기법 | 65일차</a></h2>
+<p>텍스트에 나타난 감성을 분석하는 기본 기법들에 대해 학습했습니다. <a href="Code/Day_65_Sentiment_Analysis_Basic_Techniques.html">자세히 보기</a></p>
+<h2 id="간단한-감성-분석기-구축--66일차"><a class="header" href="#간단한-감성-분석기-구축--66일차">간단한 감성 분석기 구축 | 66일차</a></h2>
+<p>학습한 내용을 바탕으로 간단한 감성 분석기를 구축했습니다. <a href="Code/Day_66_Building_Simple_Sentiment_Analyzer.html">코드</a></p>
+<h2 id="순환-신경망-rnn-소개--67일차"><a class="header" href="#순환-신경망-rnn-소개--67일차">순환 신경망 (RNN) 소개 | 67일차</a></h2>
+<p>순서가 있는 데이터를 처리하는 데 효과적인 순환 신경망(RNN)의 기본 구조와 원리에 대해 학습했습니다. <a href="Code/Day_67_Introduction_to_Recurrent_Neural_Networks_RNNs.html">자세히 보기</a></p>
+<h2 id="lstm-long-short-term-memory-네트워크--68일차"><a class="header" href="#lstm-long-short-term-memory-네트워크--68일차">LSTM (Long Short-Term Memory) 네트워크 | 68일차</a></h2>
+<p>RNN의 장기 의존성 문제를 해결하기 위해 제안된 LSTM 네트워크에 대해 학습했습니다. <a href="Code/Day_68_Long_Short_Term_Memory_LSTM_Networks.html">자세히 보기</a></p>
+<h2 id="rnnlstm을-이용한-텍스트-분류기-구축--69일차"><a class="header" href="#rnnlstm을-이용한-텍스트-분류기-구축--69일차">RNN/LSTM을 이용한 텍스트 분류기 구축 | 69일차</a></h2>
+<p>RNN 또는 LSTM을 사용하여 텍스트 분류기를 구축하는 방법을 학습했습니다. <a href="Code/Day_69_Building_Text_Classifier_RNN_LSTM.html">코드</a></p>
+<h2 id="강화-학습-및-nlp-개념-복습--70일차"><a class="header" href="#강화-학습-및-nlp-개념-복습--70일차">강화 학습 및 NLP 개념 복습 | 70일차</a></h2>
+<p>지난 15일간 학습한 강화 학습 및 자연어 처리 관련 주요 개념들을 복습했습니다. <a href="Code/Day_70_Review_RL_NLP_Concepts.html">자세히 보기</a></p>
+<h2 id="주성분-분석-pca---이론-및-구현--71일차"><a class="header" href="#주성분-분석-pca---이론-및-구현--71일차">주성분 분석 (PCA) - 이론 및 구현 | 71일차</a></h2>
+<p>차원 축소 기법 중 하나인 주성분 분석(PCA)의 이론을 학습하고 구현했습니다. <a href="Code/Day_71_PCA_Theory_Implementation.html">코드</a></p>
+<h2 id="선형-판별-분석-lda--72일차"><a class="header" href="#선형-판별-분석-lda--72일차">선형 판별 분석 (LDA) | 72일차</a></h2>
+<p>또 다른 차원 축소 및 분류 기법인 선형 판별 분석(LDA)에 대해 학습했습니다. <a href="Code/Day_72_Linear_Discriminant_Analysis_LDA.html">코드</a></p>
+<h2 id="모델-평가-지표--73일차"><a class="header" href="#모델-평가-지표--73일차">모델 평가 지표 | 73일차</a></h2>
+<p>머신러닝 모델의 성능을 평가하기 위한 다양한 지표(정밀도, 재현율, F1 점수, ROC AUC)에 대해 학습했습니다. <a href="Code/Day_73_Model_Evaluation_Metrics.html">자세히 보기</a></p>
+<h2 id="교차-검증-기법--74일차"><a class="header" href="#교차-검증-기법--74일차">교차 검증 기법 | 74일차</a></h2>
+<p>모델의 일반화 성능을 평가하기 위한 교차 검증 기법(K-폴드 교차 검증 등)에 대해 학습했습니다. <a href="Code/Day_74_Cross_Validation_Techniques.html">자세히 보기</a></p>
+<h2 id="하이퍼파라미터-튜닝--75일차"><a class="header" href="#하이퍼파라미터-튜닝--75일차">하이퍼파라미터 튜닝 | 75일차</a></h2>
+<p>모델 성능을 최적화하기 위한 하이퍼파라미터 튜닝 방법(그리드 서치, 랜덤 서치)에 대해 학습했습니다. <a href="Code/Day_75_Hyperparameter_Tuning_Grid_Random_Search.html">자세히 보기</a></p>
+<h2 id="앙상블-방법---배깅-부스팅--76일차"><a class="header" href="#앙상블-방법---배깅-부스팅--76일차">앙상블 방법 - 배깅, 부스팅 | 76일차</a></h2>
+<p>여러 모델을 결합하여 성능을 향상시키는 앙상블 기법 중 배깅(랜덤 포레스트 복습)과 부스팅(AdaBoost, Gradient Boosting)에 대해 학습했습니다. <a href="Code/Day_76_Ensemble_Methods_Bagging_Boosting.html">코드</a></p>
+<h2 id="xgboost---소개-및-구현--77일차"><a class="header" href="#xgboost---소개-및-구현--77일차">XGBoost - 소개 및 구현 | 77일차</a></h2>
+<p>강력한 부스팅 알고리즘인 XGBoost의 개념을 학습하고 구현했습니다. <a href="Code/Day_77_XGBoost_Introduction_Implementation.html">코드</a></p>
+<h2 id="lightgbm---소개-및-구현--78일차"><a class="header" href="#lightgbm---소개-및-구현--78일차">LightGBM - 소개 및 구현 | 78일차</a></h2>
+<p>XGBoost와 유사하지만 더 빠르고 효율적인 LightGBM에 대해 학습하고 구현했습니다. <a href="Code/Day_78_LightGBM_Introduction_Implementation.html">코드</a></p>
+<h2 id="시계열-분석-소개--79일차"><a class="header" href="#시계열-분석-소개--79일차">시계열 분석 소개 | 79일차</a></h2>
+<p>시간 순서대로 기록된 데이터인 시계열 데이터 분석의 기초 개념을 학습했습니다. <a href="Code/Day_79_Introduction_to_Time_Series_Analysis.html">자세히 보기</a></p>
+<h2 id="시계열을-위한-arima-모델--80일차"><a class="header" href="#시계열을-위한-arima-모델--80일차">시계열을 위한 ARIMA 모델 | 80일차</a></h2>
+<p>대표적인 시계열 예측 모델인 ARIMA 모델에 대해 학습하고 간단한 예제에 적용해 보았습니다. <a href="Code/Day_80_ARIMA_Models_for_Time_Series.html">코드</a></p>
+<h2 id="모델-배포-소개--81일차"><a class="header" href="#모델-배포-소개--81일차">모델 배포 소개 | 81일차</a></h2>
+<p>개발한 머신러닝 모델을 실제 환경에서 사용할 수 있도록 배포하는 과정의 중요성과 기본 개념을 학습했습니다. <a href="Code/Day_81_Introduction_to_Model_Deployment.html">자세히 보기</a></p>
+<h2 id="ml-모델-배포를-위한-flaskdjango---기초--82일차"><a class="header" href="#ml-모델-배포를-위한-flaskdjango---기초--82일차">ML 모델 배포를 위한 Flask/Django - 기초 | 82일차</a></h2>
+<p>웹 프레임워크인 Flask 또는 Django를 사용하여 머신러닝 모델을 배포하는 기초적인 방법을 학습했습니다. <a href="Code/Day_82_Flask_Django_for_ML_Deployment_Basics.html">자세히 보기</a></p>
+<h2 id="ml-모델을-위한-간단한-api-만들기--83일차"><a class="header" href="#ml-모델을-위한-간단한-api-만들기--83일차">ML 모델을 위한 간단한 API 만들기 | 83일차</a></h2>
+<p>Flask/Django를 사용하여 학습된 머신러닝 모델을 위한 간단한 API를 만드는 실습을 진행했습니다. <a href="Code/Day_83_Creating_Simple_API_for_ML_Model.html">코드</a></p>
+<h2 id="ml을-위한-docker---기초--84일차"><a class="header" href="#ml을-위한-docker---기초--84일차">ML을 위한 Docker - 기초 | 84일차</a></h2>
+<p>컨테이너화 기술인 Docker를 머신러닝 모델 배포에 활용하는 기초적인 방법을 학습했습니다. <a href="Code/Day_84_Docker_for_ML_Basics.html">자세히 보기</a></p>
+<h2 id="docker를-사용한-간단한-ml-모델-배포--85일차"><a class="header" href="#docker를-사용한-간단한-ml-모델-배포--85일차">Docker를 사용한 간단한 ML 모델 배포 | 85일차</a></h2>
+<p>Docker를 사용하여 간단한 머신러닝 모델을 배포하는 실습을 진행했습니다. <a href="Code/Day_85_Deploying_Simple_ML_Model_Docker.html">코드</a></p>
+<h2 id="캡스톤-프로젝트-아이디어-브레인스토밍--86일차"><a class="header" href="#캡스톤-프로젝트-아이디어-브레인스토밍--86일차">캡스톤 프로젝트 아이디어 브레인스토밍 | 86일차</a></h2>
+<p>100일 챌린지를 마무리할 캡스톤 프로젝트에 대한 아이디어를 구상했습니다. <a href="Code/Day_86_Brainstorming_Capstone_Project_Ideas.html">자세히 보기</a></p>
+<h2 id="캡스톤-프로젝트-선정-및-범위-정의--87일차"><a class="header" href="#캡스톤-프로젝트-선정-및-범위-정의--87일차">캡스톤 프로젝트 선정 및 범위 정의 | 87일차</a></h2>
+<p>여러 아이디어 중 하나를 캡스톤 프로젝트로 선정하고, 프로젝트의 목표와 범위를 명확히 정의했습니다. <a href="Code/Day_87_Selecting_Capstone_Project_Scope_Definition.html">자세히 보기</a></p>
+<h2 id="프로젝트를-위한-데이터-수집-및-전처리--88일차"><a class="header" href="#프로젝트를-위한-데이터-수집-및-전처리--88일차">프로젝트를 위한 데이터 수집 및 전처리 | 88일차</a></h2>
+<p>캡스톤 프로젝트에 필요한 데이터를 수집하고, 모델 학습에 적합하도록 전처리하는 작업을 수행했습니다. <a href="Code/Day_88_Data_Collection_Preprocessing_Capstone.html">자세히 보기</a></p>
+<h2 id="프로젝트를-위한-탐색적-데이터-분석-eda--89일차"><a class="header" href="#프로젝트를-위한-탐색적-데이터-분석-eda--89일차">프로젝트를 위한 탐색적 데이터 분석 (EDA) | 89일차</a></h2>
+<p>수집된 데이터를 다양한 각도에서 분석하고 시각화하여 데이터의 특징과 패턴을 파악하는 EDA를 수행했습니다. <a href="Code/Day_89_EDA_Feature_Engineering_Capstone.html">자세히 보기</a></p>
+<h2 id="프로젝트를-위한-모델-선정-및-초기-학습--90일차"><a class="header" href="#프로젝트를-위한-모델-선정-및-초기-학습--90일차">프로젝트를 위한 모델 선정 및 초기 학습 | 90일차</a></h2>
+<p>프로젝트 목표에 맞는 머신러닝 모델을 선정하고, 전처리된 데이터를 사용하여 초기 모델 학습을 진행했습니다. <a href="Code/Day_90_Model_Selection_Initial_Training_Capstone.html">자세히 보기</a></p>
+<h2 id="프로젝트를-위한-모델-평가-및-반복--91일차"><a class="header" href="#프로젝트를-위한-모델-평가-및-반복--91일차">프로젝트를 위한 모델 평가 및 반복 | 91일차</a></h2>
+<p>학습된 모델의 성능을 평가하고, 문제점을 분석하여 모델을 개선하는 반복 작업을 수행했습니다. <a href="Code/Day_91_Model_Evaluation_Iteration_Capstone.html">자세히 보기</a></p>
+<h2 id="프로젝트를-위한-미세-조정-및-최적화--92일차"><a class="header" href="#프로젝트를-위한-미세-조정-및-최적화--92일차">프로젝트를 위한 미세 조정 및 최적화 | 92일차</a></h2>
+<p>선정된 모델의 하이퍼파라미터를 조정하고 다양한 최적화 기법을 적용하여 모델 성능을 극대화했습니다. <a href="Code/Day_92_Fine_tuning_Optimization_Capstone.html">자세히 보기</a></p>
+<h2 id="프로젝트를-위한-간단한-ui-또는-프레젠테이션-구축--93일차"><a class="header" href="#프로젝트를-위한-간단한-ui-또는-프레젠테이션-구축--93일차">프로젝트를 위한 간단한 UI 또는 프레젠테이션 구축 | 93일차</a></h2>
+<p>캡스톤 프로젝트의 결과를 효과적으로 보여줄 수 있는 간단한 사용자 인터페이스(UI) 또는 프레젠테이션 자료를 제작했습니다. <a href="Code/Day_93_Building_UI_Presentation_Capstone.html">자세히 보기</a></p>
+<h2 id="캡스톤-프로젝트-문서화--94일차"><a class="header" href="#캡스톤-프로젝트-문서화--94일차">캡스톤 프로젝트 문서화 | 94일차</a></h2>
+<p>프로젝트의 전 과정(데이터 수집, 전처리, 모델링, 평가, 결과)을 상세히 기록하여 문서화했습니다. <a href="Code/Day_94_Documenting_Capstone_Project.html">자세히 보기</a></p>
+<h2 id="생성적-적대-신경망-gan-소개--95일차"><a class="header" href="#생성적-적대-신경망-gan-소개--95일차">생성적 적대 신경망 (GAN) 소개 | 95일차</a></h2>
+<p>새로운 데이터를 생성하는 모델인 생성적 적대 신경망(GAN)의 기본 개념과 작동 원리에 대해 학습했습니다. <a href="Code/Day_95_Introduction_to_GANs.html">자세히 보기</a></p>
+<h2 id="오토인코더--96일차"><a class="header" href="#오토인코더--96일차">오토인코더 | 96일차</a></h2>
+<p>데이터의 특징을 효율적으로 학습하여 차원 축소나 이상치 탐지 등에 활용되는 오토인코더에 대해 학습했습니다. <a href="Code/Day_96_Autoencoders.html">자세히 보기</a></p>
+<h2 id="설명-가능한-ai-xai---lime-shap--97일차"><a class="header" href="#설명-가능한-ai-xai---lime-shap--97일차">설명 가능한 AI (XAI) - LIME, SHAP | 97일차</a></h2>
+<p>머신러닝 모델의 예측 결과를 사람이 이해할 수 있도록 설명하는 XAI 기법(LIME, SHAP 등)에 대해 학습했습니다. <a href="Code/Day_97_Explainable_AI_XAI_LIME_SHAP.html">자세히 보기</a></p>
+<h2 id="ai-및-머신러닝-윤리--98일차"><a class="header" href="#ai-및-머신러닝-윤리--98일차">AI 및 머신러닝 윤리 | 98일차</a></h2>
+<p>인공지능 기술 발전과 함께 중요성이 커지고 있는 AI 및 머신러닝 윤리 문제에 대해 고찰했습니다. <a href="Code/Day_98_Ethics_in_AI_ML.html">자세히 보기</a></p>
+<h2 id="ml-및-ai의-미래-동향--99일차"><a class="header" href="#ml-및-ai의-미래-동향--99일차">ML 및 AI의 미래 동향 | 99일차</a></h2>
+<p>머신러닝과 인공지능 분야의 최신 연구 동향과 미래 발전 가능성에 대해 학습하고 토론했습니다. <a href="Code/Day_99_Future_Trends_in_ML_AI.html">자세히 보기</a></p>
+<h2 id="100일-여정-복습-및-다음-단계--100일차"><a class="header" href="#100일-여정-복습-및-다음-단계--100일차">100일 여정 복습 및 다음 단계 | 100일차</a></h2>
+<p>지난 100일간의 머신러닝 학습 여정을 되돌아보고, 앞으로의 학습 계획 및 목표를 설정했습니다. <a href="Code/Day_100_Review_100_Days_Next_Steps.html">자세히 보기</a></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+                            <a rel="next prefetch" href="Code/Day 1_Data PreProcessing.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+                    <a rel="next prefetch" href="Code/Day 1_Data PreProcessing.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr-ef4e11c1.min.js"></script>
+        <script src="mark-09e88c2c.min.js"></script>
+        <script src="searcher-c2a407aa.js"></script>
+
+        <script src="clipboard-1626706a.min.js"></script>
+        <script src="highlight-abc7f01d.js"></script>
+        <script src="book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

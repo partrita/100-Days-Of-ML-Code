@@ -1,0 +1,506 @@
+<!DOCTYPE HTML>
+<html lang="ko" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>ML 모델 배포를 위한 Flask/Django - 기초 | 82일차 - 100 Days of ML Code</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-b65ed104.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-68538d78.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">100 Days of ML Code</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="day-82-ml-모델-배포를-위한-flaskdjango---기초-flaskdjango-for-deploying-ml-models---basics"><a class="header" href="#day-82-ml-모델-배포를-위한-flaskdjango---기초-flaskdjango-for-deploying-ml-models---basics">Day 82: ML 모델 배포를 위한 Flask/Django - 기초 (Flask/Django for deploying ML models - Basics)</a></h1>
+<h2 id="학습-목표"><a class="header" href="#학습-목표">학습 목표</a></h2>
+<ul>
+<li>파이썬 웹 프레임워크 Flask와 Django의 기본 개념 이해</li>
+<li>머신러닝 모델을 API 형태로 배포하는 데 웹 프레임워크가 왜 필요한지 학습</li>
+<li>Flask를 사용하여 간단한 머신러닝 모델 예측 API를 만드는 기본 과정 숙지</li>
+<li>Django를 사용한 모델 배포의 간략한 개념 소개 및 Flask와의 비교</li>
+</ul>
+<h2 id="1-웹-프레임워크web-framework란"><a class="header" href="#1-웹-프레임워크web-framework란">1. 웹 프레임워크(Web Framework)란?</a></h2>
+<ul>
+<li>웹 애플리케이션, 웹 서비스, 웹 API 등을 개발하는 데 필요한 기본적인 구조와 도구들을 제공하는 소프트웨어 프레임워크입니다.</li>
+<li>반복적인 작업(요청 처리, 라우팅, 데이터베이스 연동, 템플릿 렌더링 등)을 단순화하고 개발 생산성을 높여줍니다.</li>
+</ul>
+<h2 id="2-왜-ml-모델-배포에-웹-프레임워크를-사용하는가"><a class="header" href="#2-왜-ml-모델-배포에-웹-프레임워크를-사용하는가">2. 왜 ML 모델 배포에 웹 프레임워크를 사용하는가?</a></h2>
+<ul>
+<li>학습된 머신러닝 모델을 다른 애플리케이션이나 사용자가 쉽게 접근하여 사용할 수 있도록 하려면, 모델을 <strong>웹 서비스 또는 API 형태로 노출</strong>하는 것이 일반적입니다.</li>
+<li>웹 프레임워크는 다음과 같은 기능을 제공하여 ML 모델 API 개발을 용이하게 합니다:
+<ul>
+<li><strong>HTTP 요청 처리</strong>: 클라이언트(사용자, 다른 시스템)로부터 HTTP 요청(GET, POST 등)을 받아 처리합니다.</li>
+<li><strong>라우팅 (Routing)</strong>: 특정 URL 경로(엔드포인트)로 들어오는 요청을 적절한 처리 함수(핸들러)로 연결합니다.</li>
+<li><strong>데이터 직렬화/역직렬화</strong>: 요청으로 들어온 데이터(JSON, 폼 데이터 등)를 파이썬 객체로 변환하고, 모델 예측 결과를 다시 클라이언트가 이해할 수 있는 형태(JSON 등)로 변환합니다.</li>
+<li><strong>요청/응답 관리</strong>: HTTP 헤더, 상태 코드 등을 관리합니다.</li>
+<li><strong>확장성</strong>: 필요에 따라 기능을 추가하거나 다른 서비스와 연동하기 용이합니다.</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-flask-소개"><a class="header" href="#3-flask-소개">3. Flask 소개</a></h2>
+<ul>
+<li><strong>정의</strong>: 파이썬으로 작성된 마이크로(Micro) 웹 프레임워크입니다. “마이크로“라는 의미는 핵심 기능을 작고 가볍게 유지하며, 필요한 기능은 확장(Extension)을 통해 추가할 수 있다는 뜻입니다.</li>
+<li><strong>특징</strong>:
+<ul>
+<li><strong>가볍고 단순함</strong>: 배우기 쉽고 빠르게 웹 애플리케이션을 개발할 수 있습니다.</li>
+<li><strong>유연성</strong>: 개발자가 원하는 방식으로 구조를 설계하고 필요한 확장을 선택하여 사용할 수 있습니다.</li>
+<li><strong>최소한의 기능 제공</strong>: URL 라우팅, 요청/응답 처리, 템플릿 엔진(Jinja2) 연동 등 핵심 기능에 집중합니다. 데이터베이스 ORM, 폼 처리 등은 기본으로 제공하지 않고 확장으로 지원.</li>
+<li><strong>작은 프로젝트나 프로토타이핑, 간단한 API 개발에 적합</strong>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="flask-설치"><a class="header" href="#flask-설치">Flask 설치</a></h3>
+<pre><code class="language-bash">pip install Flask
+</code></pre>
+<h3 id="간단한-flask-애플리케이션-예제"><a class="header" href="#간단한-flask-애플리케이션-예제">간단한 Flask 애플리케이션 예제</a></h3>
+<pre><code class="language-python"># app.py
+from flask import Flask, request, jsonify
+
+app = Flask(__name__) # Flask 애플리케이션 객체 생성
+
+# 루트 URL ('/')로 GET 요청이 오면 실행될 함수
+@app.route('/')
+def home():
+    return "Hello, Flask!"
+
+# '/greet' URL로 GET 요청이 오고, 'name' 파라미터가 있으면 실행
+@app.route('/greet', methods=['GET'])
+def greet():
+    name = request.args.get('name', 'Guest') # URL 파라미터에서 'name' 값 가져오기
+    return f"Hello, {name}!"
+
+# '/predict' URL로 POST 요청이 오면 실행 (JSON 데이터 예상)
+@app.route('/predict', methods=['POST'])
+def predict_example():
+    if request.is_json:
+        data = request.get_json() # POST 요청의 JSON 데이터 가져오기
+        # 여기서 data를 사용하여 모델 예측 수행 (예시)
+        number = data.get('number', 0)
+        prediction = number * 2
+        return jsonify({'input_number': number, 'prediction': prediction}) # JSON 형태로 응답
+    else:
+        return jsonify({'error': 'Request must be JSON'}), 400 # 400 Bad Request
+
+if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0', port=5000) # 개발 서버 실행
+    # debug=True: 코드 변경 시 자동 재시작, 디버깅 정보 제공 (운영 환경에서는 False)
+    # host='0.0.0.0': 모든 네트워크 인터페이스에서 접속 허용
+    # port=5000: 사용할 포트 번호
+</code></pre>
+<ul>
+<li>위 코드를 <code>app.py</code>로 저장하고 터미널에서 <code>python app.py</code> 실행.</li>
+<li>웹 브라우저나 <code>curl</code> 등으로 테스트:
+<ul>
+<li><code>http://localhost:5000/</code> -&gt; “Hello, Flask!”</li>
+<li><code>http://localhost:5000/greet?name=World</code> -&gt; “Hello, World!”</li>
+<li><code>curl -X POST -H "Content-Type: application/json" -d '{"number": 10}' http://localhost:5000/predict</code> -&gt; <code>{"input_number": 10, "prediction": 20}</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="4-flask를-사용한-간단한-ml-모델-예측-api-만들기"><a class="header" href="#4-flask를-사용한-간단한-ml-모델-예측-api-만들기">4. Flask를 사용한 간단한 ML 모델 예측 API 만들기</a></h2>
+<h3 id="가-모델-준비-학습-및-직렬화"><a class="header" href="#가-모델-준비-학습-및-직렬화">가. 모델 준비 (학습 및 직렬화)</a></h3>
+<ul>
+<li>먼저, 학습된 머신러닝 모델이 파일 형태로 저장되어 있어야 합니다. (예: <code>pickle</code>, <code>joblib</code> 사용)</li>
+<li>여기서는 간단한 Scikit-learn 모델을 예시로 사용합니다.</li>
+</ul>
+<pre><code class="language-python"># train_model.py (모델 학습 및 저장 - 별도 파일로 실행)
+from sklearn.linear_model import LogisticRegression
+from sklearn.datasets import load_iris
+import joblib # 또는 pickle
+
+# 1. 데이터 로드 및 모델 학습 (간단 예시)
+iris = load_iris()
+X, y = iris.data, iris.target
+# 간단화를 위해 두 개의 클래스만 사용 (0, 1)
+X_binary = X[y != 2]
+y_binary = y[y != 2]
+
+model = LogisticRegression(solver='liblinear')
+model.fit(X_binary, y_binary)
+print("모델 학습 완료!")
+
+# 2. 모델 저장
+joblib.dump(model, 'iris_binary_model.pkl')
+print("모델 저장 완료: iris_binary_model.pkl")
+
+# (선택) 스케일러 등 전처리기도 함께 저장해야 할 수 있음
+# from sklearn.preprocessing import StandardScaler
+# scaler = StandardScaler()
+# X_scaled = scaler.fit_transform(X_binary)
+# model.fit(X_scaled, y_binary)
+# joblib.dump(scaler, 'iris_scaler.pkl')
+# joblib.dump(model, 'iris_binary_model_scaled.pkl')
+</code></pre>
+<ul>
+<li>위 <code>train_model.py</code>를 먼저 실행하여 <code>iris_binary_model.pkl</code> 파일을 생성합니다.</li>
+</ul>
+<h3 id="나-flask-api-서버-구현"><a class="header" href="#나-flask-api-서버-구현">나. Flask API 서버 구현</a></h3>
+<pre><code class="language-python"># flask_api.py
+from flask import Flask, request, jsonify
+import joblib
+import numpy as np
+
+app = Flask(__name__)
+
+# 모델 로드 (애플리케이션 시작 시 한 번만 로드)
+try:
+    model = joblib.load('iris_binary_model.pkl')
+    print("모델 로드 성공!")
+    # scaler = joblib.load('iris_scaler.pkl') # 스케일러 사용 시 함께 로드
+except FileNotFoundError:
+    model = None
+    # scaler = None
+    print("저장된 모델 파일을 찾을 수 없습니다. 'train_model.py'를 먼저 실행하세요.")
+except Exception as e:
+    model = None
+    # scaler = None
+    print(f"모델 로드 중 오류 발생: {e}")
+
+
+@app.route('/')
+def home():
+    return "Iris Binary Classification API"
+
+@app.route('/predict_iris', methods=['POST'])
+def predict_iris():
+    if model is None:
+        return jsonify({'error': '모델이 로드되지 않았습니다.'}), 500
+
+    if request.is_json:
+        try:
+            data = request.get_json()
+            # 입력 데이터 형식 가정: {"features": [sepal_length, sepal_width, petal_length, petal_width]}
+            features = data.get('features')
+
+            if features is None or not isinstance(features, list) or len(features) != 4:
+                return jsonify({'error': '입력 데이터 형식이 올바르지 않습니다. "features" 키에 4개의 숫자 리스트를 제공해야 합니다.'}), 400
+
+            # 입력 데이터를 NumPy 배열로 변환
+            input_array = np.array(features).reshape(1, -1) # (1, 4) 형태
+
+            # (선택) 스케일링 적용 (학습 시 사용한 스케일러와 동일하게)
+            # if scaler:
+            #     input_array_scaled = scaler.transform(input_array)
+            #     prediction_proba = model.predict_proba(input_array_scaled)[0] # 각 클래스에 대한 확률
+            #     prediction = model.predict(input_array_scaled)[0] # 예측 클래스
+            # else:
+            prediction_proba = model.predict_proba(input_array)[0]
+            prediction = model.predict(input_array)[0]
+
+            class_names = ['setosa', 'versicolor'] # 이진 분류 클래스 이름 (0, 1)
+
+            return jsonify({
+                'input_features': features,
+                'predicted_class_id': int(prediction),
+                'predicted_class_name': class_names[int(prediction)],
+                'probabilities': {'setosa': float(prediction_proba[0]), 'versicolor': float(prediction_proba[1])}
+            })
+
+        except Exception as e:
+            return jsonify({'error': f'예측 중 오류 발생: {str(e)}'}), 500
+    else:
+        return jsonify({'error': 'Request must be JSON'}), 400
+
+if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0', port=5001) # 다른 포트 사용
+</code></pre>
+<h3 id="다-api-테스트-curl-사용"><a class="header" href="#다-api-테스트-curl-사용">다. API 테스트 (curl 사용)</a></h3>
+<pre><code class="language-bash"># flask_api.py 실행 후 터미널에서 아래 명령어 실행
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"features": [5.1, 3.5, 1.4, 0.2]}' \
+  http://localhost:5001/predict_iris
+
+# 예상 응답:
+# {
+#   "input_features": [5.1, 3.5, 1.4, 0.2],
+#   "predicted_class_id": 0,
+#   "predicted_class_name": "setosa",
+#   "probabilities": {
+#     "setosa": 0.9...,
+#     "versicolor": 0.0...
+#   }
+# }
+
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"features": [6.0, 2.2, 4.0, 1.0]}' \
+  http://localhost:5001/predict_iris
+# 예상 응답 (versicolor에 가까운 값)
+</code></pre>
+<h2 id="5-django-소개-및-flask와의-비교"><a class="header" href="#5-django-소개-및-flask와의-비교">5. Django 소개 및 Flask와의 비교</a></h2>
+<ul>
+<li><strong>정의</strong>: 파이썬으로 작성된 고수준(High-level) 웹 프레임워크로, “배터리 포함(Batteries-included)” 철학을 따릅니다. 즉, 웹 개발에 필요한 대부분의 기능(ORM, 관리자 인터페이스, 폼 처리, 인증 등)을 기본적으로 제공합니다.</li>
+<li><strong>특징</strong>:
+<ul>
+<li><strong>풀 스택 프레임워크</strong>: 웹 개발의 모든 측면을 다룰 수 있는 포괄적인 기능 제공.</li>
+<li><strong>ORM (Object-Relational Mapper)</strong>: 데이터베이스 작업을 파이썬 객체로 쉽게 처리.</li>
+<li><strong>강력한 관리자 인터페이스</strong>: 모델 데이터를 관리할 수 있는 웹 기반 관리자 페이지 자동 생성.</li>
+<li><strong>보안 기능</strong>: CSRF 방지, XSS 방지 등 기본적인 보안 기능 내장.</li>
+<li><strong>대규모 프로젝트, 복잡한 웹 애플리케이션 개발에 적합</strong>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="django를-사용한-ml-모델-배포"><a class="header" href="#django를-사용한-ml-모델-배포">Django를 사용한 ML 모델 배포</a></h3>
+<ul>
+<li>Django를 사용하여 ML 모델 API를 만드는 것도 가능하며, Flask와 유사한 방식으로 라우팅, 요청 처리, 모델 로드 및 예측 로직을 구현합니다.</li>
+<li>Django REST framework와 같은 확장을 사용하면 강력한 REST API를 더 쉽게 구축할 수 있습니다.</li>
+<li>더 많은 기능을 기본 제공하므로 초기 설정이나 학습 곡선이 Flask보다 가파를 수 있지만, 복잡한 요구사항이나 대규모 서비스에는 더 적합할 수 있습니다.</li>
+</ul>
+<h3 id="flask-vs-django-ml-모델-api-배포-관점"><a class="header" href="#flask-vs-django-ml-모델-api-배포-관점">Flask vs Django (ML 모델 API 배포 관점)</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>특징</th><th>Flask</th><th>Django</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>철학</strong></td><td>마이크로 프레임워크, 최소 기능, 높은 유연성</td><td>풀 스택 프레임워크, “배터리 포함”</td></tr>
+<tr><td><strong>학습 곡선</strong></td><td>낮음, 배우기 쉬움</td><td>상대적으로 높음</td></tr>
+<tr><td><strong>기본 기능</strong></td><td>핵심 기능만 제공, 나머지는 확장으로</td><td>ORM, 관리자, 폼, 인증 등 대부분 기능 내장</td></tr>
+<tr><td><strong>프로젝트 규모</strong></td><td>작거나 중간 규모, 간단한 API, 프로토타입</td><td>중간 규모 이상, 복잡한 웹 애플리케이션, 대규모 서비스</td></tr>
+<tr><td><strong>ML API 개발</strong></td><td>간단한 API 빠르게 구축 가능</td><td>더 많은 기능과 구조 제공, DRF 등 활용 시 강력</td></tr>
+<tr><td><strong>유연성</strong></td><td>매우 높음</td><td>상대적으로 낮으나, 필요한 대부분 기능 제공</td></tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li><strong>선택 가이드</strong>:
+<ul>
+<li><strong>빠르게 간단한 예측 API를 만들어야 할 때, 또는 다른 마이크로서비스와 통합할 때</strong>: Flask가 좋은 선택일 수 있습니다.</li>
+<li><strong>모델 API 외에 사용자 인터페이스, 데이터 관리, 인증 등 복합적인 웹 애플리케이션 기능이 함께 필요할 때</strong>: Django가 더 적합할 수 있습니다.</li>
+<li>최근에는 FastAPI와 같은 ASGI(Asynchronous Server Gateway Interface) 기반의 현대적인 프레임워크도 ML API 개발에 많이 사용됩니다 (비동기 처리, 자동 API 문서 생성 등 장점).</li>
+</ul>
+</li>
+</ul>
+<h2 id="추가-학습-자료"><a class="header" href="#추가-학습-자료">추가 학습 자료</a></h2>
+<ul>
+<li><a href="https://flask.palletsprojects.com/">Flask Documentation</a></li>
+<li><a href="https://www.datacamp.com/tutorial/machine-learning-model-deployment-flask">Deploy Machine Learning Model using Flask (DataCamp Tutorial)</a></li>
+<li><a href="https://www.djangoproject.com/">Django Documentation</a></li>
+<li><a href="https://realpython.com/django-rest-framework-class-based-views/">Building a Machine Learning API with Django REST framework (Real Python)</a></li>
+</ul>
+<h2 id="다음-학습-내용"><a class="header" href="#다음-학습-내용">다음 학습 내용</a></h2>
+<ul>
+<li>Day 83: ML 모델을 위한 간단한 API 만들기 (Creating a simple API for an ML model) - 오늘 배운 내용을 바탕으로 실제 API 엔드포인트 설계 및 추가 기능 고려.</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../Code/Day_81_Introduction_to_Model_Deployment.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../Code/Day_83_Creating_Simple_API_for_ML_Model.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../Code/Day_81_Introduction_to_Model_Deployment.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../Code/Day_83_Creating_Simple_API_for_ML_Model.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

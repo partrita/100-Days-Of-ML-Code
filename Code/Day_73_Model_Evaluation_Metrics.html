@@ -1,0 +1,456 @@
+<!DOCTYPE HTML>
+<html lang="ko" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>모델 평가 지표 | 73일차 - 100 Days of ML Code</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-b65ed104.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-68538d78.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">100 Days of ML Code</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="day-73-모델-평가-지표---정밀도-재현율-f1-score-roc-auc-model-evaluation-metrics---precision-recall-f1-score-roc-auc"><a class="header" href="#day-73-모델-평가-지표---정밀도-재현율-f1-score-roc-auc-model-evaluation-metrics---precision-recall-f1-score-roc-auc">Day 73: 모델 평가 지표 - 정밀도, 재현율, F1-score, ROC AUC (Model Evaluation Metrics - Precision, Recall, F1-score, ROC AUC)</a></h1>
+<h2 id="학습-목표"><a class="header" href="#학습-목표">학습 목표</a></h2>
+<ul>
+<li>분류 모델의 성능을 정확하게 평가하기 위한 다양한 지표의 필요성 이해</li>
+<li>오차 행렬(Confusion Matrix)의 구성 요소(TP, FP, FN, TN) 학습</li>
+<li>주요 분류 평가지표 학습 및 의미 파악:
+<ul>
+<li>정확도 (Accuracy)</li>
+<li>정밀도 (Precision)</li>
+<li>재현율 (Recall) / 민감도 (Sensitivity)</li>
+<li>F1 점수 (F1-Score)</li>
+<li>특이도 (Specificity)</li>
+<li>ROC 곡선 (Receiver Operating Characteristic Curve)과 AUC (Area Under the Curve)</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-정확도-accuracy의-한계"><a class="header" href="#1-정확도-accuracy의-한계">1. 정확도 (Accuracy)의 한계</a></h2>
+<ul>
+<li><strong>정확도</strong>: (예측이 올바른 샘플 수) / (전체 샘플 수)</li>
+<li>가장 직관적인 평가지표이지만, 데이터가 불균형(Imbalanced)할 때 모델 성능을 왜곡할 수 있습니다.</li>
+<li>예: 100개의 이메일 중 95개가 정상 메일, 5개가 스팸 메일인 데이터셋. 모든 메일을 정상으로 예측하는 모델도 정확도는 95%가 됩니다. 하지만 이 모델은 스팸 메일을 전혀 탐지하지 못하므로 유용하지 않습니다.</li>
+<li>따라서, 특히 불균형 데이터셋에서는 정확도 외에 다른 평가지표들을 함께 고려해야 합니다.</li>
+</ul>
+<h2 id="2-오차-행렬-confusion-matrix"><a class="header" href="#2-오차-행렬-confusion-matrix">2. 오차 행렬 (Confusion Matrix)</a></h2>
+<ul>
+<li>분류 모델의 예측 결과를 실제 클래스와 비교하여 시각적으로 표현한 표입니다.</li>
+<li>이진 분류(Positive/Negative)의 경우 다음과 같이 구성됩니다:</li>
+</ul>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left"></th><th style="text-align: center">예측: Positive (1)</th><th style="text-align: center">예측: Negative (0)</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left"><strong>실제: Positive (1)</strong></td><td style="text-align: center">TP</td><td style="text-align: center">FN</td></tr>
+<tr><td style="text-align: left"><strong>실제: Negative (0)</strong></td><td style="text-align: center">FP</td><td style="text-align: center">TN</td></tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>
+<p><strong>TP (True Positive, 진짜 양성)</strong>: 실제 Positive인 것을 Positive로 올바르게 예측. (예: 실제 스팸 메일을 스팸으로 예측)</p>
+</li>
+<li>
+<p><strong>FN (False Negative, 가짜 음성)</strong>: 실제 Positive인 것을 Negative로 잘못 예측. (예: 실제 스팸 메일을 정상으로 예측) - <strong>Type II Error</strong></p>
+</li>
+<li>
+<p><strong>FP (False Positive, 가짜 양성)</strong>: 실제 Negative인 것을 Positive로 잘못 예측. (예: 실제 정상 메일을 스팸으로 예측) - <strong>Type I Error</strong></p>
+</li>
+<li>
+<p><strong>TN (True Negative, 진짜 음성)</strong>: 실제 Negative인 것을 Negative로 올바르게 예측. (예: 실제 정상 메일을 정상으로 예측)</p>
+</li>
+<li>
+<p>다중 클래스 분류의 경우, 각 클래스에 대해 오차 행렬을 확장하여 생각할 수 있습니다.</p>
+</li>
+</ul>
+<h2 id="3-주요-분류-평가지표"><a class="header" href="#3-주요-분류-평가지표">3. 주요 분류 평가지표</a></h2>
+<h3 id="가-정확도-accuracy"><a class="header" href="#가-정확도-accuracy">가. 정확도 (Accuracy)</a></h3>
+<ul>
+<li><strong>정의</strong>: 전체 예측 중 올바르게 예측한 비율.</li>
+<li><strong>계산</strong>: <code>(TP + TN) / (TP + TN + FP + FN)</code></li>
+<li>데이터 분포가 균일할 때 유용하지만, 불균형 데이터에서는 신뢰도가 낮습니다.</li>
+</ul>
+<h3 id="나-정밀도-precision"><a class="header" href="#나-정밀도-precision">나. 정밀도 (Precision)</a></h3>
+<ul>
+<li><strong>정의</strong>: 모델이 Positive로 예측한 것들 중 실제로 Positive인 것의 비율.</li>
+<li><strong>계산</strong>: <code>TP / (TP + FP)</code></li>
+<li><strong>의미</strong>: “모델이 Positive라고 예측했을 때, 얼마나 믿을 수 있는가?”</li>
+<li>FP를 낮추는 것이 중요할 때 사용됩니다. (예: 스팸 메일 필터 - 정상 메일을 스팸으로 잘못 분류(FP)하면 안 됨)</li>
+</ul>
+<h3 id="다-재현율-recall--민감도-sensitivity--적중률-hit-rate"><a class="header" href="#다-재현율-recall--민감도-sensitivity--적중률-hit-rate">다. 재현율 (Recall) / 민감도 (Sensitivity) / 적중률 (Hit Rate)</a></h3>
+<ul>
+<li><strong>정의</strong>: 실제 Positive인 것들 중 모델이 Positive로 올바르게 예측한 것의 비율.</li>
+<li><strong>계산</strong>: <code>TP / (TP + FN)</code></li>
+<li><strong>의미</strong>: “실제 Positive 샘플들을 모델이 얼마나 잘 찾아내는가?”</li>
+<li>FN을 낮추는 것이 중요할 때 사용됩니다. (예: 암 진단 모델 - 실제 암 환자를 정상으로 잘못 진단(FN)하면 안 됨)</li>
+</ul>
+<h3 id="라-f1-점수-f1-score"><a class="header" href="#라-f1-점수-f1-score">라. F1 점수 (F1-Score)</a></h3>
+<ul>
+<li><strong>정의</strong>: 정밀도와 재현율의 조화 평균(Harmonic Mean).</li>
+<li><strong>계산</strong>: <code>2 * (Precision * Recall) / (Precision + Recall)</code></li>
+<li><strong>의미</strong>: 정밀도와 재현율이 모두 중요할 때 사용. 두 지표가 한쪽으로 치우치지 않고 모두 높은 값을 가질 때 F1 점수도 높아집니다.</li>
+<li>불균형 데이터셋에서 정확도보다 더 신뢰할 수 있는 성능 지표로 간주됩니다.</li>
+</ul>
+<h3 id="마-특이도-specificity--tnr-true-negative-rate"><a class="header" href="#마-특이도-specificity--tnr-true-negative-rate">마. 특이도 (Specificity) / TNR (True Negative Rate)</a></h3>
+<ul>
+<li><strong>정의</strong>: 실제 Negative인 것들 중 모델이 Negative로 올바르게 예측한 것의 비율.</li>
+<li><strong>계산</strong>: <code>TN / (TN + FP)</code></li>
+<li><strong>의미</strong>: “실제 Negative 샘플들을 모델이 얼마나 잘 식별하는가?”</li>
+<li>재현율(민감도)과 함께 사용되어 모델의 전반적인 성능을 평가합니다. (예: 질병 진단에서 건강한 사람을 건강하다고 판단하는 능력)</li>
+</ul>
+<h3 id="정밀도-재현율-트레이드오프-precision-recall-trade-off"><a class="header" href="#정밀도-재현율-트레이드오프-precision-recall-trade-off">정밀도-재현율 트레이드오프 (Precision-Recall Trade-off)</a></h3>
+<ul>
+<li>일반적으로 정밀도와 재현율은 서로 반비례 관계(Trade-off)를 가집니다.</li>
+<li>분류 모델의 결정 임계값(Threshold)을 조정함에 따라 한쪽이 올라가면 다른 한쪽이 내려가는 경향이 있습니다.
+<ul>
+<li>임계값을 높이면: Positive로 예측하는 기준이 엄격해져 FP가 줄고 정밀도는 높아지지만, TP도 줄어 FN이 늘고 재현율은 낮아질 수 있습니다.</li>
+<li>임계값을 낮추면: Positive로 예측하는 기준이 완화되어 TP가 늘고 재현율은 높아지지만, FP도 늘어 정밀도는 낮아질 수 있습니다.</li>
+</ul>
+</li>
+<li>따라서, 문제의 특성에 따라 정밀도와 재현율 중 어떤 것을 더 중요하게 생각할지 결정하고 임계값을 조절해야 합니다. F1 점수는 이 둘의 균형을 나타냅니다.</li>
+</ul>
+<h2 id="4-roc-곡선-receiver-operating-characteristic-curve과-auc-area-under-the-curve"><a class="header" href="#4-roc-곡선-receiver-operating-characteristic-curve과-auc-area-under-the-curve">4. ROC 곡선 (Receiver Operating Characteristic Curve)과 AUC (Area Under the Curve)</a></h2>
+<h3 id="가-roc-곡선"><a class="header" href="#가-roc-곡선">가. ROC 곡선</a></h3>
+<ul>
+<li><strong>정의</strong>: 이진 분류 모델의 성능을 시각적으로 평가하는 그래프. 다양한 임계값(Threshold) 설정에 따라 분류기의 **재현율(TPR, True Positive Rate)**과 **위양성률(FPR, False Positive Rate)**의 변화를 나타냅니다.
+<ul>
+<li><strong>TPR (True Positive Rate)</strong> = Recall = Sensitivity = <code>TP / (TP + FN)</code> (Y축)</li>
+<li><strong>FPR (False Positive Rate)</strong> = <code>FP / (FP + TN)</code> = 1 - Specificity (X축)</li>
+</ul>
+</li>
+<li><strong>해석</strong>:
+<ul>
+<li>곡선이 왼쪽 위 모서리(좌표 (0,1))에 가까울수록 모델 성능이 우수함을 의미합니다. (FPR은 낮고 TPR은 높은 이상적인 상태)</li>
+<li>대각선(y=x)은 무작위 분류기(Random Classifier)의 성능을 나타냅니다. ROC 곡선이 이 대각선보다 위에 있어야 의미 있는 모델입니다.</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://scikit-learn.org/stable/_images/sphx_glr_plot_roc_001.png" alt="ROC Curve">
+<em>(이미지 출처: Scikit-learn documentation)</em></p>
+<h3 id="나-auc-area-under-the-roc-curve"><a class="header" href="#나-auc-area-under-the-roc-curve">나. AUC (Area Under the ROC Curve)</a></h3>
+<ul>
+<li><strong>정의</strong>: ROC 곡선 아래의 면적. 0과 1 사이의 값을 가집니다.</li>
+<li><strong>의미</strong>:
+<ul>
+<li>AUC 값이 1에 가까울수록 모델의 성능이 우수함을 나타냅니다. (완벽한 분류기는 AUC=1)</li>
+<li>AUC 값이 0.5이면 무작위 분류기와 동일한 성능을 의미합니다.</li>
+<li>AUC는 임계값에 관계없이 모델이 얼마나 양성 클래스와 음성 클래스를 잘 구분하는지를 나타내는 전반적인 성능 지표입니다.</li>
+</ul>
+</li>
+<li>불균형 데이터셋에서도 비교적 안정적인 성능 평가를 제공합니다.</li>
+</ul>
+<h2 id="5-scikit-learn을-사용한-평가지표-계산"><a class="header" href="#5-scikit-learn을-사용한-평가지표-계산">5. <code>scikit-learn</code>을 사용한 평가지표 계산</a></h2>
+<pre><code class="language-python">from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, f1_score
+from sklearn.metrics import roc_curve, roc_auc_score
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.datasets import make_classification # 예제 데이터 생성용
+import matplotlib.pyplot as plt
+
+# 예제 데이터 생성 (불균형 데이터 가정 가능)
+X, y = make_classification(n_samples=1000, n_features=20, weights=[0.9, 0.1], random_state=42) # 10%가 Positive 클래스
+
+# 데이터 분할
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42, stratify=y) # stratify=y 중요!
+
+# 모델 학습 (예: 로지스틱 회귀)
+model = LogisticRegression(solver='liblinear')
+model.fit(X_train, y_train)
+
+# 예측
+y_pred = model.predict(X_test)
+y_pred_proba = model.predict_proba(X_test)[:, 1] # Positive 클래스에 대한 예측 확률
+
+# 1. 오차 행렬
+cm = confusion_matrix(y_test, y_pred)
+print("Confusion Matrix:\n", cm)
+# TN, FP
+# FN, TP
+
+# 2. 정확도
+accuracy = accuracy_score(y_test, y_pred)
+print(f"\nAccuracy: {accuracy:.4f}")
+
+# 3. 정밀도
+precision = precision_score(y_test, y_pred) # pos_label=1 기본값
+print(f"Precision: {precision:.4f}")
+
+# 4. 재현율
+recall = recall_score(y_test, y_pred)
+print(f"Recall (Sensitivity): {recall:.4f}")
+
+# 5. F1 점수
+f1 = f1_score(y_test, y_pred)
+print(f"F1 Score: {f1:.4f}")
+
+# (선택) 특이도 계산
+tn, fp, fn, tp = cm.ravel() # 오차 행렬 값들을 1차원으로 풀기
+specificity = tn / (tn + fp)
+print(f"Specificity: {specificity:.4f}")
+
+# 6. ROC 곡선 및 AUC
+fpr, tpr, thresholds = roc_curve(y_test, y_pred_proba) # 예측 확률 사용!
+auc = roc_auc_score(y_test, y_pred_proba)
+print(f"\nAUC: {auc:.4f}")
+
+# ROC 곡선 시각화
+plt.figure(figsize=(8, 6))
+plt.plot(fpr, tpr, color='blue', lw=2, label=f'ROC curve (area = {auc:.2f})')
+plt.plot([0, 1], [0, 1], color='gray', lw=2, linestyle='--', label='Random classifier')
+plt.xlim([0.0, 1.0])
+plt.ylim([0.0, 1.05])
+plt.xlabel('False Positive Rate (1 - Specificity)')
+plt.ylabel('True Positive Rate (Sensitivity/Recall)')
+plt.title('Receiver Operating Characteristic (ROC) Curve')
+plt.legend(loc="lower right")
+plt.grid(True)
+plt.show()
+</code></pre>
+<h2 id="6-어떤-지표를-사용해야-할까"><a class="header" href="#6-어떤-지표를-사용해야-할까">6. 어떤 지표를 사용해야 할까?</a></h2>
+<ul>
+<li><strong>문제의 종류와 중요도에 따라 다릅니다.</strong>
+<ul>
+<li><strong>스팸 메일 필터</strong>: 정밀도가 중요 (정상 메일을 스팸으로 오판(FP)하면 안 됨).</li>
+<li><strong>암 진단</strong>: 재현율이 중요 (실제 환자를 놓치면(FN) 안 됨).</li>
+<li><strong>불균형 데이터</strong>: F1 점수, ROC AUC를 주로 사용. 정확도는 부적절.</li>
+<li><strong>모델 간 비교</strong>: ROC AUC는 임계값에 관계없이 모델의 전반적인 분류 능력을 보여주므로 유용.</li>
+</ul>
+</li>
+<li>일반적으로 여러 지표를 함께 고려하여 모델의 성능을 다각도로 평가하는 것이 좋습니다.</li>
+</ul>
+<h2 id="추가-학습-자료"><a class="header" href="#추가-학습-자료">추가 학습 자료</a></h2>
+<ul>
+<li><a href="https://scikit-learn.org/stable/modules/model_evaluation.html">Scikit-learn: Model evaluation</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Precision_and_recall">Precision and recall (Wikipedia)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic">Receiver operating characteristic (Wikipedia)</a></li>
+<li><a href="https://developers.google.com/machine-learning/crash-course/classification/true-false-positive-negative">Google Developers - Classification: True vs. False and Positive vs. Negative</a></li>
+</ul>
+<h2 id="다음-학습-내용"><a class="header" href="#다음-학습-내용">다음 학습 내용</a></h2>
+<ul>
+<li>Day 74: 교차 검증 기법 (Cross-Validation techniques) - 모델의 일반화 성능을 더 신뢰성 있게 평가하는 방법.</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../Code/Day_72_Linear_Discriminant_Analysis_LDA.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../Code/Day_74_Cross_Validation_Techniques.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../Code/Day_72_Linear_Discriminant_Analysis_LDA.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../Code/Day_74_Cross_Validation_Techniques.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

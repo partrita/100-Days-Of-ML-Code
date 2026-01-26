@@ -1,0 +1,428 @@
+<!DOCTYPE HTML>
+<html lang="ko" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Docker를 사용한 간단한 ML 모델 배포 | 85일차 - 100 Days of ML Code</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-b65ed104.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-68538d78.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">100 Days of ML Code</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="day-85-docker를-사용한-간단한-ml-모델-배포-deploying-a-simple-ml-model-using-docker"><a class="header" href="#day-85-docker를-사용한-간단한-ml-모델-배포-deploying-a-simple-ml-model-using-docker">Day 85: Docker를 사용한 간단한 ML 모델 배포 (Deploying a simple ML model using Docker)</a></h1>
+<h2 id="학습-목표"><a class="header" href="#학습-목표">학습 목표</a></h2>
+<ul>
+<li>어제 학습한 Docker 기본 지식을 바탕으로, 실제 머신러닝 모델 API를 Docker 컨테이너로 실행하고 외부에서 접근하는 전체 과정 복습 및 심화.</li>
+<li>Docker 이미지 레지스트리(예: Docker Hub)에 이미지를 푸시(Push)하고 풀(Pull)하는 방법 이해.</li>
+<li>간단한 클라우드 환경(예: 가상 머신)에 Docker 컨테이너를 배포하는 개념 학습.</li>
+<li>Docker Compose를 사용한 다중 컨테이너 애플리케이션 관리의 기초 소개 (선택 사항).</li>
+</ul>
+<h2 id="1-전체-배포-시나리오-복습"><a class="header" href="#1-전체-배포-시나리오-복습">1. 전체 배포 시나리오 복습</a></h2>
+<p>어제까지의 과정을 통해 다음을 수행했습니다:</p>
+<ol>
+<li><strong>머신러닝 모델 학습 및 저장</strong>: <code>iris_binary_model.pkl</code> (및 필요시 <code>iris_scaler.pkl</code>)</li>
+<li><strong>Flask API 서버 작성</strong>: <code>flask_api_v2.py</code> (모델 로드, 예측 엔드포인트 <code>/predict_iris</code> 구현)</li>
+<li><strong>필요 라이브러리 목록 작성</strong>: <code>requirements.txt</code></li>
+<li><strong>Dockerfile 작성</strong>: Flask API 서버를 실행하는 Docker 이미지 빌드 지침 정의</li>
+<li><strong>Docker 이미지 빌드</strong>: <code>docker build -t my-iris-api:v1 .</code></li>
+<li><strong>Docker 컨테이너 로컬 실행</strong>: <code>docker run -d -p 5001:5001 --name my-api-container my-iris-api:v1</code></li>
+<li><strong>로컬에서 API 테스트</strong>: <code>curl</code> 또는 Postman 사용</li>
+</ol>
+<p>오늘은 이 로컬에서 실행한 Docker 컨테이너를 다른 환경에서도 사용할 수 있도록 하는 단계를 추가적으로 고려합니다.</p>
+<h2 id="2-docker-이미지-레지스트리-docker-image-registry"><a class="header" href="#2-docker-이미지-레지스트리-docker-image-registry">2. Docker 이미지 레지스트리 (Docker Image Registry)</a></h2>
+<ul>
+<li><strong>정의</strong>: Docker 이미지를 저장하고 관리하며 공유하는 중앙 저장소입니다.</li>
+<li><strong>종류</strong>:
+<ul>
+<li><strong>Docker Hub</strong>: Docker에서 제공하는 공식 공용 레지스트리. 무료로 공개 이미지를 저장하거나, 유료로 비공개 이미지를 저장할 수 있습니다.</li>
+<li><strong>프라이빗 레지스트리 (Private Registry)</strong>: 기업이나 조직 내부에 자체적으로 구축하거나, 클라우드 서비스 제공업체(AWS ECR, GCP Container Registry/Artifact Registry, Azure ACR 등)가 제공하는 비공개 레지스트리를 사용할 수 있습니다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="가-docker-hub에-이미지-푸시-push"><a class="header" href="#가-docker-hub에-이미지-푸시-push">가. Docker Hub에 이미지 푸시 (Push)</a></h3>
+<ol>
+<li><strong>Docker Hub 계정 생성</strong>: <a href="https://hub.docker.com/">Docker Hub 웹사이트</a>에서 계정을 만듭니다.</li>
+<li><strong>로컬 Docker에 로그인</strong>: 터미널에서 <code>docker login</code> 명령을 실행하고 Docker Hub 사용자 이름과 비밀번호를 입력합니다.
+<pre><code class="language-bash">docker login
+# Username: &lt;your_dockerhub_username&gt;
+# Password: &lt;your_dockerhub_password&gt;
+</code></pre>
+</li>
+<li><strong>이미지 태그 변경 (선택 사항, 권장)</strong>: Docker Hub에 푸시하려면 이미지 이름을 <code>&lt;DockerHub_사용자이름&gt;/&lt;이미지_이름&gt;:&lt;태그&gt;</code> 형식으로 지정해야 합니다. 기존 이미지에 새 태그를 추가하거나, 빌드 시 이 형식으로 이름을 지정합니다.
+<pre><code class="language-bash"># 기존 이미지에 새 태그 추가
+docker tag my-iris-api:v1 &lt;your_dockerhub_username&gt;/my-iris-api:v1
+
+# 또는 빌드 시 바로 지정
+# docker build -t &lt;your_dockerhub_username&gt;/my-iris-api:v1 .
+</code></pre>
+</li>
+<li><strong>이미지 푸시</strong>: <code>docker push &lt;DockerHub_사용자이름&gt;/&lt;이미지_이름&gt;:&lt;태그&gt;</code>
+<pre><code class="language-bash">docker push &lt;your_dockerhub_username&gt;/my-iris-api:v1
+</code></pre>
+<ul>
+<li>푸시가 완료되면 Docker Hub 웹사이트의 내 레포지토리에서 이미지를 확인할 수 있습니다. (기본적으로 공개 이미지로 생성됨)</li>
+</ul>
+</li>
+</ol>
+<h3 id="나-다른-환경에서-이미지-풀-pull-및-실행"><a class="header" href="#나-다른-환경에서-이미지-풀-pull-및-실행">나. 다른 환경에서 이미지 풀 (Pull) 및 실행</a></h3>
+<ul>
+<li>Docker가 설치된 다른 서버나 컴퓨터에서 Docker Hub (또는 다른 레지스트리)에 있는 이미지를 가져와 실행할 수 있습니다.</li>
+</ul>
+<ol>
+<li><strong>(선택) 해당 환경에서 Docker 로그인</strong>: 비공개 이미지의 경우 필요. 공개 이미지는 로그인 없이 풀 가능.</li>
+<li><strong>이미지 풀</strong>: <code>docker pull &lt;DockerHub_사용자이름&gt;/&lt;이미지_이름&gt;:&lt;태그&gt;</code>
+<pre><code class="language-bash">docker pull &lt;your_dockerhub_username&gt;/my-iris-api:v1
+</code></pre>
+</li>
+<li><strong>컨테이너 실행</strong>: 로컬에서 실행했던 것과 동일한 <code>docker run</code> 명령 사용.
+<pre><code class="language-bash">docker run -d -p 5001:5001 --name my-remote-api-container &lt;your_dockerhub_username&gt;/my-iris-api:v1
+</code></pre>
+<ul>
+<li>이제 해당 서버의 IP 주소와 5001번 포트를 통해 API에 접근할 수 있습니다. (방화벽 설정 등 필요할 수 있음)</li>
+</ul>
+</li>
+</ol>
+<h2 id="3-간단한-클라우드-환경에-docker-컨테이너-배포-개념"><a class="header" href="#3-간단한-클라우드-환경에-docker-컨테이너-배포-개념">3. 간단한 클라우드 환경에 Docker 컨테이너 배포 (개념)</a></h2>
+<ul>
+<li>클라우드 서비스 제공업체(AWS, GCP, Azure 등)의 가상 머신(VM) 인스턴스를 사용하여 Docker 컨테이너를 배포할 수 있습니다.</li>
+</ul>
+<h3 id="일반적인-단계-예-aws-ec2-gcp-compute-engine"><a class="header" href="#일반적인-단계-예-aws-ec2-gcp-compute-engine">일반적인 단계 (예: AWS EC2, GCP Compute Engine)</a></h3>
+<ol>
+<li><strong>클라우드 플랫폼에서 VM 인스턴스 생성</strong>:
+<ul>
+<li>운영체제 선택 (예: Ubuntu, Amazon Linux 등 Docker 지원 OS).</li>
+<li>인스턴스 크기(CPU, 메모리) 선택.</li>
+<li>네트워크 설정 (보안 그룹/방화벽 규칙에서 API 포트 - 예: 5001 - 허용).</li>
+</ul>
+</li>
+<li><strong>VM 인스턴스에 접속 (SSH)</strong>.</li>
+<li><strong>Docker 설치</strong>: VM 인스턴스에 Docker Engine을 설치합니다. (각 클라우드 플랫폼 및 OS별 설치 가이드 참조)
+<pre><code class="language-bash"># 예시: Ubuntu에 Docker 설치
+# sudo apt update
+# sudo apt install -y docker.io
+# sudo systemctl start docker
+# sudo systemctl enable docker
+# sudo usermod -aG docker $USER # 현재 사용자를 docker 그룹에 추가 (재로그인 필요)
+</code></pre>
+</li>
+<li><strong>Docker 이미지 풀</strong>: Docker Hub 또는 프라이빗 레지스트리에서 배포할 이미지를 풀합니다.
+<pre><code class="language-bash">docker pull &lt;your_dockerhub_username&gt;/my-iris-api:v1
+</code></pre>
+</li>
+<li><strong>Docker 컨테이너 실행</strong>: <code>docker run</code> 명령으로 컨테이너를 실행합니다.
+<pre><code class="language-bash">docker run -d -p 5001:5001 --name my-cloud-api-container &lt;your_dockerhub_username&gt;/my-iris-api:v1
+# --restart always 옵션을 추가하면 VM 재부팅 시 컨테이너 자동 시작
+# docker run -d -p 5001:5001 --name my-cloud-api-container --restart always &lt;your_dockerhub_username&gt;/my-iris-api:v1
+</code></pre>
+</li>
+<li><strong>API 테스트</strong>: VM 인스턴스의 공인 IP 주소와 매핑된 포트(예: <code>http://&lt;VM_Public_IP&gt;:5001/predict_iris</code>)로 API를 테스트합니다.</li>
+</ol>
+<h3 id="클라우드-관리형-컨테이너-서비스"><a class="header" href="#클라우드-관리형-컨테이너-서비스">클라우드 관리형 컨테이너 서비스</a></h3>
+<ul>
+<li>위 방법은 VM에 직접 Docker를 설치하고 관리하는 방식입니다.</li>
+<li>클라우드 제공업체들은 컨테이너 배포 및 관리를 더 쉽게 해주는 관리형 서비스도 제공합니다:
+<ul>
+<li><strong>AWS</strong>: ECS (Elastic Container Service), EKS (Elastic Kubernetes Service), Fargate, App Runner</li>
+<li><strong>GCP</strong>: Cloud Run, GKE (Google Kubernetes Engine), App Engine</li>
+<li><strong>Azure</strong>: ACI (Azure Container Instances), AKS (Azure Kubernetes Service), App Service</li>
+</ul>
+</li>
+<li>이러한 서비스들은 컨테이너 오케스트레이션, 자동 확장, 로드 밸런싱, 모니터링 등을 더 쉽게 설정하고 관리할 수 있도록 도와줍니다. (더 고급 주제)</li>
+</ul>
+<h2 id="4-docker-compose-사용-기초-선택-사항"><a class="header" href="#4-docker-compose-사용-기초-선택-사항">4. Docker Compose 사용 기초 (선택 사항)</a></h2>
+<ul>
+<li><strong>정의</strong>: 여러 개의 Docker 컨테이너로 구성된 애플리케이션을 정의하고 실행하기 위한 도구입니다.</li>
+<li><code>docker-compose.yml</code>이라는 YAML 파일을 사용하여 애플리케이션의 서비스, 네트워크, 볼륨 등을 설정합니다.</li>
+<li><strong>ML 배포에서의 활용 예시</strong>:
+<ul>
+<li>Flask/Django API 서버 컨테이너.</li>
+<li>데이터베이스 컨테이너 (예: PostgreSQL, MySQL).</li>
+<li>메시지 큐 컨테이너 (예: RabbitMQ, Redis - 비동기 작업용).</li>
+<li>모니터링 도구 컨테이너 (예: Prometheus, Grafana).</li>
+</ul>
+</li>
+<li>여러 컨테이너를 한 번의 명령(<code>docker-compose up</code>, <code>docker-compose down</code>)으로 쉽게 관리할 수 있습니다.</li>
+</ul>
+<h3 id="간단한-docker-composeyml-예시-flask-api만-있는-경우"><a class="header" href="#간단한-docker-composeyml-예시-flask-api만-있는-경우">간단한 <code>docker-compose.yml</code> 예시 (Flask API만 있는 경우)</a></h3>
+<pre><code class="language-yaml"># docker-compose.yml
+version: '3.8' # Docker Compose 파일 형식 버전
+
+services:
+  my-api-service: # 서비스 이름 (임의 지정)
+    image: &lt;your_dockerhub_username&gt;/my-iris-api:v1 # 사용할 Docker 이미지
+    # build: . # Dockerfile이 있는 현재 디렉토리에서 이미지를 빌드할 수도 있음
+    container_name: my-compose-api-container # 실행될 컨테이너 이름
+    ports:
+      - "5001:5001" # 호스트 포트:컨테이너 포트
+    restart: always # 컨테이너 비정상 종료 시 자동 재시작
+    # environment: # 환경 변수 설정 (필요시)
+    #   - FLASK_ENV=production
+</code></pre>
+<ul>
+<li>위 파일을 <code>docker-compose.yml</code>로 저장하고, 해당 디렉토리에서 다음 명령 실행:
+<ul>
+<li><code>docker-compose up -d</code> : 백그라운드에서 서비스 시작 (이미지가 없으면 풀 또는 빌드)</li>
+<li><code>docker-compose down</code> : 서비스 중지 및 컨테이너, 네트워크 등 제거</li>
+<li><code>docker-compose logs my-api-service</code> : 해당 서비스 로그 확인</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-운영-환경에서의-추가-고려-사항"><a class="header" href="#5-운영-환경에서의-추가-고려-사항">5. 운영 환경에서의 추가 고려 사항</a></h2>
+<ul>
+<li><strong>WSGI 서버 사용</strong>: Flask/Django의 내장 개발 서버는 운영 환경에 적합하지 않습니다. Gunicorn, uWSGI와 같은 WSGI 서버를 Dockerfile의 <code>CMD</code> 또는 <code>ENTRYPOINT</code>에서 사용하여 애플리케이션을 실행해야 합니다.
+<ul>
+<li>예: <code>CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5001", "flask_api_v2:app"]</code>
+<ul>
+<li><code>-w 4</code>: 워커 프로세스 4개 사용</li>
+<li><code>-b 0.0.0.0:5001</code>: 모든 인터페이스의 5001번 포트에서 바인딩</li>
+<li><code>flask_api_v2:app</code>: <code>flask_api_v2.py</code> 파일의 <code>app</code> Flask 객체를 의미</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>HTTPS 설정</strong>: 실제 서비스에서는 보안을 위해 HTTPS를 사용해야 합니다. 이는 보통 로드 밸런서나 리버스 프록시(Nginx 등) 수준에서 처리합니다.</li>
+<li><strong>환경 변수 관리</strong>: API 키, 데이터베이스 접속 정보 등 민감한 정보는 Docker 이미지에 직접 하드코딩하지 않고, 컨테이너 실행 시 환경 변수로 주입하거나 Docker Secrets, Vault 등을 사용합니다.</li>
+<li><strong>로깅 및 모니터링</strong>: 컨테이너 로그를 수집하고 분석할 수 있는 시스템(ELK Stack, CloudWatch Logs 등)과 애플리케이션 및 인프라 모니터링 도구(Prometheus, Grafana, Datadog 등)를 설정합니다.</li>
+<li><strong>CI/CD (Continuous Integration / Continuous Deployment)</strong>: 코드 변경 시 자동으로 이미지를 빌드, 테스트하고 레지스트리에 푸시하며, 배포까지 자동화하는 파이프라인을 구축합니다. (Jenkins, GitLab CI, GitHub Actions 등)</li>
+</ul>
+<h2 id="실습-아이디어"><a class="header" href="#실습-아이디어">실습 아이디어</a></h2>
+<ol>
+<li>어제 만든 <code>my-iris-api:v1</code> 이미지를 Docker Hub의 본인 계정에 푸시해보세요.</li>
+<li>(가능하다면) 다른 컴퓨터나 클라우드 VM에 Docker를 설치하고, 푸시한 이미지를 풀하여 컨테이너를 실행하고 API를 테스트해보세요.</li>
+<li>(선택) 간단한 <code>docker-compose.yml</code> 파일을 작성하여 어제 만든 API 컨테이너를 실행해보세요.</li>
+<li>(선택) Dockerfile의 <code>CMD</code>를 Gunicorn을 사용하도록 변경하고 이미지를 다시 빌드하여 실행해보세요. (Gunicorn 설치 필요: <code>requirements.txt</code>에 추가)</li>
+</ol>
+<h2 id="추가-학습-자료"><a class="header" href="#추가-학습-자료">추가 학습 자료</a></h2>
+<ul>
+<li><a href="https://docs.docker.com/docker-hub/">Docker Hub Quickstart</a></li>
+<li><a href="https://aws.amazon.com/docker/">Deploying Docker containers on AWS (AWS Documentation)</a></li>
+<li><a href="https://docs.docker.com/compose/">Docker Compose Overview</a></li>
+<li><a href="https://docs.docker.com/develop/develop-images/dockerfile_best-practices/">Best practices for writing Dockerfiles</a></li>
+</ul>
+<h2 id="다음-학습-내용"><a class="header" href="#다음-학습-내용">다음 학습 내용</a></h2>
+<ul>
+<li>Day 86: 캡스톤 프로젝트 아이디어 브레인스토밍 (Brainstorming Capstone Project ideas) - 지금까지 배운 내용을 종합적으로 활용할 수 있는 프로젝트 아이디어 구상.</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../Code/Day_84_Docker_for_ML_Basics.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../Code/Day_86_Brainstorming_Capstone_Project_Ideas.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../Code/Day_84_Docker_for_ML_Basics.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../Code/Day_86_Brainstorming_Capstone_Project_Ideas.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

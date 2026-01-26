@@ -1,0 +1,480 @@
+<!DOCTYPE HTML>
+<html lang="ko" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>XGBoost - 소개 및 구현 | 77일차 - 100 Days of ML Code</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-b65ed104.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-68538d78.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">100 Days of ML Code</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="day-77-xgboost---소개-및-구현-xgboost---introduction-and-implementation"><a class="header" href="#day-77-xgboost---소개-및-구현-xgboost---introduction-and-implementation">Day 77: XGBoost - 소개 및 구현 (XGBoost - Introduction and implementation)</a></h1>
+<h2 id="학습-목표"><a class="header" href="#학습-목표">학습 목표</a></h2>
+<ul>
+<li>XGBoost (Extreme Gradient Boosting)의 개념과 등장 배경 이해</li>
+<li>XGBoost가 기존 그래디언트 부스팅 머신(GBM)에 비해 가지는 주요 장점 학습
+<ul>
+<li>규제(Regularization)를 통한 과적합 방지</li>
+<li>병렬 처리 및 최적화를 통한 빠른 학습 속도</li>
+<li>결측치(Missing Values) 자체 처리 기능</li>
+<li>교차 검증 내장 기능 등</li>
+</ul>
+</li>
+<li>XGBoost의 주요 하이퍼파라미터 이해</li>
+<li>파이썬 XGBoost 라이브러리를 사용한 모델 구현 방법 숙지</li>
+</ul>
+<h2 id="1-xgboost-extreme-gradient-boosting-소개"><a class="header" href="#1-xgboost-extreme-gradient-boosting-소개">1. XGBoost (Extreme Gradient Boosting) 소개</a></h2>
+<ul>
+<li><strong>정의</strong>: 그래디언트 부스팅 알고리즘을 기반으로 성능과 속도를 극대화한 트리 기반의 앙상블 학습 프레임워크입니다.</li>
+<li>Tianqi Chen에 의해 개발되었으며, 캐글(Kaggle)과 같은 데이터 과학 경진대회에서 압도적인 성능을 보여주며 널리 사용되기 시작했습니다.</li>
+<li>분류(Classification)와 회귀(Regression) 문제 모두에 사용할 수 있습니다.</li>
+</ul>
+<h2 id="2-xgboost의-주요-장점-및-특징"><a class="header" href="#2-xgboost의-주요-장점-및-특징">2. XGBoost의 주요 장점 및 특징</a></h2>
+<h3 id="가-규제-regularization"><a class="header" href="#가-규제-regularization">가. 규제 (Regularization)</a></h3>
+<ul>
+<li>표준 GBM에는 없는 **L1 규제(Lasso Regression)**와 <strong>L2 규제(Ridge Regression)</strong> 항을 손실 함수에 추가하여 모델의 복잡도를 제어하고 과적합을 방지합니다.
+<ul>
+<li>L1 규제 (<code>reg_alpha</code>): 가중치의 절대값 합에 페널티를 부여하여 일부 가중치를 0으로 만들어 특징 선택 효과를 가집니다.</li>
+<li>L2 규제 (<code>reg_lambda</code>): 가중치의 제곱 합에 페널티를 부여하여 가중치 크기를 줄여 모델을 부드럽게 만듭니다.</li>
+</ul>
+</li>
+<li>이는 모델이 너무 복잡해지는 것을 막아 일반화 성능을 향상시킵니다.</li>
+</ul>
+<h3 id="나-병렬-처리-및-최적화-parallel-processing-and-optimization"><a class="header" href="#나-병렬-처리-및-최적화-parallel-processing-and-optimization">나. 병렬 처리 및 최적화 (Parallel Processing and Optimization)</a></h3>
+<ul>
+<li><strong>트리 생성 시 병렬 처리</strong>: 각 노드에서 최적의 분할 지점을 찾는 과정을 병렬로 처리하여 학습 속도를 크게 향상시킵니다. (주의: 트리가 순차적으로 생성되는 부스팅의 특성상 전체 트리를 병렬로 학습하는 것은 아님)</li>
+<li><strong>캐시 인식 접근 (Cache-aware Access)</strong>: 메모리 접근 패턴을 최적화하여 하드웨어 성능을 최대한 활용합니다.</li>
+<li><strong>블록 압축 및 샤딩 (Block Compression and Sharding)</strong>: 대용량 데이터를 효율적으로 처리하기 위한 기술.</li>
+</ul>
+<h3 id="다-결측치-자체-처리-inbuilt-missing-value-treatment"><a class="header" href="#다-결측치-자체-처리-inbuilt-missing-value-treatment">다. 결측치 자체 처리 (Inbuilt Missing Value Treatment)</a></h3>
+<ul>
+<li>데이터 전처리 단계에서 결측치를 특별히 처리하지 않아도 XGBoost는 학습 과정에서 결측치를 자동으로 처리하는 방법을 학습합니다.</li>
+<li>각 노드에서 분기할 때 결측치를 가진 샘플을 어느 쪽으로 보낼지(왼쪽 또는 오른쪽 자식 노드)를 학습하여 최적의 방향을 결정합니다.</li>
+</ul>
+<h3 id="라-트리-가지치기-tree-pruning"><a class="header" href="#라-트리-가지치기-tree-pruning">라. 트리 가지치기 (Tree Pruning)</a></h3>
+<ul>
+<li>일반적인 GBM은 탐욕적(Greedy) 방식으로 트리를 성장시킨 후 가지치기를 하지만, XGBoost는 <code>max_depth</code>에 도달할 때까지 트리를 성장시킨 후, 손실 감소 기여도가 음수인 분기(즉, 모델 성능에 도움이 안 되는 분기)를 역방향으로 가지치기합니다 (Post-pruning).</li>
+<li><code>gamma</code> (또는 <code>min_split_loss</code>) 파라미터를 사용하여 리프 노드를 추가적으로 분할할 최소 손실 감소 값을 지정하여, 이 값보다 작은 손실 감소를 보이는 분기는 수행하지 않습니다.</li>
+</ul>
+<h3 id="마-교차-검증-내장-기능-built-in-cross-validation"><a class="header" href="#마-교차-검증-내장-기능-built-in-cross-validation">마. 교차 검증 내장 기능 (Built-in Cross-Validation)</a></h3>
+<ul>
+<li>XGBoost API 내에 교차 검증 기능(<code>xgb.cv</code>)이 포함되어 있어, 최적의 부스팅 라운드 수(<code>n_estimators</code> 또는 <code>num_boost_round</code>)를 찾는 데 유용합니다.</li>
+<li>학습 과정에서 검증 세트의 성능을 모니터링하고, 성능이 더 이상 향상되지 않으면 조기 종료(Early Stopping)할 수 있습니다.</li>
+</ul>
+<h3 id="바-높은-유연성-및-확장성"><a class="header" href="#바-높은-유연성-및-확장성">바. 높은 유연성 및 확장성</a></h3>
+<ul>
+<li>사용자 정의 손실 함수(Custom Objective Function) 및 평가 지표(Evaluation Metric)를 사용할 수 있습니다.</li>
+<li>다양한 프로그래밍 언어(Python, R, Java, Scala, C++ 등)와 분산 환경(Hadoop, Spark)을 지원합니다.</li>
+</ul>
+<h2 id="3-xgboost의-주요-하이퍼파라미터"><a class="header" href="#3-xgboost의-주요-하이퍼파라미터">3. XGBoost의 주요 하이퍼파라미터</a></h2>
+<ul>
+<li>XGBoost는 많은 하이퍼파라미터를 가지고 있으며, 적절한 튜닝이 중요합니다.</li>
+</ul>
+<h3 id="가-일반-파라미터-general-parameters"><a class="header" href="#가-일반-파라미터-general-parameters">가. 일반 파라미터 (General Parameters)</a></h3>
+<ul>
+<li><code>booster</code> [기본값=gbtree]: 사용할 부스터 모델 유형. <code>gbtree</code>(트리 기반 모델), <code>gblinear</code>(선형 모델), <code>dart</code>(Dropout을 추가한 트리 모델) 중 선택.</li>
+<li><code>nthread</code> [기본값=시스템 최대 스레드 수]: 병렬 처리에 사용할 스레드 수.</li>
+<li><code>verbosity</code> [기본값=1]: 메시지 출력 레벨. 0(Silent), 1(Warning), 2(Info), 3(Debug).</li>
+</ul>
+<h3 id="나-부스터-파라미터-booster-parameters---gbtree-기준"><a class="header" href="#나-부스터-파라미터-booster-parameters---gbtree-기준">나. 부스터 파라미터 (Booster Parameters) - <code>gbtree</code> 기준</a></h3>
+<ul>
+<li><code>eta</code> (또는 <code>learning_rate</code>) [기본값=0.3]: 학습률. 각 부스팅 단계에서 가중치를 얼마나 줄일지 결정. 낮은 값은 모델을 더 견고하게 만들지만, <code>num_boost_round</code>를 늘려야 함. (0.01 ~ 0.2 권장)</li>
+<li><code>gamma</code> (또는 <code>min_split_loss</code>) [기본값=0]: 리프 노드를 추가적으로 분할하기 위한 최소 손실 감소 값. 클수록 모델이 보수적(덜 복잡)이 됨.</li>
+<li><code>max_depth</code> [기본값=6]: 각 트리의 최대 깊이. 클수록 모델이 복잡해지고 과적합 가능성이 높아짐. (3 ~ 10 권장)</li>
+<li><code>min_child_weight</code> [기본값=1]: 자식 노드에 필요한 최소한의 관측치 가중치 합. 과적합 방지에 사용.</li>
+<li><code>subsample</code> [기본값=1]: 각 트리를 학습할 때 사용할 학습 데이터 샘플의 비율. (0.5 ~ 1 권장)</li>
+<li><code>colsample_bytree</code> [기본값=1]: 각 트리를 구성할 때 사용할 특성(피처)의 비율. (0.5 ~ 1 권장)</li>
+<li><code>colsample_bylevel</code>, <code>colsample_bynode</code>: 더 세부적인 특성 샘플링 비율.</li>
+<li><code>lambda</code> (또는 <code>reg_lambda</code>) [기본값=1]: L2 규제 가중치.</li>
+<li><code>alpha</code> (또는 <code>reg_alpha</code>) [기본값=0]: L1 규제 가중치.</li>
+<li><code>tree_method</code> [기본값=auto]: 트리 생성 알고리즘. <code>auto</code>, <code>exact</code>, <code>approx</code>, <code>hist</code>, <code>gpu_hist</code> 등. <code>hist</code>가 대용량 데이터에 효율적.</li>
+</ul>
+<h3 id="다-학습-과정-파라미터-learning-task-parameters"><a class="header" href="#다-학습-과정-파라미터-learning-task-parameters">다. 학습 과정 파라미터 (Learning Task Parameters)</a></h3>
+<ul>
+<li><code>objective</code> [기본값=reg:squarederror]: 학습 목표 함수.
+<ul>
+<li><code>reg:squarederror</code>: 회귀 문제 (제곱 오차).</li>
+<li><code>binary:logistic</code>: 이진 분류 (로지스틱 손실). 예측값은 확률.</li>
+<li><code>multi:softmax</code>: 다중 클래스 분류 (소프트맥스 손실). 예측값은 클래스. <code>num_class</code> 파라미터 필요.</li>
+<li><code>multi:softprob</code>: 다중 클래스 분류. 예측값은 각 클래스에 대한 확률. <code>num_class</code> 파라미터 필요.</li>
+</ul>
+</li>
+<li><code>eval_metric</code>: 검증 세트에 사용할 평가 지표.
+<ul>
+<li>회귀: <code>rmse</code>, <code>mae</code> 등.</li>
+<li>분류: <code>error</code> (분류 오류율), <code>logloss</code> (로그 손실), <code>auc</code> (ROC AUC), <code>aucpr</code> (PR AUC), <code>merror</code> (다중 클래스 오류율) 등.</li>
+</ul>
+</li>
+<li><code>seed</code> [기본값=0]: 재현성을 위한 랜덤 시드.</li>
+</ul>
+<h2 id="4-파이썬-xgboost-라이브러리-사용법"><a class="header" href="#4-파이썬-xgboost-라이브러리-사용법">4. 파이썬 XGBoost 라이브러리 사용법</a></h2>
+<ul>
+<li><code>xgboost</code> 라이브러리를 설치해야 합니다: <code>pip install xgboost</code></li>
+</ul>
+<h3 id="가-scikit-learn-래퍼-wrapper-사용"><a class="header" href="#가-scikit-learn-래퍼-wrapper-사용">가. Scikit-Learn 래퍼 (Wrapper) 사용</a></h3>
+<ul>
+<li>XGBoost는 Scikit-Learn과 호환되는 래퍼 클래스(<code>XGBClassifier</code>, <code>XGBRegressor</code>)를 제공하여 기존 Scikit-Learn 워크플로우에 쉽게 통합할 수 있습니다.</li>
+</ul>
+<pre><code class="language-python">import xgboost as xgb
+from sklearn.datasets import load_breast_cancer
+from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+
+# 데이터 로드 (유방암 데이터셋 - 이진 분류)
+cancer = load_breast_cancer()
+X, y = cancer.data, cancer.target
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
+
+# XGBClassifier 모델 생성 및 학습 (Scikit-Learn 래퍼)
+# 주요 하이퍼파라미터 설정 예시
+xgb_clf = xgb.XGBClassifier(
+    objective='binary:logistic', # 이진 분류
+    n_estimators=100,          # 부스팅 라운드 수 (트리 개수)
+    learning_rate=0.1,         # 학습률
+    max_depth=3,               # 트리의 최대 깊이
+    subsample=0.8,             # 각 트리에 사용할 샘플 비율
+    colsample_bytree=0.8,      # 각 트리에 사용할 특성 비율
+    gamma=0,                   # 최소 손실 감소
+    reg_alpha=0,               # L1 규제
+    reg_lambda=1,              # L2 규제
+    use_label_encoder=False,   # LabelEncoder 사용 경고 방지 (XGBoost 1.3.0 이상)
+    eval_metric='logloss',     # 평가 지표 (학습 중 출력)
+    random_state=42
+)
+
+# 조기 종료(Early Stopping) 설정하여 학습
+# eval_set: 검증 데이터셋. 조기 종료 및 학습 과정 모니터링에 사용
+# early_stopping_rounds: 지정된 라운드 동안 성능 향상이 없으면 학습 중단
+eval_set = [(X_test, y_test)] # 테스트셋을 검증셋으로 사용 (실제로는 별도 검증셋 권장)
+xgb_clf.fit(X_train, y_train,
+            early_stopping_rounds=10,
+            eval_set=eval_set,
+            verbose=True) # verbose=True로 학습 과정 출력
+
+# 예측
+y_pred = xgb_clf.predict(X_test)
+y_pred_proba = xgb_clf.predict_proba(X_test)[:, 1]
+
+# 평가
+accuracy = accuracy_score(y_test, y_pred)
+print(f"\nXGBoost 정확도: {accuracy:.4f}")
+print("\nConfusion Matrix:\n", confusion_matrix(y_test, y_pred))
+print("\nClassification Report:\n", classification_report(y_test, y_pred))
+
+# 특성 중요도 시각화
+# xgb.plot_importance(xgb_clf)
+# plt.show()
+</code></pre>
+<h3 id="나-xgboost-고유-api-사용"><a class="header" href="#나-xgboost-고유-api-사용">나. XGBoost 고유 API 사용</a></h3>
+<ul>
+<li>XGBoost는 자체적인 데이터 구조(<code>DMatrix</code>)와 학습 API를 가지고 있습니다. 대용량 데이터 처리나 세밀한 제어에 더 유리할 수 있습니다.</li>
+</ul>
+<pre><code class="language-python"># 1. DMatrix 생성 (XGBoost 전용 데이터 구조)
+dtrain = xgb.DMatrix(data=X_train, label=y_train)
+dtest = xgb.DMatrix(data=X_test, label=y_test) # 레이블은 평가에만 사용
+
+# 2. 파라미터 설정 (딕셔너리 형태)
+params = {
+    'objective': 'binary:logistic',
+    'eval_metric': 'logloss',
+    'eta': 0.1, # learning_rate
+    'max_depth': 3,
+    'subsample': 0.8,
+    'colsample_bytree': 0.8,
+    'gamma': 0,
+    'lambda': 1, # L2 규제
+    'alpha': 0,  # L1 규제
+    'seed': 42
+}
+
+num_boost_round = 200 # 부스팅 라운드 수
+
+# 3. 모델 학습 (xgb.train)
+# watchlist: 학습 과정에서 성능을 모니터링할 데이터셋 리스트
+watchlist = [(dtrain, 'train'), (dtest, 'eval')]
+
+bst_model = xgb.train(
+    params=params,
+    dtrain=dtrain,
+    num_boost_round=num_boost_round,
+    evals=watchlist,
+    early_stopping_rounds=10, # 조기 종료
+    verbose_eval=10 # 10 라운드마다 평가 결과 출력
+)
+
+# 4. 예측 (확률값 반환)
+pred_probs_bst = bst_model.predict(dtest)
+# 확률을 이진 클래스로 변환 (임계값 0.5 기준)
+preds_bst = [1 if prob &gt; 0.5 else 0 for prob in pred_probs_bst]
+
+# 5. 평가
+accuracy_bst = accuracy_score(y_test, preds_bst)
+print(f"\nXGBoost (Native API) 정확도: {accuracy_bst:.4f}")
+
+# 최적의 부스팅 라운드 수 확인 (조기 종료 시)
+print(f"최적 부스팅 라운드: {bst_model.best_iteration}")
+</code></pre>
+<h3 id="다-교차-검증-xgbcv"><a class="header" href="#다-교차-검증-xgbcv">다. 교차 검증 (<code>xgb.cv</code>)</a></h3>
+<pre><code class="language-python"># xgb.cv를 사용한 교차 검증
+# 파라미터는 xgb.train과 유사
+# nfold: 폴드 수
+# metrics: 평가 지표 리스트
+# early_stopping_rounds: 조기 종료
+# as_pandas: 결과를 Pandas DataFrame으로 반환
+
+cv_results = xgb.cv(
+    params=params,
+    dtrain=dtrain,
+    num_boost_round=num_boost_round,
+    nfold=5, # 5-fold cross-validation
+    metrics={'logloss', 'auc'}, # 여러 지표 사용 가능
+    early_stopping_rounds=10,
+    seed=42,
+    verbose_eval=50,
+    as_pandas=True
+)
+
+print("\nXGBoost CV 결과 (마지막 5개 라운드):\n", cv_results.tail())
+print(f"\n최적 CV LogLoss: {cv_results['test-logloss-mean'].min()} at round {cv_results['test-logloss-mean'].idxmin()}")
+print(f"최적 CV AUC: {cv_results['test-auc-mean'].max()} at round {cv_results['test-auc-mean'].idxmax()}")
+</code></pre>
+<h2 id="5-xgboost-하이퍼파라미터-튜닝"><a class="header" href="#5-xgboost-하이퍼파라미터-튜닝">5. XGBoost 하이퍼파라미터 튜닝</a></h2>
+<ul>
+<li><code>GridSearchCV</code> 또는 <code>RandomizedSearchCV</code> (Scikit-Learn 래퍼 사용 시) 또는 <code>Hyperopt</code>, <code>Optuna</code>와 같은 베이지안 최적화 도구를 사용하여 튜닝할 수 있습니다.</li>
+<li>주요 튜닝 대상: <code>n_estimators</code>, <code>learning_rate</code>, <code>max_depth</code>, <code>min_child_weight</code>, <code>gamma</code>, <code>subsample</code>, <code>colsample_bytree</code>, <code>reg_alpha</code>, <code>reg_lambda</code>.</li>
+<li>일반적으로 <code>learning_rate</code>를 낮추고(<code>eta</code> &lt; 0.1), <code>n_estimators</code> (또는 <code>num_boost_round</code>)를 조기 종료와 함께 크게 설정하는 전략이 많이 사용됩니다.</li>
+</ul>
+<h2 id="추가-학습-자료"><a class="header" href="#추가-학습-자료">추가 학습 자료</a></h2>
+<ul>
+<li><a href="https://xgboost.readthedocs.io/en/latest/">XGBoost 공식 문서</a></li>
+<li><a href="https://machinelearningmastery.com/gentle-introduction-xgboost-applied-machine-learning/">A Gentle Introduction to XGBoost for Applied Machine Learning (Machine Learning Mastery)</a></li>
+<li><a href="https://towardsdatascience.com/xgboost-algorithm-long-may-it-reign-9029759fa4a0">XGBoost Algorithm: Long May It Reign! (Towards Data Science)</a></li>
+</ul>
+<h2 id="다음-학습-내용"><a class="header" href="#다음-학습-내용">다음 학습 내용</a></h2>
+<ul>
+<li>Day 78: LightGBM - 소개 및 구현 (LightGBM - Introduction and implementation) - XGBoost와 유사하지만 더 빠르고 효율적인 또 다른 그래디언트 부스팅 프레임워크.</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../Code/Day_76_Ensemble_Methods_Bagging_Boosting.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../Code/Day_78_LightGBM_Introduction_Implementation.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../Code/Day_76_Ensemble_Methods_Bagging_Boosting.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../Code/Day_78_LightGBM_Introduction_Implementation.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

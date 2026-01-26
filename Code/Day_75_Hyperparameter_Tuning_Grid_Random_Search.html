@@ -1,0 +1,463 @@
+<!DOCTYPE HTML>
+<html lang="ko" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>하이퍼파라미터 튜닝 | 75일차 - 100 Days of ML Code</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-b65ed104.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-68538d78.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">100 Days of ML Code</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="day-75-하이퍼파라미터-튜닝---그리드-서치-랜덤-서치-hyperparameter-tuning---grid-search-random-search"><a class="header" href="#day-75-하이퍼파라미터-튜닝---그리드-서치-랜덤-서치-hyperparameter-tuning---grid-search-random-search">Day 75: 하이퍼파라미터 튜닝 - 그리드 서치, 랜덤 서치 (Hyperparameter Tuning - Grid Search, Random Search)</a></h1>
+<h2 id="학습-목표"><a class="header" href="#학습-목표">학습 목표</a></h2>
+<ul>
+<li>모델 파라미터(Model Parameters)와 하이퍼파라미터(Hyperparameters)의 차이 이해</li>
+<li>하이퍼파라미터 튜닝의 중요성과 목적 학습</li>
+<li>주요 하이퍼파라미터 튜닝 기법 학습:
+<ul>
+<li>수동 탐색 (Manual Search)</li>
+<li>그리드 서치 (Grid Search)</li>
+<li>랜덤 서치 (Random Search)</li>
+</ul>
+</li>
+<li><code>scikit-learn</code>을 사용한 그리드 서치 및 랜덤 서치 구현 방법 숙지</li>
+<li>교차 검증을 하이퍼파라미터 튜닝에 어떻게 활용하는지 이해</li>
+</ul>
+<h2 id="1-모델-파라미터-vs-하이퍼파라미터"><a class="header" href="#1-모델-파라미터-vs-하이퍼파라미터">1. 모델 파라미터 vs 하이퍼파라미터</a></h2>
+<h3 id="가-모델-파라미터-model-parameters"><a class="header" href="#가-모델-파라미터-model-parameters">가. 모델 파라미터 (Model Parameters)</a></h3>
+<ul>
+<li>모델이 학습 과정에서 데이터로부터 <strong>스스로 학습하는 변수</strong>들입니다.</li>
+<li>사용자가 직접 설정하지 않고, 모델이 학습 데이터를 통해 최적의 값을 찾아냅니다.</li>
+<li>예:
+<ul>
+<li>선형 회귀 모델의 계수(coefficients) 및 절편(intercept).</li>
+<li>로지스틱 회귀 모델의 계수.</li>
+<li>신경망의 가중치(weights) 및 편향(biases).</li>
+<li>결정 트리의 각 노드에서의 분기 조건.</li>
+</ul>
+</li>
+</ul>
+<h3 id="나-하이퍼파라미터-hyperparameters"><a class="header" href="#나-하이퍼파라미터-hyperparameters">나. 하이퍼파라미터 (Hyperparameters)</a></h3>
+<ul>
+<li>모델의 학습 과정을 제어하거나 모델의 구조를 결정하는 변수들로, <strong>사용자가 직접 설정</strong>해야 합니다.</li>
+<li>모델이 학습을 시작하기 전에 미리 정의되어야 하며, 학습 과정에서 업데이트되지 않습니다.</li>
+<li>하이퍼파라미터의 선택에 따라 모델의 성능이 크게 달라질 수 있습니다.</li>
+<li>예:
+<ul>
+<li>로지스틱 회귀, SVM의 규제 강도 <code>C</code>.</li>
+<li>K-최근접 이웃(KNN)의 이웃 수 <code>k</code>.</li>
+<li>결정 트리, 랜덤 포레스트의 최대 깊이 <code>max_depth</code>, 최소 샘플 분할 수 <code>min_samples_split</code>.</li>
+<li>신경망의 학습률(learning rate), 은닉층의 수, 각 층의 뉴런 수, 활성화 함수, 옵티마이저 종류, 배치 크기, 에포크 수.</li>
+<li>PCA의 주성분 개수 <code>n_components</code>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-하이퍼파라미터-튜닝-hyperparameter-tuning--optimization"><a class="header" href="#2-하이퍼파라미터-튜닝-hyperparameter-tuning--optimization">2. 하이퍼파라미터 튜닝 (Hyperparameter Tuning / Optimization)</a></h2>
+<ul>
+<li><strong>정의</strong>: 모델의 성능을 최적화하기 위해 가장 좋은 하이퍼파라미터 조합을 찾는 과정입니다.</li>
+<li><strong>중요성</strong>: 적절한 하이퍼파라미터 설정은 모델의 일반화 성능을 크게 향상시킬 수 있습니다. 잘못된 하이퍼파라미터는 과소적합(Underfitting)이나 과적합(Overfitting)을 유발할 수 있습니다.</li>
+<li><strong>목표</strong>: 검증 세트(Validation Set) 또는 교차 검증(Cross-Validation)을 통해 가장 좋은 성능을 내는 하이퍼파라미터 조합을 찾습니다.</li>
+</ul>
+<h2 id="3-주요-하이퍼파라미터-튜닝-기법"><a class="header" href="#3-주요-하이퍼파라미터-튜닝-기법">3. 주요 하이퍼파라미터 튜닝 기법</a></h2>
+<h3 id="가-수동-탐색-manual-search"><a class="header" href="#가-수동-탐색-manual-search">가. 수동 탐색 (Manual Search)</a></h3>
+<ul>
+<li>사용자가 경험이나 직관에 의존하여 하이퍼파라미터 값을 직접 변경해가며 모델 성능을 확인하는 방식입니다.</li>
+<li>간단한 모델이나 하이퍼파라미터 수가 적을 때는 시도해볼 수 있지만, 비효율적이고 최적의 조합을 찾기 어렵습니다.</li>
+</ul>
+<h3 id="나-그리드-서치-grid-search"><a class="header" href="#나-그리드-서치-grid-search">나. 그리드 서치 (Grid Search)</a></h3>
+<ul>
+<li><strong>개념</strong>: 사용자가 지정한 하이퍼파라미터 값들의 모든 가능한 조합에 대해 모델 성능을 평가하여 가장 좋은 조합을 찾는 방법입니다.</li>
+<li><strong>수행 단계</strong>:
+<ol>
+<li>튜닝할 하이퍼파라미터와 탐색할 값들의 목록을 정의합니다. (격자, Grid 생성)</li>
+<li>정의된 모든 하이퍼파라미터 조합에 대해 모델을 학습하고 교차 검증을 통해 성능을 평가합니다.</li>
+<li>가장 높은 교차 검증 성능을 보인 하이퍼파라미터 조합을 최적의 조합으로 선택합니다.</li>
+</ol>
+</li>
+<li><strong>장점</strong>:
+<ul>
+<li>지정된 범위 내에서 모든 조합을 탐색하므로, 최적의 조합을 찾을 가능성이 비교적 높습니다.</li>
+<li>구현이 간단합니다.</li>
+</ul>
+</li>
+<li><strong>단점</strong>:
+<ul>
+<li>하이퍼파라미터의 종류가 많거나 탐색할 값의 범위가 넓으면 계산 비용이 기하급수적으로 증가합니다 (차원의 저주와 유사).</li>
+<li>연속적인 하이퍼파라미터의 경우 이산적인 값들만 탐색합니다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="다-랜덤-서치-random-search"><a class="header" href="#다-랜덤-서치-random-search">다. 랜덤 서치 (Random Search)</a></h3>
+<ul>
+<li><strong>개념</strong>: 그리드 서치와 유사하지만, 모든 조합을 시도하는 대신 지정된 횟수만큼 하이퍼파라미터 조합을 무작위로 샘플링하여 평가합니다.</li>
+<li><strong>수행 단계</strong>:
+<ol>
+<li>튜닝할 하이퍼파라미터와 각 하이퍼파라미터의 탐색 범위(또는 확률 분포)를 정의합니다.</li>
+<li>지정된 횟수(<code>n_iter</code>)만큼 하이퍼파라미터 조합을 무작위로 선택하여 모델을 학습하고 교차 검증을 통해 성능을 평가합니다.</li>
+<li>가장 높은 교차 검증 성능을 보인 하이퍼파라미터 조합을 최적의 조합으로 선택합니다.</li>
+</ol>
+</li>
+<li><strong>장점</strong>:
+<ul>
+<li>그리드 서치보다 계산 효율성이 높습니다. (특히 하이퍼파라미터 공간이 클 때)</li>
+<li>모든 하이퍼파라미터가 동일하게 중요하지 않다는 가정 하에, 중요한 하이퍼파라미터에 대해 더 다양한 값을 탐색할 가능성이 있습니다.</li>
+<li>제한된 시간 내에 좋은 성능의 조합을 찾을 확률이 높습니다.</li>
+</ul>
+</li>
+<li><strong>단점</strong>:
+<ul>
+<li>무작위 탐색이므로 최적의 조합을 반드시 찾는다는 보장은 없습니다. (하지만 충분한 반복 횟수를 설정하면 좋은 결과를 얻을 수 있음)</li>
+</ul>
+</li>
+</ul>
+<h3 id="라-베이지안-최적화-bayesian-optimization---고급-기법"><a class="header" href="#라-베이지안-최적화-bayesian-optimization---고급-기법">라. 베이지안 최적화 (Bayesian Optimization) - 고급 기법</a></h3>
+<ul>
+<li>이전 탐색 결과를 바탕으로 다음 탐색할 하이퍼파라미터 조합을 더 효율적으로 결정하는 방식입니다. (예: Hyperopt, Optuna 라이브러리)</li>
+<li>랜덤 서치보다 더 적은 반복으로 좋은 성능을 찾을 수 있는 경우가 많습니다.</li>
+</ul>
+<h2 id="4-scikit-learn을-사용한-그리드-서치-및-랜덤-서치-구현"><a class="header" href="#4-scikit-learn을-사용한-그리드-서치-및-랜덤-서치-구현">4. <code>scikit-learn</code>을 사용한 그리드 서치 및 랜덤 서치 구현</a></h2>
+<ul>
+<li><code>GridSearchCV</code>와 <code>RandomizedSearchCV</code> 클래스를 사용합니다.</li>
+<li>내부적으로 교차 검증을 수행하여 각 하이퍼파라미터 조합의 성능을 평가합니다.</li>
+</ul>
+<h3 id="가-예제-데이터-및-모델-준비"><a class="header" href="#가-예제-데이터-및-모델-준비">가. 예제 데이터 및 모델 준비</a></h3>
+<pre><code class="language-python">from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split, GridSearchCV, RandomizedSearchCV
+from sklearn.svm import SVC # 예제 모델로 SVM 사용
+from sklearn.preprocessing import StandardScaler
+import numpy as np
+
+# 데이터 로드 및 분할
+iris = load_iris()
+X, y = iris.data, iris.target
+
+# 데이터 스케일링 (SVM은 스케일링에 민감)
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.3, random_state=42, stratify=y)
+
+# 기본 모델 (튜닝 전)
+base_model = SVC(random_state=42)
+base_model.fit(X_train, y_train)
+print(f"기본 모델 정확도: {base_model.score(X_test, y_test):.4f}")
+</code></pre>
+<h3 id="나-그리드-서치-gridsearchcv"><a class="header" href="#나-그리드-서치-gridsearchcv">나. 그리드 서치 (GridSearchCV)</a></h3>
+<pre><code class="language-python"># 1. 하이퍼파라미터 그리드 정의
+# SVM의 주요 하이퍼파라미터: C (규제 강도), kernel, gamma (커널 계수)
+param_grid = {
+    'C': [0.1, 1, 10, 100],
+    'kernel': ['linear', 'rbf', 'poly'],
+    'gamma': ['scale', 'auto', 0.1, 1] # 'rbf', 'poly', 'sigmoid' 커널에만 해당
+}
+
+# 2. GridSearchCV 객체 생성
+# estimator: 사용할 모델
+# param_grid: 탐색할 하이퍼파라미터 그리드
+# cv: 교차 검증 폴드 수 (또는 교차 검증기 객체)
+# scoring: 성능 평가 지표 (예: 'accuracy', 'f1')
+# n_jobs: 병렬 처리할 CPU 코어 수 (-1이면 모든 코어 사용)
+# verbose: 로그 출력 레벨
+grid_search = GridSearchCV(estimator=SVC(random_state=42),
+                           param_grid=param_grid,
+                           cv=5, # 5-fold cross-validation
+                           scoring='accuracy',
+                           n_jobs=-1,
+                           verbose=1)
+
+# 3. 그리드 서치 수행 (학습 데이터에 대해)
+print("\nGridSearchCV 시작...")
+grid_search.fit(X_train, y_train)
+print("GridSearchCV 완료!")
+
+# 4. 최적 하이퍼파라미터 및 성능 확인
+print("\n최적 하이퍼파라미터:", grid_search.best_params_)
+print("최적 교차 검증 점수 (Accuracy):", grid_search.best_score_)
+
+# 5. 최적 모델로 테스트 데이터 평가
+best_model_grid = grid_search.best_estimator_ # 최적 하이퍼파라미터로 학습된 모델
+test_accuracy_grid = best_model_grid.score(X_test, y_test)
+print("테스트 세트 정확도 (GridSearch):", test_accuracy_grid)
+
+# (선택) 모든 결과 확인
+# results_df = pd.DataFrame(grid_search.cv_results_)
+# print("\nGridSearchCV 결과 상세:\n", results_df[['param_C', 'param_kernel', 'param_gamma', 'mean_test_score']].sort_values(by='mean_test_score', ascending=False).head())
+</code></pre>
+<h3 id="다-랜덤-서치-randomizedsearchcv"><a class="header" href="#다-랜덤-서치-randomizedsearchcv">다. 랜덤 서치 (RandomizedSearchCV)</a></h3>
+<pre><code class="language-python">from scipy.stats import expon, uniform # 확률 분포 정의용
+
+# 1. 하이퍼파라미터 탐색 범위 (분포) 정의
+param_dist = {
+    'C': expon(scale=100), # 지수 분포 (큰 값에 더 많은 확률 부여, 예시) / 또는 [0.1, 1, 10, 100, 1000] 같은 리스트
+    'kernel': ['linear', 'rbf', 'poly'],
+    'gamma': expon(scale=.1), # 또는 ['scale', 'auto', 0.01, 0.1, 1]
+    'degree': [2, 3, 4] # 'poly' 커널에만 해당
+}
+
+# 2. RandomizedSearchCV 객체 생성
+# n_iter: 시도할 하이퍼파라미터 조합의 수
+random_search = RandomizedSearchCV(estimator=SVC(random_state=42),
+                                   param_distributions=param_dist,
+                                   n_iter=50, # 50개의 조합을 무작위로 시도
+                                   cv=5,
+                                   scoring='accuracy',
+                                   n_jobs=-1,
+                                   random_state=42, # 재현성을 위해 설정
+                                   verbose=1)
+
+# 3. 랜덤 서치 수행
+print("\nRandomizedSearchCV 시작...")
+random_search.fit(X_train, y_train)
+print("RandomizedSearchCV 완료!")
+
+# 4. 최적 하이퍼파라미터 및 성능 확인
+print("\n최적 하이퍼파라미터 (RandomSearch):", random_search.best_params_)
+print("최적 교차 검증 점수 (Accuracy, RandomSearch):", random_search.best_score_)
+
+# 5. 최적 모델로 테스트 데이터 평가
+best_model_random = random_search.best_estimator_
+test_accuracy_random = best_model_random.score(X_test, y_test)
+print("테스트 세트 정확도 (RandomSearch):", test_accuracy_random)
+</code></pre>
+<h2 id="5-하이퍼파라미터-튜닝-시-고려사항"><a class="header" href="#5-하이퍼파라미터-튜닝-시-고려사항">5. 하이퍼파라미터 튜닝 시 고려사항</a></h2>
+<ul>
+<li><strong>탐색 공간 정의</strong>: 하이퍼파라미터의 탐색 범위나 분포를 적절히 설정하는 것이 중요합니다. 너무 넓으면 비효율적이고, 너무 좁으면 최적값을 놓칠 수 있습니다. 도메인 지식이나 이전 경험을 활용할 수 있습니다.</li>
+<li><strong>계산 비용</strong>: 그리드 서치는 조합 수가 많아지면 매우 오래 걸립니다. 랜덤 서치나 베이지안 최적화는 제한된 예산 내에서 더 효율적일 수 있습니다.</li>
+<li><strong>교차 검증 폴드 수</strong>: <code>cv</code> 값을 적절히 설정해야 합니다. 일반적으로 5 또는 10이 사용됩니다.</li>
+<li><strong>평가 지표</strong>: <code>scoring</code> 파라미터를 문제에 맞는 적절한 평가지표로 설정해야 합니다 (예: 불균형 데이터에서는 ‘f1’ 또는 ‘roc_auc’).</li>
+<li><strong>데이터 누수 방지</strong>: 하이퍼파라미터 튜닝은 학습 데이터(또는 학습 데이터 내의 검증 폴드)에 대해서만 수행되어야 하며, 최종 평가는 별도의 테스트 세트에서 이루어져야 합니다. <code>GridSearchCV</code>와 <code>RandomizedSearchCV</code>는 내부적으로 이를 잘 처리합니다.</li>
+</ul>
+<h2 id="추가-학습-자료"><a class="header" href="#추가-학습-자료">추가 학습 자료</a></h2>
+<ul>
+<li><a href="https://scikit-learn.org/stable/modules/grid_search.html">Scikit-learn: Tuning the hyper-parameters of an estimator</a></li>
+<li><a href="https://towardsdatascience.com/hyperparameter-tuning-the-random-forest-in-python-using-scikit-learn-28d2aa77dd74">Hyperparameter Tuning the Random Forest in Python (Towards Data Science)</a></li>
+<li><a href="https://machinelearningmastery.com/a-gentle-introduction-to-algorithm-tuning/">A Gentle Introduction to Algorithm Tuning (Machine Learning Mastery)</a></li>
+</ul>
+<h2 id="다음-학습-내용"><a class="header" href="#다음-학습-내용">다음 학습 내용</a></h2>
+<ul>
+<li>Day 76: 앙상블 방법 - 배깅 (랜덤 포레스트 복습), 부스팅 (AdaBoost, Gradient Boosting) (Ensemble Methods - Bagging (revisit Random Forests), Boosting (AdaBoost, Gradient Boosting))</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../Code/Day_74_Cross_Validation_Techniques.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../Code/Day_76_Ensemble_Methods_Bagging_Boosting.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../Code/Day_74_Cross_Validation_Techniques.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../Code/Day_76_Ensemble_Methods_Bagging_Boosting.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

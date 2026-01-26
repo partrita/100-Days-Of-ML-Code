@@ -1,0 +1,374 @@
+<!DOCTYPE HTML>
+<html lang="ko" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>AI 및 머신러닝 윤리 | 98일차 - 100 Days of ML Code</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-b65ed104.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-68538d78.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">100 Days of ML Code</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="day-98-ai-및-머신러닝-윤리-ethics-in-ai-and-machine-learning"><a class="header" href="#day-98-ai-및-머신러닝-윤리-ethics-in-ai-and-machine-learning">Day 98: AI 및 머신러닝 윤리 (Ethics in AI and Machine Learning)</a></h1>
+<h2 id="학습-목표"><a class="header" href="#학습-목표">학습 목표</a></h2>
+<ul>
+<li>AI 및 머신러닝 기술 발전과 함께 대두되는 주요 윤리적 문제 인식.</li>
+<li>편향(Bias), 공정성(Fairness), 투명성(Transparency), 책임성(Accountability), 개인정보보호(Privacy) 등 핵심 윤리 원칙 이해.</li>
+<li>책임감 있는 AI (Responsible AI) 개발의 중요성과 필요성 공감.</li>
+<li>AI 윤리 문제 해결을 위한 다양한 접근 방식 및 노력 소개.</li>
+</ul>
+<h2 id="1-ai-윤리의-중요성"><a class="header" href="#1-ai-윤리의-중요성">1. AI 윤리의 중요성</a></h2>
+<ul>
+<li>인공지능(AI)과 머신러닝(ML) 기술은 사회 여러 분야에 막대한 영향을 미치고 있으며, 그 영향력이 커짐에 따라 윤리적 고려의 중요성도 함께 증가하고 있습니다.</li>
+<li>AI 시스템이 내리는 결정은 개인의 삶, 사회 구조, 심지어 인류 전체에 중대한 결과를 초래할 수 있습니다.</li>
+<li>따라서 AI를 개발하고 활용하는 과정에서 발생할 수 있는 윤리적 문제들을 사전에 인지하고, 이를 최소화하며, 인간 중심의 기술 발전을 추구하는 것이 필수적입니다.</li>
+</ul>
+<h2 id="2-주요-ai-윤리-문제-및-핵심-원칙"><a class="header" href="#2-주요-ai-윤리-문제-및-핵심-원칙">2. 주요 AI 윤리 문제 및 핵심 원칙</a></h2>
+<h3 id="가-편향-bias-과-공정성-fairness"><a class="header" href="#가-편향-bias-과-공정성-fairness">가. 편향 (Bias) 과 공정성 (Fairness)</a></h3>
+<ul>
+<li><strong>문제점</strong>:
+<ul>
+<li><strong>데이터 편향</strong>: AI 모델은 학습 데이터에 존재하는 편향(성별, 인종, 나이, 지역, 사회경제적 배경 등)을 그대로 학습하거나 증폭시킬 수 있습니다.
+<ul>
+<li>예: 특정 인종 그룹에 대한 안면 인식 정확도 저하, 특정 성별에 불리한 채용 추천 시스템.</li>
+</ul>
+</li>
+<li><strong>알고리즘 편향</strong>: 모델 설계 자체나 최적화 과정에서 특정 그룹에 불리하게 작용하는 편향이 발생할 수 있습니다.</li>
+<li><strong>사회적 편향 반영</strong>: 기존 사회에 존재하는 차별이나 고정관념을 AI가 학습하여 자동화하고 영속화할 위험.</li>
+</ul>
+</li>
+<li><strong>공정성 (Fairness)</strong>:
+<ul>
+<li>AI 시스템이 모든 개인과 그룹에 대해 차별 없이 공평하게 대우하는 것을 목표로 합니다.</li>
+<li>공정성의 정의는 다양하며(예: 개인 공정성, 그룹 공정성, 절차적 공정성), 상황과 맥락에 따라 적절한 정의를 적용해야 합니다.</li>
+<li><strong>해결 노력</strong>: 편향된 데이터 탐지 및 수정, 공정성을 고려한 알고리즘 개발, 다양한 그룹에 대한 성능 평가, 편향 완화 기술 적용.</li>
+</ul>
+</li>
+</ul>
+<h3 id="나-투명성-transparency-과-설명-가능성-explainability"><a class="header" href="#나-투명성-transparency-과-설명-가능성-explainability">나. 투명성 (Transparency) 과 설명 가능성 (Explainability)</a></h3>
+<ul>
+<li><strong>문제점</strong>:
+<ul>
+<li>복잡한 AI 모델(특히 딥러닝)은 내부 작동 방식을 이해하기 어려워 “블랙박스“로 여겨집니다. (Day 97 XAI 참고)</li>
+<li>모델이 왜 특정 결정을 내렸는지 알 수 없다면, 그 결정을 신뢰하기 어렵고 문제 발생 시 원인 파악 및 수정이 어렵습니다.</li>
+</ul>
+</li>
+<li><strong>투명성 (Transparency)</strong>: AI 시스템의 설계, 데이터, 작동 방식, 한계점 등이 명확하게 공개되고 이해될 수 있도록 하는 것.</li>
+<li><strong>설명 가능성 (Explainability)</strong>: 모델의 특정 예측이나 결정에 대해 인간이 이해할 수 있는 형태로 이유를 제공하는 능력. (LIME, SHAP 등)</li>
+<li><strong>해결 노력</strong>: XAI 기술 개발 및 적용, 모델 카드(Model Cards)나 데이터 시트(Datasheets for Datasets)를 통한 정보 공개.</li>
+</ul>
+<h3 id="다-책임성-accountability-과-거버넌스-governance"><a class="header" href="#다-책임성-accountability-과-거버넌스-governance">다. 책임성 (Accountability) 과 거버넌스 (Governance)</a></h3>
+<ul>
+<li><strong>문제점</strong>:
+<ul>
+<li>AI 시스템이 잘못된 결정을 내리거나 피해를 발생시켰을 때, 그 책임은 누구에게 있는가? (개발자, 운영자, 사용자, AI 자체?)</li>
+<li>책임 소재가 불분명하면 문제 해결 및 예방이 어렵습니다.</li>
+</ul>
+</li>
+<li><strong>책임성 (Accountability)</strong>: AI 시스템의 개발, 배포, 운영 전 과정에 걸쳐 누가 어떤 책임을 지는지 명확히 하고, 문제 발생 시 책임을 질 수 있는 체계를 마련하는 것.</li>
+<li><strong>거버넌스 (Governance)</strong>: AI 개발 및 활용에 대한 윤리적 원칙, 법적 규제, 내부 정책, 감독 체계 등을 수립하고 시행하는 것.</li>
+<li><strong>해결 노력</strong>: AI 윤리 가이드라인 제정, 법적 책임 프레임워크 논의, 내부 검토 위원회 운영, 감사 추적 기능 강화.</li>
+</ul>
+<h3 id="라-개인정보보호-privacy"><a class="header" href="#라-개인정보보호-privacy">라. 개인정보보호 (Privacy)</a></h3>
+<ul>
+<li><strong>문제점</strong>:
+<ul>
+<li>AI 모델 학습에는 대량의 데이터가 필요하며, 이 과정에서 개인의 민감한 정보가 수집, 처리, 저장될 수 있습니다.</li>
+<li>수집된 데이터가 유출되거나 오용될 경우 심각한 프라이버시 침해로 이어질 수 있습니다.</li>
+<li>모델 자체가 개인 정보를 암묵적으로 기억하거나(Membership Inference Attack), 특정 개인을 재식별(Re-identification)할 수 있는 정보를 노출할 위험.</li>
+</ul>
+</li>
+<li><strong>개인정보보호 (Privacy)</strong>: 데이터 수집 단계부터 활용, 폐기까지 전 과정에서 개인 정보를 안전하게 보호하고, 정보 주체의 권리를 존중하는 것.</li>
+<li><strong>해결 노력</strong>:
+<ul>
+<li><strong>데이터 최소화 원칙</strong>: 필요한 최소한의 정보만 수집.</li>
+<li><strong>익명화/가명화 처리</strong>: 개인 식별 정보를 제거하거나 대체.</li>
+<li><strong>차분 프라이버시 (Differential Privacy)</strong>: 데이터에 노이즈를 추가하여 개별 데이터 포인트에 대한 정보를 보호하면서 통계적 분석은 가능하게 함.</li>
+<li><strong>연합 학습 (Federated Learning)</strong>: 데이터를 중앙 서버로 보내지 않고, 각 로컬 장치에서 모델을 학습한 후 모델 업데이트만 공유.</li>
+<li><strong>동형 암호 (Homomorphic Encryption)</strong>: 암호화된 상태에서 데이터 분석 및 모델 학습 가능. (아직 연구 단계)</li>
+<li>GDPR, CCPA 등 개인정보보호 규정 준수.</li>
+</ul>
+</li>
+</ul>
+<h3 id="마-안전성-safety-과-보안-security"><a class="header" href="#마-안전성-safety-과-보안-security">마. 안전성 (Safety) 과 보안 (Security)</a></h3>
+<ul>
+<li><strong>문제점</strong>:
+<ul>
+<li>AI 시스템(특히 자율주행차, 의료 AI 등 물리적 상호작용을 하는 시스템)의 오작동은 심각한 안전 문제로 이어질 수 있습니다.</li>
+<li>악의적인 공격(Adversarial Attack - 입력에 미세한 노이즈를 추가하여 모델 오작동 유도, 데이터 오염, 모델 탈취 등)에 취약할 수 있습니다.</li>
+</ul>
+</li>
+<li><strong>안전성 (Safety)</strong>: AI 시스템이 의도치 않은 피해를 발생시키지 않도록 설계, 개발, 테스트하는 것.</li>
+<li><strong>보안 (Security)</strong>: AI 시스템과 데이터를 외부 공격으로부터 보호하는 것.</li>
+<li><strong>해결 노력</strong>: 강인한(Robust) 모델 개발, 적대적 공격 탐지 및 방어 기술, 지속적인 테스트 및 검증, 보안 취약점 관리.</li>
+</ul>
+<h3 id="바-인간-통제-human-control--oversight-및-자율성-autonomy"><a class="header" href="#바-인간-통제-human-control--oversight-및-자율성-autonomy">바. 인간 통제 (Human Control / Oversight) 및 자율성 (Autonomy)</a></h3>
+<ul>
+<li><strong>문제점</strong>: AI 시스템의 자율성이 높아질수록 인간의 통제 범위를 벗어나 예기치 않은 결과를 초래할 위험.</li>
+<li><strong>인간 통제</strong>: 중요한 결정이나 위험 상황에서는 인간이 개입하여 최종 판단을 내리거나 시스템을 제어할 수 있도록 하는 “Human-in-the-loop” 또는 “Human-over-the-loop” 방식.</li>
+<li><strong>자율성</strong>: AI가 독립적으로 판단하고 행동할 수 있는 능력. 자율성과 인간 통제 간의 적절한 균형이 필요.</li>
+</ul>
+<h2 id="3-책임감-있는-ai-responsible-ai-개발"><a class="header" href="#3-책임감-있는-ai-responsible-ai-개발">3. 책임감 있는 AI (Responsible AI) 개발</a></h2>
+<ul>
+<li>위에서 언급된 윤리적 원칙들을 AI 시스템의 전체 생명주기(설계, 개발, 배포, 운영, 폐기)에 걸쳐 적극적으로 고려하고 통합하려는 노력입니다.</li>
+<li><strong>주요 구성 요소</strong>:
+<ul>
+<li><strong>윤리적 가이드라인 및 원칙 수립</strong>: 조직 내 AI 개발 및 사용에 대한 명확한 윤리 기준 설정.</li>
+<li><strong>다양한 이해관계자 참여</strong>: 개발자, 연구자, 정책 입안자, 사용자, 시민 사회 등 다양한 관점을 반영.</li>
+<li><strong>영향 평가</strong>: AI 시스템 도입 전에 잠재적인 윤리적, 사회적 영향을 평가 (AI Impact Assessment).</li>
+<li><strong>지속적인 교육 및 인식 제고</strong>: AI 윤리에 대한 내부 구성원의 이해와 역량 강화.</li>
+<li><strong>기술적 도구 활용</strong>: 편향 탐지/완화 도구, XAI 도구, 프라이버시 강화 기술 등.</li>
+<li><strong>피드백 및 개선 메커니즘</strong>: 문제 발생 시 보고하고 개선할 수 있는 채널 마련.</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-ai-윤리-문제-해결을-위한-노력들"><a class="header" href="#4-ai-윤리-문제-해결을-위한-노력들">4. AI 윤리 문제 해결을 위한 노력들</a></h2>
+<ul>
+<li><strong>국제기구 및 정부</strong>: OECD AI 원칙, EU AI Act (제안), 각국 정부의 AI 윤리 기준 및 전략 발표.</li>
+<li><strong>학계 및 연구기관</strong>: AI 윤리 관련 연구, 새로운 알고리즘 및 평가 방법론 개발.</li>
+<li><strong>기업</strong>: 자체적인 AI 윤리 원칙 및 거버넌스 체계 구축, 책임감 있는 AI 개발팀 운영. (예: Google AI Principles, Microsoft Responsible AI)</li>
+<li><strong>시민사회 및 NGO</strong>: AI 윤리 문제에 대한 사회적 논의 활성화, 감시 및 정책 제언.</li>
+</ul>
+<h2 id="5-개발자연구자로서의-자세"><a class="header" href="#5-개발자연구자로서의-자세">5. 개발자/연구자로서의 자세</a></h2>
+<ul>
+<li>자신이 개발하는 AI 기술이 사회에 미칠 수 있는 영향을 항상 인지하고, 윤리적 책임감을 가져야 합니다.</li>
+<li>다양한 윤리적 문제에 대해 지속적으로 학습하고 고민해야 합니다.</li>
+<li>기술적 결정뿐만 아니라 윤리적 결정에도 적극적으로 참여하고 목소리를 내야 합니다.</li>
+<li>가능하다면, 프로젝트 초기 단계부터 윤리적 고려 사항을 포함시키고, 다양한 이해관계자와 소통하려는 노력이 필요합니다.</li>
+</ul>
+<h2 id="추가-학습-자료"><a class="header" href="#추가-학습-자료">추가 학습 자료</a></h2>
+<ul>
+<li><a href="https://oecd.ai/en/ai-principles">OECD AI Principles</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Ethics_of_artificial_intelligence">Ethics of Artificial Intelligence (Wikipedia)</a></li>
+<li><a href="https://ai.googleblog.com/2019/01/a-framework-for-understanding-ai.html">A Framework for Understanding AI Ethics (Google AI Blog)</a></li>
+<li><a href="https://www.microsoft.com/en-us/ai/responsible-ai-resources">Microsoft Responsible AI Resources</a></li>
+<li><a href="https://plato.stanford.edu/entries/ethics-ai/">AI Ethics (Stanford Encyclopedia of Philosophy)</a></li>
+<li><a href="https://www.theethicalalgorithm.com/">“The Ethical Algorithm” by Michael Kearns and Aaron Roth (책)</a></li>
+</ul>
+<h2 id="다음-학습-내용"><a class="header" href="#다음-학습-내용">다음 학습 내용</a></h2>
+<ul>
+<li>Day 99: ML 및 AI의 미래 동향 (Future trends in ML and AI) - 현재 주목받고 있는 머신러닝 및 AI 분야의 최신 연구 동향과 앞으로의 발전 가능성 탐색.</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../Code/Day_97_Explainable_AI_XAI_LIME_SHAP.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../Code/Day_99_Future_Trends_in_ML_AI.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../Code/Day_97_Explainable_AI_XAI_LIME_SHAP.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../Code/Day_99_Future_Trends_in_ML_AI.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

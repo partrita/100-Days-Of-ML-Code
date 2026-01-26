@@ -1,0 +1,436 @@
+<!DOCTYPE HTML>
+<html lang="ko" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>캡스톤 프로젝트 아이디어 브레인스토밍 | 86일차 - 100 Days of ML Code</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-b65ed104.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-68538d78.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">100 Days of ML Code</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="day-86-캡스톤-프로젝트-아이디어-브레인스토밍-brainstorming-capstone-project-ideas"><a class="header" href="#day-86-캡스톤-프로젝트-아이디어-브레인스토밍-brainstorming-capstone-project-ideas">Day 86: 캡스톤 프로젝트 아이디어 브레인스토밍 (Brainstorming Capstone Project ideas)</a></h1>
+<h2 id="학습-목표"><a class="header" href="#학습-목표">학습 목표</a></h2>
+<ul>
+<li>지난 85일간 학습한 머신러닝, 딥러닝, 자연어 처리, 시계열 분석, 모델 배포 등의 지식을 종합적으로 활용할 수 있는 캡스톤 프로젝트 아이디어 구상.</li>
+<li>개인의 관심사, 사용 가능한 데이터, 현실적인 구현 가능성을 고려하여 아이디어 발상.</li>
+<li>다양한 분야의 문제 해결에 머신러닝을 어떻게 적용할 수 있을지 탐색.</li>
+</ul>
+<h2 id="1-캡스톤-프로젝트의-중요성"><a class="header" href="#1-캡스톤-프로젝트의-중요성">1. 캡스톤 프로젝트의 중요성</a></h2>
+<ul>
+<li><strong>지식 통합 및 심화</strong>: 개별적으로 학습한 개념들을 실제 문제 해결 과정에 적용해보면서 지식을 통합하고 깊이 이해할 수 있습니다.</li>
+<li><strong>실전 경험</strong>: 데이터 수집부터 모델 배포까지 머신러닝 프로젝트의 전체 생명주기를 경험해볼 수 있습니다.</li>
+<li><strong>문제 해결 능력 향상</strong>: 정의되지 않은 문제에 대해 스스로 해결책을 찾아나가는 과정을 통해 실질적인 문제 해결 능력을 기릅니다.</li>
+<li><strong>포트폴리오 구축</strong>: 성공적인 캡스톤 프로젝트는 개인의 역량을 보여주는 훌륭한 포트폴리오가 될 수 있습니다.</li>
+<li><strong>자신감 향상</strong>: 스스로 프로젝트를 완성해나가는 과정에서 성취감과 자신감을 얻을 수 있습니다.</li>
+</ul>
+<h2 id="2-아이디어-발상-시-고려사항"><a class="header" href="#2-아이디어-발상-시-고려사항">2. 아이디어 발상 시 고려사항</a></h2>
+<ul>
+<li><strong>개인의 관심사</strong>: 자신이 흥미를 느끼는 분야나 주제를 선택해야 프로젝트를 진행하는 동안 동기 부여가 되고 즐겁게 참여할 수 있습니다.</li>
+<li><strong>데이터 확보 가능성</strong>:
+<ul>
+<li>공개 데이터셋 (Kaggle, UCI Machine Learning Repository, 공공데이터포털 등) 활용 가능 여부.</li>
+<li>웹 크롤링을 통해 직접 데이터 수집 가능성.</li>
+<li>API를 통해 데이터 수집 가능성.</li>
+<li>데이터의 양과 질이 프로젝트 수행에 적합한지.</li>
+</ul>
+</li>
+<li><strong>기술적 실현 가능성</strong>: 현재까지 학습한 내용과 앞으로 학습할 내용을 바탕으로 현실적으로 구현 가능한 범위 내에서 아이디어를 선택합니다. 너무 거창하거나 복잡한 아이디어는 중간에 포기할 수 있습니다.</li>
+<li><strong>프로젝트 목표의 명확성</strong>: 무엇을 만들고 싶은지, 어떤 문제를 해결하고 싶은지, 어떤 결과를 기대하는지 명확하게 정의해야 합니다.</li>
+<li><strong>예상 소요 시간 및 노력</strong>: 남은 100일 챌린지 기간(약 10~14일) 내에 어느 정도 완성도를 갖출 수 있을지 고려합니다.</li>
+<li><strong>차별성 및 독창성 (선택 사항)</strong>: 기존에 많이 다뤄진 주제라도 자신만의 새로운 접근 방식이나 아이디어를 추가하면 좋습니다.</li>
+</ul>
+<h2 id="3-다양한-분야별-프로젝트-아이디어-예시"><a class="header" href="#3-다양한-분야별-프로젝트-아이디어-예시">3. 다양한 분야별 프로젝트 아이디어 예시</a></h2>
+<h3 id="가-자연어-처리-nlp"><a class="header" href="#가-자연어-처리-nlp">가. 자연어 처리 (NLP)</a></h3>
+<ol>
+<li><strong>감성 분석기 심화</strong>:
+<ul>
+<li>특정 도메인(영화 리뷰, 제품 리뷰, 뉴스 댓글 등)의 텍스트에 대한 감성 분석.</li>
+<li>단순 긍/부정을 넘어 다중 감정(기쁨, 슬픔, 분노 등) 분류.</li>
+<li>속성 기반 감성 분석 (Aspect-based Sentiment Analysis).</li>
+<li>한국어 데이터 사용 시 KoNLPy 및 한국어 특화 모델 활용.</li>
+</ul>
+</li>
+<li><strong>텍스트 분류기</strong>:
+<ul>
+<li>뉴스 기사 카테고리 자동 분류 (스포츠, 정치, 경제, 사회 등).</li>
+<li>스팸 메일 필터링.</li>
+<li>기술 문서나 논문 주제 분류.</li>
+</ul>
+</li>
+<li><strong>챗봇 (간단한 형태)</strong>:
+<ul>
+<li>특정 주제에 대한 질의응답 봇 (FAQ 봇).</li>
+<li>간단한 규칙 기반 또는 검색 기반 챗봇.</li>
+<li>(고급) Seq2Seq 모델을 사용한 생성 기반 챗봇 기초.</li>
+</ul>
+</li>
+<li><strong>텍스트 요약기</strong>:
+<ul>
+<li>긴 뉴스 기사나 문서를 몇 문장으로 요약.</li>
+<li>추출적 요약(Extractive Summarization) 또는 (고급) 생성적 요약(Abstractive Summarization) 시도.</li>
+</ul>
+</li>
+<li><strong>유사 문서 검색 시스템</strong>:
+<ul>
+<li>특정 문서와 내용이 유사한 다른 문서들을 찾아주는 시스템.</li>
+<li>TF-IDF, Word Embeddings, Doc2Vec 등 활용.</li>
+</ul>
+</li>
+<li><strong>개체명 인식 (NER)</strong>:
+<ul>
+<li>텍스트에서 인명, 지명, 기관명 등 특정 유형의 개체를 인식하고 태깅.</li>
+</ul>
+</li>
+</ol>
+<h3 id="나-컴퓨터-비전-computer-vision---학습-범위-외지만-관심-있다면-도전-가능"><a class="header" href="#나-컴퓨터-비전-computer-vision---학습-범위-외지만-관심-있다면-도전-가능">나. 컴퓨터 비전 (Computer Vision) - (학습 범위 외지만, 관심 있다면 도전 가능)</a></h3>
+<ol>
+<li><strong>이미지 분류</strong>:
+<ul>
+<li>특정 종류의 객체(고양이/개, 자동차 종류 등) 이미지 분류.</li>
+<li>손글씨 숫자 또는 문자 인식 (MNIST, EMNIST 데이터셋).</li>
+</ul>
+</li>
+<li><strong>객체 탐지 (Object Detection) 기초</strong>:
+<ul>
+<li>이미지 내 특정 객체의 위치를 바운딩 박스로 표시. (YOLO, SSD 등 모델 사용은 고급)</li>
+<li>간단한 객체(예: 얼굴)를 찾는 수준.</li>
+</ul>
+</li>
+</ol>
+<h3 id="다-시계열-분석-time-series-analysis"><a class="header" href="#다-시계열-분석-time-series-analysis">다. 시계열 분석 (Time Series Analysis)</a></h3>
+<ol>
+<li><strong>주가 예측 (간단한 모델)</strong>:
+<ul>
+<li>특정 주식의 과거 데이터를 사용하여 미래 주가 등락 예측 (ARIMA, LSTM 등 사용).</li>
+<li>(주의) 실제 투자 목적으로는 매우 신중해야 하며, 많은 변수를 고려해야 함.</li>
+</ul>
+</li>
+<li><strong>날씨 예측</strong>:
+<ul>
+<li>과거 기온, 습도 등의 데이터를 사용하여 미래 날씨 예측.</li>
+</ul>
+</li>
+<li><strong>수요 예측</strong>:
+<ul>
+<li>특정 상품의 과거 판매 데이터를 기반으로 미래 수요량 예측.</li>
+</ul>
+</li>
+<li><strong>이상 탐지</strong>:
+<ul>
+<li>센서 데이터나 시스템 로그에서 비정상적인 패턴 탐지.</li>
+</ul>
+</li>
+</ol>
+<h3 id="라-추천-시스템-recommender-systems"><a class="header" href="#라-추천-시스템-recommender-systems">라. 추천 시스템 (Recommender Systems)</a></h3>
+<ol>
+<li><strong>콘텐츠 기반 필터링 (Content-based Filtering)</strong>:
+<ul>
+<li>사용자가 과거에 좋아했던 아이템과 유사한 아이템을 추천. (아이템의 특징 정보 활용)</li>
+</ul>
+</li>
+<li><strong>협업 필터링 (Collaborative Filtering)</strong>:
+<ul>
+<li>사용자와 아이템 간의 상호작용 패턴(평점, 구매 이력 등)을 기반으로 추천.</li>
+<li>사용자 기반 또는 아이템 기반.</li>
+<li>(고급) 행렬 분해 (Matrix Factorization) 기법.</li>
+</ul>
+</li>
+<li><strong>간단한 영화/음악/상품 추천 시스템 구축</strong>.</li>
+</ol>
+<h3 id="마-데이터-분석-및-시각화-기반-예측분류"><a class="header" href="#마-데이터-분석-및-시각화-기반-예측분류">마. 데이터 분석 및 시각화 기반 예측/분류</a></h3>
+<ol>
+<li><strong>고객 이탈 예측 (Customer Churn Prediction)</strong>:
+<ul>
+<li>통신사, 금융기관 등의 고객 데이터를 분석하여 이탈 가능성이 높은 고객 예측.</li>
+</ul>
+</li>
+<li><strong>신용카드 사기 탐지 (Credit Card Fraud Detection)</strong>:
+<ul>
+<li>거래 내역 데이터를 분석하여 사기 거래 탐지 (불균형 데이터 처리 중요).</li>
+</ul>
+</li>
+<li><strong>질병 예측</strong>:
+<ul>
+<li>환자 데이터를 기반으로 특정 질병 발병 가능성 예측.</li>
+</ul>
+</li>
+<li><strong>부동산 가격 예측</strong>:
+<ul>
+<li>지역, 크기, 편의시설 등 다양한 요소를 고려하여 부동산 가격 예측.</li>
+</ul>
+</li>
+</ol>
+<h3 id="바-강화-학습-reinforcement-learning---고급-주제-간단한-환경에서-시도"><a class="header" href="#바-강화-학습-reinforcement-learning---고급-주제-간단한-환경에서-시도">바. 강화 학습 (Reinforcement Learning) - (고급 주제, 간단한 환경에서 시도)</a></h3>
+<ol>
+<li><strong>간단한 게임 AI</strong>:
+<ul>
+<li>그리드 월드, 카트폴(CartPole) 등 OpenAI Gym의 간단한 환경에서 Q-러닝, DQN 등 적용.</li>
+</ul>
+</li>
+<li><strong>미로 찾기 에이전트</strong>.</li>
+</ol>
+<h3 id="사-모델-배포-및-mlops-관련"><a class="header" href="#사-모델-배포-및-mlops-관련">사. 모델 배포 및 MLOps 관련</a></h3>
+<ol>
+<li><strong>ML 모델 서빙 API 심화</strong>:
+<ul>
+<li>이전에 만든 Flask/Django API를 확장하여 더 많은 기능 추가 (인증, 로깅, 모니터링, 비동기 처리 등).</li>
+<li>FastAPI와 같은 다른 프레임워크 사용 시도.</li>
+</ul>
+</li>
+<li><strong>Docker를 이용한 모델 배포 파이프라인 구축</strong>:
+<ul>
+<li>모델 학습, API 서버 패키징, Docker 이미지 빌드, 레지스트리 푸시까지의 과정을 스크립트로 자동화.</li>
+</ul>
+</li>
+<li><strong>간단한 웹 UI와 ML 모델 연동</strong>:
+<ul>
+<li>사용자가 웹 인터페이스를 통해 데이터를 입력하고 예측 결과를 확인할 수 있는 간단한 웹 애플리케이션 제작. (HTML, CSS, JavaScript 기초 필요)</li>
+</ul>
+</li>
+</ol>
+<h2 id="4-아이디어-구체화-질문"><a class="header" href="#4-아이디어-구체화-질문">4. 아이디어 구체화 질문</a></h2>
+<ul>
+<li><strong>어떤 문제를 해결하고 싶은가?</strong> (Problem Statement)</li>
+<li><strong>이 문제를 해결했을 때 어떤 가치가 있는가?</strong> (Value Proposition)</li>
+<li><strong>어떤 데이터를 사용할 것인가? 어떻게 확보할 것인가?</strong> (Data Source)</li>
+<li><strong>어떤 머신러닝/딥러닝 모델 또는 기법을 적용해볼 수 있을까?</strong> (Methodology)</li>
+<li><strong>프로젝트의 최종 결과물은 어떤 형태일까?</strong> (Deliverables: 코드, 보고서, 데모, API, 웹앱 등)</li>
+<li><strong>성공/실패를 판단할 수 있는 기준은 무엇인가?</strong> (Evaluation Metrics)</li>
+<li><strong>가장 어려운 부분은 무엇일까? 어떻게 해결할 수 있을까?</strong> (Challenges &amp; Solutions)</li>
+<li><strong>프로젝트를 통해 무엇을 배우고 싶은가?</strong> (Learning Objectives)</li>
+</ul>
+<h2 id="5-다음-단계-아이디어-선정-및-계획-수립"><a class="header" href="#5-다음-단계-아이디어-선정-및-계획-수립">5. 다음 단계: 아이디어 선정 및 계획 수립</a></h2>
+<ul>
+<li>오늘 브레인스토밍한 아이디어들 중에서 가장 관심 있고 실현 가능성이 높은 아이디어를 1~2개 정도로 추립니다.</li>
+<li>각 아이디어에 대해 위 “아이디어 구체화 질문“에 답해보면서 더 깊이 고민합니다.</li>
+<li>내일은 이 중 최종 프로젝트 주제를 선정하고, 구체적인 수행 계획을 세울 예정입니다.</li>
+</ul>
+<p><strong>팁</strong>: Kaggle 경진대회(과거 포함), GitHub의 머신러닝 프로젝트, 관련 블로그나 논문 등을 참고하여 아이디어를 얻거나 구체화하는 데 도움을 받을 수 있습니다.</p>
+<h2 id="다음-학습-내용"><a class="header" href="#다음-학습-내용">다음 학습 내용</a></h2>
+<ul>
+<li>Day 87: 캡스톤 프로젝트 선정 및 범위 정의 (Selecting a Capstone Project and defining scope) - 브레인스토밍한 아이디어 중 하나를 선택하고 프로젝트의 목표와 범위를 명확히 설정.</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../Code/Day_85_Deploying_Simple_ML_Model_Docker.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../Code/Day_87_Selecting_Capstone_Project_Scope_Definition.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../Code/Day_85_Deploying_Simple_ML_Model_Docker.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../Code/Day_87_Selecting_Capstone_Project_Scope_Definition.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

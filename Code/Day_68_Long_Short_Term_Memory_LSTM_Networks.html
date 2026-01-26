@@ -1,0 +1,368 @@
+<!DOCTYPE HTML>
+<html lang="ko" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>LSTM (Long Short-Term Memory) 네트워크 | 68일차 - 100 Days of ML Code</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-b65ed104.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-68538d78.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">100 Days of ML Code</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="day-68-lstm-long-short-term-memory-네트워크-long-short-term-memory-lstm-networks"><a class="header" href="#day-68-lstm-long-short-term-memory-네트워크-long-short-term-memory-lstm-networks">Day 68: LSTM (Long Short-Term Memory) 네트워크 (Long Short-Term Memory (LSTM) Networks)</a></h1>
+<h2 id="학습-목표"><a class="header" href="#학습-목표">학습 목표</a></h2>
+<ul>
+<li>RNN의 장기 의존성 문제(Vanishing/Exploding Gradient) 복습</li>
+<li>LSTM의 등장 배경과 핵심 아이디어 이해</li>
+<li>LSTM 셀(Cell)의 내부 구조와 주요 구성 요소(셀 상태, 게이트) 학습:
+<ul>
+<li>망각 게이트 (Forget Gate)</li>
+<li>입력 게이트 (Input Gate)</li>
+<li>출력 게이트 (Output Gate)</li>
+</ul>
+</li>
+<li>LSTM이 장기 의존성 문제를 어떻게 완화하는지 이해</li>
+</ul>
+<h2 id="1-rnn의-장기-의존성-문제-복습"><a class="header" href="#1-rnn의-장기-의존성-문제-복습">1. RNN의 장기 의존성 문제 복습</a></h2>
+<ul>
+<li>바닐라 RNN은 시퀀스가 길어질수록 앞쪽의 정보가 뒤쪽으로 잘 전달되지 못하는 <strong>장기 의존성 문제</strong>를 가집니다.</li>
+<li>이는 역전파 시 기울기가 점차 사라지거나(Vanishing Gradient) 폭주하여(Exploding Gradient) 발생하며, 이로 인해 먼 과거의 정보를 효과적으로 학습하기 어렵습니다.</li>
+</ul>
+<h2 id="2-lstm-long-short-term-memory-소개"><a class="header" href="#2-lstm-long-short-term-memory-소개">2. LSTM (Long Short-Term Memory) 소개</a></h2>
+<ul>
+<li>Hochreiter &amp; Schmidhuber (1997)에 의해 제안된 RNN의 특별한 종류로, 장기 의존성 문제를 해결하기 위해 설계되었습니다.</li>
+<li>핵심 아이디어: **셀 상태(Cell State)**라는 별도의 정보 흐름 경로를 두고, **게이트(Gate)**라는 메커니즘을 통해 이 셀 상태에 정보를 추가하거나 제거하는 것을 제어합니다.</li>
+<li>이를 통해 중요한 정보는 오래 유지하고, 불필요한 정보는 잊어버릴 수 있도록 하여 장기적인 의존성을 효과적으로 학습할 수 있습니다.</li>
+</ul>
+<h2 id="3-lstm-셀의-구조"><a class="header" href="#3-lstm-셀의-구조">3. LSTM 셀의 구조</a></h2>
+<ul>
+<li>LSTM 셀은 바닐라 RNN 셀보다 복잡한 구조를 가집니다.</li>
+<li>주요 구성 요소:
+<ul>
+<li><strong>셀 상태 (Cell State, C<sub>t</sub>)</strong>: LSTM의 핵심. 정보가 큰 변화 없이 셀 전체를 관통하여 흐르는 컨베이어 벨트와 유사. 게이트를 통해 정보가 추가되거나 제거될 수 있음. 장기 기억을 담당.</li>
+<li><strong>은닉 상태 (Hidden State, h<sub>t</sub>)</strong>: 이전 타임스텝의 출력 및 현재 타임스텝의 단기 기억. 다음 셀로 전달됨.</li>
+<li><strong>게이트 (Gates)</strong>: 시그모이드(Sigmoid) 함수와 요소별 곱셈(Pointwise Multiplication) 연산으로 구성. 정보의 흐름을 제어.
+<ul>
+<li>시그모이드 함수는 0과 1 사이의 값을 출력하여, 각 정보 조각을 얼마나 통과시킬지 결정 (0: 통과시키지 않음, 1: 모두 통과시킴).</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://colah.github.io/posts/2015-08-Understanding-LSTMs/img/LSTM3-chain.png" alt="LSTM Cell Structure">
+<em>(이미지 출처: Christopher Olah’s blog)</em></p>
+<h3 id="가-망각-게이트-forget-gate-ft"><a class="header" href="#가-망각-게이트-forget-gate-ft">가. 망각 게이트 (Forget Gate, f<sub>t</sub>)</a></h3>
+<ul>
+<li><strong>역할</strong>: 이전 셀 상태(C<sub>t-1</sub>)에서 어떤 정보를 버릴지(잊어버릴지) 결정합니다.</li>
+<li><strong>입력</strong>: 이전 은닉 상태(h<sub>t-1</sub>)와 현재 입력(x<sub>t</sub>).</li>
+<li><strong>계산</strong>: f<sub>t</sub> = σ(W<sub>f</sub> * [h<sub>t-1</sub>, x<sub>t</sub>] + b<sub>f</sub>)
+<ul>
+<li>σ: 시그모이드 함수</li>
+<li>W<sub>f</sub>: 망각 게이트의 가중치 행렬</li>
+<li>b<sub>f</sub>: 망각 게이트의 편향 벡터</li>
+<li>[h<sub>t-1</sub>, x<sub>t</sub>]: h<sub>t-1</sub>과 x<sub>t</sub>를 연결(concatenate)한 벡터.</li>
+</ul>
+</li>
+<li><strong>출력</strong>: 0과 1 사이의 값을 가지는 벡터. 각 요소는 이전 셀 상태의 해당 정보를 얼마나 유지할지(1에 가까울수록 유지, 0에 가까울수록 삭제)를 나타냅니다.</li>
+</ul>
+<h3 id="나-입력-게이트-input-gate-it-및-새로운-후보값-candidate-values-ct"><a class="header" href="#나-입력-게이트-input-gate-it-및-새로운-후보값-candidate-values-ct">나. 입력 게이트 (Input Gate, i<sub>t</sub>) 및 새로운 후보값 (Candidate Values, C̃<sub>t</sub>)</a></h3>
+<ul>
+<li><strong>역할</strong>: 현재 입력에서 어떤 새로운 정보를 셀 상태에 저장할지 결정합니다.</li>
+<li>두 부분으로 나뉩니다:
+<ol>
+<li><strong>입력 게이트 (i<sub>t</sub>)</strong>: 어떤 값을 업데이트할지 결정.
+<ul>
+<li><strong>계산</strong>: i<sub>t</sub> = σ(W<sub>i</sub> * [h<sub>t-1</sub>, x<sub>t</sub>] + b<sub>i</sub>)</li>
+</ul>
+</li>
+<li><strong>새로운 후보값 (C̃<sub>t</sub>)</strong>: 셀 상태에 추가될 수 있는 새로운 후보 값들의 벡터를 생성. (tanh 함수 사용)
+<ul>
+<li><strong>계산</strong>: C̃<sub>t</sub> = tanh(W<sub>C</sub> * [h<sub>t-1</sub>, x<sub>t</sub>] + b<sub>C</sub>)</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="다-셀-상태-업데이트-updating-the-cell-state"><a class="header" href="#다-셀-상태-업데이트-updating-the-cell-state">다. 셀 상태 업데이트 (Updating the Cell State)</a></h3>
+<ul>
+<li><strong>역할</strong>: 이전 셀 상태를 업데이트하여 새로운 셀 상태(C<sub>t</sub>)를 만듭니다.</li>
+<li><strong>계산</strong>: C<sub>t</sub> = f<sub>t</sub> * C<sub>t-1</sub> + i<sub>t</sub> * C̃<sub>t</sub>
+<ul>
+<li><strong>f<sub>t</sub> * C<sub>t-1</sub></strong>: 이전 셀 상태에서 망각 게이트를 통해 선택적으로 정보를 버립니다.</li>
+<li><strong>i<sub>t</sub> * C̃<sub>t</sub></strong>: 입력 게이트를 통해 선택된 새로운 후보값을 스케일링합니다.</li>
+<li>이 두 부분을 더하여 새로운 셀 상태를 만듭니다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="라-출력-게이트-output-gate-ot-및-은닉-상태-업데이트"><a class="header" href="#라-출력-게이트-output-gate-ot-및-은닉-상태-업데이트">라. 출력 게이트 (Output Gate, o<sub>t</sub>) 및 은닉 상태 업데이트</a></h3>
+<ul>
+<li><strong>역할</strong>: 업데이트된 셀 상태(C<sub>t</sub>)를 기반으로 어떤 정보를 현재 타임스텝의 은닉 상태(h<sub>t</sub>, 즉 출력)로 내보낼지 결정합니다.</li>
+<li><strong>계산</strong>:
+<ol>
+<li><strong>출력 게이트 (o<sub>t</sub>)</strong>: 셀 상태의 어느 부분을 출력할지 결정.
+<ul>
+<li>o<sub>t</sub> = σ(W<sub>o</sub> * [h<sub>t-1</sub>, x<sub>t</sub>] + b<sub>o</sub>)</li>
+</ul>
+</li>
+<li><strong>은닉 상태 (h<sub>t</sub>)</strong>:
+<ul>
+<li>h<sub>t</sub> = o<sub>t</sub> * tanh(C<sub>t</sub>)</li>
+<li>셀 상태 C<sub>t</sub>를 tanh 함수에 통과시켜 -1과 1 사이의 값으로 만들고, 출력 게이트 o<sub>t</sub>와 곱하여 최종 은닉 상태(출력)를 결정합니다.</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="4-lstm이-장기-의존성-문제를-완화하는-방식"><a class="header" href="#4-lstm이-장기-의존성-문제를-완화하는-방식">4. LSTM이 장기 의존성 문제를 완화하는 방식</a></h2>
+<ul>
+<li><strong>셀 상태의 분리</strong>: 셀 상태는 상대적으로 간단한 선형 연산(곱셈과 덧셈)을 통해 정보가 흐르므로, 기울기가 여러 층을 거치면서 소실되거나 폭주하는 문제가 줄어듭니다. 정보가 비교적 잘 보존되어 전달될 수 있습니다.</li>
+<li><strong>게이트 메커니즘</strong>:
+<ul>
+<li><strong>망각 게이트</strong>: 불필요한 정보를 명시적으로 제거하여 셀 상태가 과도하게 복잡해지는 것을 방지합니다.</li>
+<li><strong>입력 게이트</strong>: 중요한 새로운 정보만 선택적으로 셀 상태에 추가합니다.</li>
+<li>이를 통해 LSTM은 시퀀스에서 중요한 정보는 장기간 기억하고, 덜 중요한 정보는 잊어버리는 학습을 할 수 있습니다.</li>
+</ul>
+</li>
+<li>결과적으로, LSTM은 바닐라 RNN보다 훨씬 긴 시퀀스에 대해서도 효과적으로 학습할 수 있으며, 장기 의존성 문제를 크게 완화합니다.</li>
+</ul>
+<h2 id="5-gru-gated-recurrent-unit"><a class="header" href="#5-gru-gated-recurrent-unit">5. GRU (Gated Recurrent Unit)</a></h2>
+<ul>
+<li>LSTM과 유사한 성능을 내면서 구조가 더 간단한 모델로, Cho 등이 2014년에 제안했습니다.</li>
+<li>망각 게이트와 입력 게이트를 **업데이트 게이트(Update Gate)**로 통합하고, 셀 상태와 은닉 상태를 하나로 합쳤습니다.</li>
+<li>**리셋 게이트(Reset Gate)**를 사용하여 과거 정보를 얼마나 무시할지 결정합니다.</li>
+<li>LSTM보다 파라미터 수가 적어 계산 효율성이 높고, 데이터가 적을 때 과적합 방지에 유리할 수 있습니다.</li>
+<li>성능은 문제에 따라 LSTM과 비슷하거나 약간 낮을 수 있습니다.</li>
+</ul>
+<h2 id="추가-학습-자료"><a class="header" href="#추가-학습-자료">추가 학습 자료</a></h2>
+<ul>
+<li><a href="https://colah.github.io/posts/2015-08-Understanding-LSTMs/">Understanding LSTMs (Christopher Olah’s Blog)</a> - (LSTM 이해를 위한 최고의 자료 중 하나)</li>
+<li><a href="https://towardsdatascience.com/illustrated-guide-to-lstms-and-grus-a-step-by-step-explanation-44e9eb85bf21">Illustrated Guide to LSTMs and GRUs: A step by step explanation (Michael Phi)</a></li>
+<li><a href="https://wikidocs.net/22888">딥 러닝을 이용한 자연어 처리 입문 - LSTM</a></li>
+</ul>
+<h2 id="다음-학습-내용"><a class="header" href="#다음-학습-내용">다음 학습 내용</a></h2>
+<ul>
+<li>Day 69: RNN/LSTM을 이용한 텍스트 분류기 구축 (Building a text classifier using RNN/LSTM)</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../Code/Day_67_Introduction_to_Recurrent_Neural_Networks_RNNs.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../Code/Day_69_Building_Text_Classifier_RNN_LSTM.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../Code/Day_67_Introduction_to_Recurrent_Neural_Networks_RNNs.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../Code/Day_69_Building_Text_Classifier_RNN_LSTM.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

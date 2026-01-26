@@ -2,33 +2,33 @@
 
 [Siraj Raval](https://github.com/llSourcell)이 제안한 100일간의 머신러닝 코딩
 
-[여기](https://github.com/Avik-Jain/100-Days-Of-ML-Code/tree/master/datasets)에서 데이터셋을 받으세요.
+[여기](datasets)에서 데이터셋을 받으세요.
 
 ## 데이터 전처리 | 1일차
-[여기](https://github.com/Avik-Jain/100-Days-Of-ML-Code/blob/master/Code/Day%201_Data%20PreProcessing.md)에서 코드를 확인하세요.
+[여기](Code/Day%201_Data%20PreProcessing.md)에서 코드를 확인하세요.
 
 <p align="center">
-  <img src="https://github.com/Avik-Jain/100-Days-Of-ML-Code/blob/master/Info-graphs/Day%201.jpg">
+  <img src="Info-graphs/Day%201.jpg">
 </p>
 
 ## 단순 선형 회귀 | 2일차
-[여기](https://github.com/Avik-Jain/100-Days-Of-ML-Code/blob/master/Code/Day2_Simple_Linear_Regression.md)에서 코드를 확인하세요.
+[여기](Code/Day2_Simple_Linear_Regression.md)에서 코드를 확인하세요.
 
 <p align="center">
-  <img src="https://github.com/Avik-Jain/100-Days-Of-ML-Code/blob/master/Info-graphs/Day%202.jpg">
+  <img src="Info-graphs/Day%202.jpg">
 </p>
 
 ## 다중 선형 회귀 | 3일차
-[여기](https://github.com/Avik-Jain/100-Days-Of-ML-Code/blob/master/Code/Day3_Multiple_Linear_Regression.md)에서 코드를 확인하세요.
+[여기](Code/Day3_Multiple_Linear_Regression.md)에서 코드를 확인하세요.
 
 <p align="center">
-  <img src="https://github.com/Avik-Jain/100-Days-Of-ML-Code/blob/master/Info-graphs/Day%203.jpg">
+  <img src="Info-graphs/Day%203.jpg">
 </p>
 
 ## 로지스틱 회귀 | 4일차
 
 <p align="center">
-  <img src="https://github.com/Avik-Jain/100-Days-Of-ML-Code/blob/master/Info-graphs/Day%204.jpg">
+  <img src="Info-graphs/Day%204.jpg">
 </p>
 
 ## 로지스틱 회귀 | 5일차
@@ -37,11 +37,11 @@
 또한 코드 문서화에 도움을 주실 분이 있고 이미 해당 분야에 경험이 있으며 github용 Markdown을 알고 계신다면 LinkedIn으로 저에게 연락해 주세요 :).
 
 ## 로지스틱 회귀 구현 | 6일차
-[여기](https://github.com/Avik-Jain/100-Days-Of-ML-Code/blob/master/Code/Day%206%20Logistic%20Regression.md)에서 코드를 확인하세요.
+[여기](Code/Day%206%20Logistic%20Regression.md)에서 코드를 확인하세요.
 
 ## K 최근접 이웃 | 7일차
 <p align="center">
-  <img src="https://github.com/Avik-Jain/100-Days-Of-ML-Code/blob/master/Info-graphs/Day%207.jpg">
+  <img src="Info-graphs/Day%207.jpg">
 </p>
 
 ## 로지스틱 회귀의 수학적 원리 | 8일차
@@ -63,7 +63,7 @@ SVM 작동 방식에 대해 더 자세히 배우고 K-NN 알고리즘을 구현�
 
 ## 서포트 벡터 머신 | 12일차
 <p align="center">
-  <img src="https://github.com/Avik-Jain/100-Days-Of-ML-Code/blob/master/Info-graphs/Day%2012.jpg">
+  <img src="Info-graphs/Day%2012.jpg">
 </p>
 
 ## 나이브 베이즈 분류기 | 13일차
@@ -73,7 +73,7 @@ SVM 작동 방식에 대해 더 자세히 배우고 K-NN 알고리즘을 구현�
 
 ## SVM 구현 | 14일차
 오늘 선형적으로 관련된 데이터에 SVM을 구현했습니다. Scikit-Learn 라이브러리를 사용했습니다. Scikit-Learn에는 이 작업을 수행하는 데 사용하는 SVC 분류기가 있습니다. 다음 구현에서는 커널 트릭을 사용할 예정입니다.
-[여기](https://github.com/Avik-Jain/100-Days-Of-ML-Code/blob/master/Code/Day%2013%20SVM.md)에서 코드를 확인하세요.
+[여기](Code/Day%2013%20SVM.md)에서 코드를 확인하세요.
 
 ## 나이브 베이즈 분류기 및 블랙박스 머신러닝 | 15일차
 다양한 유형의 나이브 베이즈 분류기에 대해 배웠습니다. 또한 [Bloomberg](https://bloomberg.github.io/foml/#home)의 강의를 듣기 시작했습니다. 재생 목록의 첫 번째 강의는 블랙박스 머신러닝이었습니다. 예측 함수, 특징 추출, 학습 알고리즘, 성능 평가, 교차 검증, 샘플 편향, 비정상성, 과적합 및 하이퍼파라미터 튜닝에 대한 전체 개요를 제공합니다.
@@ -101,14 +101,14 @@ Yaser Abu-Mostafa 교수의 Caltech 머신러닝 과정(CS 156) 18개 강의 중
 
 ## 결정 트리 | 23일차
 <p align="center">
-  <img src="https://github.com/Avik-Jain/100-Days-Of-ML-Code/blob/master/Info-graphs/Day%2023.jpg">
+  <img src="Info-graphs/Day%2023.jpg">
 </p>
 
 ## 통계 학습 이론 소개 | 24일차
 Bloomberg ML 과정의 세 번째 강의에서는 입력 공간, 행동 공간, 결과 공간, 예측 함수, 손실 함수 및 가설 공간과 같은 핵심 개념 중 일부를 소개했습니다.
 
 ## 결정 트리 구현 | 25일차
-[여기](https://github.com/Avik-Jain/100-Days-Of-ML-Code/blob/master/Code/Day%2025%20Decision%20Tree.md)에서 코드를 확인하세요.
+[여기](Code/Day%2025%20Decision%20Tree.md)에서 코드를 확인하세요.
 
 ## 선형 대수 복습으로 이동 | 26일차
 유튜브에서 3Blue1Brown이라는 놀라운 [채널](https://www.youtube.com/channel/UCYO_jab_esuFRV4b17AJtAw)을 발견했습니다. 선형 대수의 본질이라는 재생 목록이 있습니다. 벡터, 선형 조합, 스팬, 기저 벡터, 선형 변환 및 행렬 곱셈에 대한 전체 개요를 제공하는 4개의 비디오를 완료하며 시작했습니다.
@@ -151,11 +151,11 @@ Bloomberg ML 과정의 세 번째 강의에서는 입력 공간, 행동 공간, 
 
 ## 랜덤 포레스트 | 33일차
 <p align="center">
-  <img src="https://github.com/Avik-Jain/100-Days-Of-ML-Code/blob/master/Info-graphs/Day%2033.jpg">
+  <img src="Info-graphs/Day%2033.jpg">
 </p>
 
 ## 랜덤 포레스트 구현 | 34일차
-[여기](https://github.com/Avik-Jain/100-Days-Of-ML-Code/blob/master/Code/Day%2034%20Random_Forest.md)에서 코드를 확인하세요.
+[여기](Code/Day%2034%20Random_Forest.md)에서 코드를 확인하세요.
 
 ## 하지만 신경망이란 *무엇*일까요? | 딥러닝, 1장 | 35일차
 3Blue1Brown 유튜브 채널의 신경망에 대한 놀라운 비디오. 이 비디오는 신경망에 대한 이해를 돕고 손으로 쓴 숫자 데이터셋을 사용하여 개념을 설명합니다.
@@ -191,7 +191,7 @@ Bloomberg ML 과정의 세 번째 강의에서는 입력 공간, 행동 공간, 
 또한 K 평균 군집화를 쉽게 이해하는 데 도움이 되는 멋진 애니메이션을 찾았습니다. [링크](http://shabal.in/visuals/kmeans/6.html)
 
 <p align="center">
-  <img src="https://github.com/Avik-Jain/100-Days-Of-ML-Code/blob/master/Info-graphs/Day%2043.jpg">
+  <img src="Info-graphs/Day%2043.jpg">
 </p>
 
 ## K 평균 군집화 구현 | 44일차
@@ -274,7 +274,7 @@ JK VanderPlas의 새 책 "Python Data Science HandBook"을 받았습니다. [여
 계층적 군집화에 대해 공부했습니다.
 이 놀라운 [시각화](https://cdn-images-1.medium.com/max/800/1*ET8kCcPpr893vNZFs8j4xg.gif)를 확인해 보세요.
 <p align="center">
-  <img src="https://github.com/Avik-Jain/100-Days-Of-ML-Code/blob/master/Info-graphs/Day%2054.jpg">
+  <img src="Info-graphs/Day%2054.jpg">
 </p>
 
 ## 강화 학습 소개 | 55일차

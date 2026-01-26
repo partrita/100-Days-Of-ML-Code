@@ -1,10 +1,10 @@
 # 데이터 전처리
 <p align="center">
-  <img src="https://github.com/Avik-Jain/100-Days-Of-ML-Code/blob/master/Info-graphs/Day%201.jpg">
+  <img src="../Info-graphs/Day%201.jpg">
 </p>
 
 인포그래픽에 표시된 것처럼 데이터 전처리를 6가지 필수 단계로 나눕니다.
-이 예제에 사용된 데이터셋은 [여기](https://github.com/Avik-Jain/100-Days-Of-ML-Code/tree/master/datasets)에서 가져오세요.
+이 예제에 사용된 데이터셋은 [여기](../datasets)에서 가져오세요.
 
 ## 1단계: 라이브러리 가져오기
 ```Python

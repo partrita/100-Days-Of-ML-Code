@@ -2,13 +2,13 @@
 
 
 <p align="center">
-  <img src="https://github.com/Avik-Jain/100-Days-Of-ML-Code/blob/master/Info-graphs/Day%204.jpg">
+  <img src="../Info-graphs/Day%204.jpg">
 </p>
 
 ## 데이터셋 | 소셜 네트워크
 
 <p align="center">
-  <img src="https://github.com/Avik-Jain/100-Days-Of-ML-Code/blob/master/Other%20Docs/data.PNG">
+  <img src="../Other%20Docs/data.PNG">
 </p> 
 
 이 데이터셋에는 소셜 네트워크 사용자 정보가 포함되어 있습니다. 이 정보는 사용자 ID, 성별, 나이 및 예상 급여입니다. 한 자동차 회사가 새로운 고급 SUV를 출시했습니다. 그리고 우리는 이 소셜 네트워크 사용자 중 누가 이 새로운 SUV를 구매할 것인지 확인하려고 합니다. 그리고 여기 마지막 열은 사용자가 이 SUV를 구매했는지 여부를 나타냅니다. 우리는 두 가지 변수, 즉 나이와 예상 급여를 기반으로 사용자가 SUV를 구매할지 여부를 예측하는 모델을 구축할 것입니다. 따라서 우리의 특징 행렬은 이 두 열만 해당됩니다.
@@ -25,7 +25,7 @@ import pandas as pd
 ```
 ### 데이터셋 가져오기
 
-[여기](https://github.com/Avik-Jain/100-Days-Of-ML-Code/blob/master/datasets/Social_Network_Ads.csv)에서 데이터셋을 가져오세요.
+[여기](../datasets/Social_Network_Ads.csv)에서 데이터셋을 가져오세요.
 ```python
 dataset = pd.read_csv('Social_Network_Ads.csv')
 X = dataset.iloc[:, [2, 3]].values # 독립 변수 (나이, 예상 급여)
@@ -82,9 +82,9 @@ cm = confusion_matrix(y_test, y_pred)
 ## 시각화
 
 <p align="center">
-  <img src="https://github.com/Avik-Jain/100-Days-Of-ML-Code/blob/master/Other%20Docs/training.png">
+  <img src="../Other%20Docs/training.png">
 </p> 
 
 <p align="center">
-  <img src="https://github.com/Avik-Jain/100-Days-Of-ML-Code/blob/master/Other%20Docs/testing.png">
+  <img src="../Other%20Docs/testing.png">
 </p>
